@@ -1,0 +1,23 @@
+# === Basura del sistema operativo ===
+.DS_Store
+Thumbs.db
+desktop.ini
+__MACOSX/
+._*
+
+# === Comprimidos (los proyectos ya van descomprimidos) ===
+*.zip
+*.rar
+*.7z
+
+# === Material pesado / multimedia suelta ===
+*.pdf
+*.mp4
+
+# === Herramientas / temporales ===
+.playwright-mcp/
+**/supabase/.temp/
+node_modules/
+
+# === Secretos (por si algún día hay) ===
+.env

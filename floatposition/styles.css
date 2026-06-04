@@ -1,0 +1,49 @@
+body {
+    background-color: dimgray;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.imgCabecera {
+    width: 100%;
+}
+
+header {
+    position: relative;
+}
+
+h1 {
+    position: absolute;
+    left: calc(50% - 115px);
+    top: calc(50% - 19px);
+    margin: 0px;
+    color: white;
+}
+
+main h2 {
+    color: red;
+}
+
+aside {
+    width: 200px;
+    box-sizing: border-box;
+    padding: 20px;
+    float: left;
+}
+
+main {
+    box-sizing: border-box;
+    padding: 20px;
+    float: left;
+    width: calc(100% - 300px);
+}
+
+.redes {
+    position: fixed;
+    bottom: 5px;
+}

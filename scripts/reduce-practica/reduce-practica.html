@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Práctica reduce</title>
+
+	<script type="text/javascript">
+//array.reduce(
+//          (acumulador, elementoActual) => {
+//  				return nuevoAcumulador;
+//			}, valorInicial);
+
+// 1) reduce con un array de numeros: sumar puntos de una partida
+		const puntos = [10, 25, 5, 40];
+		const totalPuntos = puntos.reduce((acumulador, punto) => {
+									return acumulador + punto;
+								}, 0);
+		console.log(totalPuntos); // 80
+//| Vuelta | acumulador | punto | resultado |
+//| ------ | ---------: | ----: | --------: |
+//| 1      |          0 |    10 |        10 |
+//| 2      |         10 |    25 |        35 |
+//| 3      |         35 |     5 |        40 |
+//| 4      |         40 |    40 |        80 |
+
+// 2) reduce con un array de objetos: precio total del carrito
+const carrito = [
+  { articulo: "Teclado", precio: 45 },
+  { articulo: "Monitor", precio: 180 },
+  { articulo: "Webcam", precio: 60 }
+];
+
+const totalCarrito = carrito.reduce((acumulador, item) => acumulador + item.precio, 0);
+console.log(totalCarrito); // 285
+
+// 3) reduce con un array de objetos y un condicional: contar aprobados
+const alumnos = [
+  { nombre: "Marta", nota: 8 },
+  { nombre: "Diego", nota: 4 },
+  { nombre: "Sara", nota: 6 },
+  { nombre: "Luis", nota: 3 }
+];
+
+const aprobados = alumnos.reduce((acumulador, alumno) => {
+  return alumno.nota >= 5 ? acumulador + 1 : acumulador;
+}, 0);
+
+console.log(aprobados); // 2
+
+// 4) reduce para crear un string: lista de ingredientes
+const ingredientes = ["Tomate", "Queso", "Albahaca", "Aceite"];
+const receta = ingredientes.reduce((acumulador, ingrediente) => {
+  return acumulador + " - " + ingrediente;
+}, '');
+console.log(receta); // " - Tomate - Queso - Albahaca - Aceite"
+
+// 5) Reduce para crear un objeto que agrupa en arrays por una propiedad
+const canciones = [
+  { titulo: "Smells Like Teen Spirit", genero: "rock" },
+  { titulo: "Billie Jean", genero: "pop" },
+  { titulo: "Bohemian Rhapsody", genero: "rock" },
+  { titulo: "Bad Guy", genero: "pop" }
+];
+
+const cancionesPorGenero = canciones.reduce((acumulador, cancion) => {
+  const genero = cancion.genero;
+
+  if (!acumulador[genero]) { //acumulador['rock']
+    acumulador[genero] = [];
+  }
+
+  acumulador[genero].push(cancion);
+
+  return acumulador;
+}, {});
+// 1a vuelta
+// genero = 'rock'
+// acumulador: {rock:[{ titulo: "Smells Like Teen Spirit", genero: "rock" }]}
+// 2a vuelta
+// genero = 'pop'
+// acumulador: {rock:[...], pop:[{ titulo: "Billie Jean", genero: "pop" }]}
+// 3a vuelta
+// genero = 'rock'
+// acumulador: {rock:[2 canciones], pop:[1 cancion]}
+// 4a vuelta
+// genero = 'pop'
+// acumulador: {rock:[2 canciones], pop:[2 canciones]}
+
+console.log(cancionesPorGenero);
+
+// 6) reduce para totalizar un numero por categoria: gasto por mes
+const gastos = [
+  { concepto: "Alquiler", mes: "enero", importe: 700 },
+  { concepto: "Luz", mes: "enero", importe: 60 },
+  { concepto: "Alquiler", mes: "febrero", importe: 700 },
+  { concepto: "Internet", mes: "febrero", importe: 40 }
+];
+
+const gastoPorMes = gastos.reduce((acumulador, gasto) => {
+  const mes = gasto.mes;
+
+  if (!acumulador[mes]) {
+    acumulador[mes] = 0;
+  }
+
+  acumulador[mes] += gasto.importe;
+
+  return acumulador;
+}, {});
+
+console.log(gastoPorMes); // { enero: 760, febrero: 740 }
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

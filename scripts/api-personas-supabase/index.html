@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CRUD Personas (Supabase + async/await)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <h1>CRUD de Personas (Supabase)</h1>
+
+  <div class="layout">
+
+    <div class="columna-formulario">
+      <h2>Formulario</h2>
+      <div id="formulario">
+        <input type="hidden" id="idPersona">
+
+        <label>Nombre:</label>
+        <input type="text" id="nombre">
+        <br><br>
+
+        <label>Primer apellido:</label>
+        <input type="text" id="apellido1">
+        <br><br>
+
+        <label>Segundo apellido:</label>
+        <input type="text" id="apellido2">
+        <br><br>
+
+        <label>DNI:</label>
+        <input type="text" id="dni">
+        <br><br>
+
+        <input type="button" id="botonCrear" value="Crear persona" onclick="crearPersona()">
+        <input type="button" id="botonModificar" value="Modificar persona" onclick="modificarPersona2()" style="display:none">
+      </div>
+
+      <h2>Buscar</h2>
+      <input type="text" id="busqueda" placeholder="Nombre, apellidos o DNI..." oninput="buscar()">
+    </div>
+
+    <div class="columna-listado">
+      <h2>Listado de personas (<span id="contador">0</span>)</h2>
+      <div id="listadoPersonas"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

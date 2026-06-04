@@ -1,0 +1,109 @@
+    body {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f0e8;
+      color: #1a1208;
+    }
+
+    .contenedor {
+      padding: 0 1rem;
+    }
+
+    .imagenCabecera {
+      background-image: url('donquix.webp');
+      height: 200px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center top;
+    }
+
+    header {
+      background-color: #2b1a08;
+      color: #f5f0e8;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+      color: #b8860b;
+    }
+
+    header p {
+      margin: 0.3rem 0 0;
+      font-size: 0.9rem;
+      color: #d4c5a0;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .intro-banner {
+      background-color: #5c3d1e;
+      color: #f5f0e8;
+      padding: 1rem 1.2rem;
+      border-left: 5px solid #b8860b;
+      margin: 1.5rem 0;
+      font-style: italic;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: #8b1a1a;
+      border-bottom: 2px solid #b8860b;
+      padding-bottom: 0.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .texto p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .esconderMovil {
+      display: none;
+    }
+
+
+    @media (min-width: 768px) {
+
+      .imagenCabecera {
+        height: 260px;
+      }
+
+      .texto {
+        column-count: 2;
+        column-rule: 3px solid #b8860b;
+        column-gap: 2rem;
+      }
+
+      .texto p:first-child {
+        margin-top: 0;
+      }
+
+      .esconderMovil {
+        display: block;
+      }
+
+    }
+
+
+    @media (min-width: 1200px) {
+
+      .contenedor {
+        width: 1160px;
+        margin: 0 auto;
+      }
+
+      .imagenCabecera {
+        height: 320px;
+      }
+
+      .texto {
+        column-count: 3;
+      }
+
+    }

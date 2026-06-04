@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ejercicio 11 - Prioridad CSS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Ejercicio 11 - Prioridad CSS</h1>
+    <p>Los siguientes párrafos demuestran la prioridad de los selectores CSS:</p>
+
+    <p class="rojo blue" id="verde" style="color: orange;">
+        Se escribe naranja
+    </p>
+
+    <p class="rojo blue" id="verde">
+        Se escribe verde
+    </p>
+
+    <p class="rojo blue">
+        Se escribe rojo o azul dependiendo del color definido más abajo en CSS
+    </p>
+
+    <p>
+        Se escribe en el color definido por defecto en P
+    </p>
+</body>
+</html>

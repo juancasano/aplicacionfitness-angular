@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<form action="" method="post">
+		<div class="fila">
+			<label class="colizq">Nombre</label><div class="colder">
+				<input type="text" name="nombre" placeholder="Pon tu nombre" style="width:213px">
+				<label>Fec. Nac.</label>
+				<input type="date" name="fecNac">
+				<label>DNI</label>
+				<input type="text" name="dni">
+			</div>
+		</div>
+		<div class="fila">
+			<label class="colizq">Apellidos</label><div class="colder">
+				<input type="text" name="apellidos" placeholder="Pon tus apellidos" class="ancho100">
+			</div>
+		</div>
+		<div class="fila">
+			<label class="colizq">Calle y número</label><div class="colder">
+				<input type="text" name="calleynum" placeholder="Pon tu direccion" class="ancho100">
+			</div>
+		</div>
+		<div class="fila">
+			<label class="colizq">Código postal</label><div class="colder">
+				<input type="text" name="CP" placeholder="Pon el código postal" style="width: 140px">
+			<label>Población</label>
+			<input type="text" name="poblacion" style="width:413px">
+			</div>
+		</div>	
+		<div class="fila">
+			<label class="colizq">Estado civil</label><div class="colder">
+				<select name="estadoCivil">
+					<option value="soltero">Soltero</option>
+					<option value="casado">Casado</option>
+				</select>
+				<input type="radio" value="H" name="genero"><label>Hombre</label>
+				<input type="radio" value="M" name="genero"><label>Mujer</label>	
+				<input type="radio" value="J" name="genero"><label>Jirafa</label>
+				<input type="radio" value="F" name="genero"><label>Farola</label>
+			</div>
+		</div>
+		<div class="fila">
+			<label class="colizq idiomasLabel">Idiomas</label><div class="colder idiomas">
+				<div class="fondoazul">
+					<input type="checkbox" value="es" name="idiomas"><label>Español</label><br>
+					<input type="checkbox" value="fr" name="idiomas"><label>Francés</label><br>
+					<input type="checkbox" value="de" name="idiomas"><label>Aleman</label><br>
+					<input type="checkbox" value="en" name="idiomas"><label>Inglés</label>
+				</div>
+
+			</div>
+		</div>
+		<div class="fila">
+			<label class="colizq comentarios comentariosLabel">Comentarios personales</label><div class="colder comentarios">
+				<textarea class="ancho100"></textarea>
+			</div>
+		</div>
+		<div class="fila">
+			<label class="colizq" style="backgrund-color:red">Pulsa aquí</label><div class="colder" style="text-align:center;">
+				<input type="submit" value="Enviar" name="enviar">
+				<input type="reset" name="reset" value="Reset">
+			</div>
+		</div>
+	</form>
+</body>
+</html>

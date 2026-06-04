@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Filtro de Temperaturas</title>
+	<script type="text/javascript" src="filtroTemperaturas.js"></script>
+</head>
+<body onload="leerDatos();">
+	<h1>Filtro de Temperaturas</h1>
+
+	<label>
+		Mostrar temperaturas mayores o iguales a:
+		<input type="number" id="minimo" value="0">
+		ºC
+	</label>
+	<button id="btnFiltrar">Filtrar</button>
+
+	<div id="temperaturas"></div>
+</body>
+</html>

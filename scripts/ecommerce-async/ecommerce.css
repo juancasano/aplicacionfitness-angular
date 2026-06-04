@@ -1,0 +1,13 @@
+.producto {
+	padding: 50px;
+	box-sizing: border-box;
+	text-align: center;
+}
+.producto img {
+	width: 100%;
+}
+#productos-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 20px;
+}

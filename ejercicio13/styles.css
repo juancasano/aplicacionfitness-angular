@@ -1,0 +1,73 @@
+form {
+	width: 800px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.colizq,.colder {
+	display: inline-block;
+}
+.colizq {
+	background-color: #2e7d32;
+	width: 147px;
+	padding: 5px;
+	text-align: right;
+	color: white;
+	box-sizing: border-box;
+	height: 30px;
+	margin-right: 3px;
+	border-radius: 6px 0 0 6px;
+}
+.colder {
+	background-color: #f1f8e9;
+	padding: 4px;
+	box-sizing: border-box;
+	height: 30px;
+	vertical-align: bottom;
+	width: 650px;
+	border-radius: 0 6px 6px 0;
+}
+.fila {
+	margin-bottom: 3px;
+}
+.ancho100 {
+	width: 100%;
+	box-sizing: border-box;
+}
+.fondoazul {
+	background-color: #a5d6a7;
+	width: 100px;
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 8px;
+}
+.idiomas {
+	height: 95px;
+	vertical-align: top;
+	overflow: hidden;
+}
+.idiomasLabel {
+	padding-top: 35px;
+	height: 95px;
+}
+.comentarios {
+	height: 95px;
+	vertical-align: top;
+}
+.comentariosLabel {
+	padding-top: 35px;	
+}
+textarea {
+	height: 85px;
+}
+
+
+
+
+
+
+input[type="text"], input[type="date"], select, textarea {
+	border-radius: 4px;
+}
+input[type="submit"], input[type="reset"] {
+	border-radius: 6px;
+}

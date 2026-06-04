@@ -1,0 +1,70 @@
+<<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script>
+
+let personaLaura = {
+	nombre: "Laura",
+	edad: 32,
+	ciudad: "Madrid"
+}
+let personaBorja = {
+	nombre: "Borja",
+	edad: 45,
+	ciudad: "Barcelona"
+}
+let cocheLaura = {
+	marca: "Renault",	
+	modelo: "Clio",
+	color: "blanco",
+	año: 2020
+}
+let alumno = {
+	nombre: "Borja",
+	edad: 45,
+	curso: "IFCD65_2026",
+	aprobado: true
+}
+console.log(alumno.nombre);
+console.log(alumno.edad);
+console.log(alumno.curso);
+console.log(alumno.aprobado);
+console.log(alumno);
+
+const propiedad1 = "nombre";
+console.log(alumno[propiedad1]);
+console.log(alumno["edad"]);
+console.log(alumno["curso"]);
+console.log(alumno["aprobado"]);
+
+alumno.edad=53;
+alumno.aprobado="aprobado";
+delete alumno.curso;
+console.log(alumno);
+
+
+
+
+
+</script>
+
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

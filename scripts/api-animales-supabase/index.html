@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda de Animales (Supabase)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="cabecera">
+    <h1>Tienda de Animales</h1>
+    <input type="text" id="busqueda" class="buscador-cabecera" placeholder="🔍 Nombre, especie, raza, color, chip o dueño..." oninput="buscar()">
+  </div>
+
+  <div class="layout-superior">
+
+    <div class="columna-izquierda">
+      <h2>Formulario</h2>
+      <div id="formulario">
+        <input type="hidden" id="idAnimal">
+
+        <label>Nombre:</label>
+        <input type="text" id="nombre">
+        <br><br>
+
+        <label>Especie:</label>
+        <select id="especie">
+          <option value="">(elige especie)</option>
+        </select>
+        <br><br>
+
+        <label>Raza:</label>
+        <input type="text" id="raza">
+        <br><br>
+
+        <label>Identificador:</label>
+        <input type="text" id="identificador">
+        <br><br>
+
+        <label>Edad (años):</label>
+        <input type="number" id="edad" min="0">
+        <br><br>
+
+        <label>Peso (kg):</label>
+        <input type="number" id="peso_kg" step="0.1" min="0">
+        <br><br>
+
+        <label>Color:</label>
+        <select id="color">
+          <option value="">(elige color)</option>
+        </select>
+        <br><br>
+
+        <label>Esterilizado:</label>
+        <input type="checkbox" id="esterilizado">
+        <br><br>
+
+        <label>Dueño:</label>
+        <select id="dueno_id">
+          <option value="">(sin dueño)</option>
+        </select>
+        <br><br>
+
+        <input type="button" id="botonCrear" value="Crear animal" onclick="crearAnimal()">
+        <input type="button" id="botonModificar" value="Modificar animal" onclick="modificarAnimal2()" style="display:none">
+      </div>
+
+      <h2>Dueños</h2>
+      <div id="listadoDuenos"></div>
+    </div>
+
+    <div class="columna-animales">
+      <h2>Listado de animales</h2>
+      <div id="listadoAnimales"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

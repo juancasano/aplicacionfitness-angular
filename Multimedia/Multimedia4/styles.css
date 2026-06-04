@@ -1,0 +1,103 @@
+    body {
+      background-color: #c0c0c0;
+      font-family: Arial;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #cc0000;
+      font-size: 2em;
+      margin-bottom: 5px;
+    }
+
+    p.subtitulo {
+      color: #333;
+      font-size: 1em;
+      margin-bottom: 40px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(3, 200px);
+      gap: 40px;
+      margin: 0 auto 40px auto;
+      width: fit-content;
+    }
+
+    .galeria1 {
+      margin: 0;
+      padding: 10px 10px 30px 10px;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+      width: 200px;
+      position: relative;
+      z-index: 100000;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0s;
+    }
+
+    .galeria1 img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .galeria1 figcaption {
+      font-size: 13px;
+      color: #555;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .p1 { background-color: #ffe0e0; }
+    .p2 { background-color: #fff3cd; }
+    .p3 { background-color: #d4edda; }
+    .p4 { background-color: #cce5ff; }
+    .p5 { background-color: #e2d9f3; }
+    .p6 { background-color: #fde5d4; }
+
+    .p1:hover {
+      transform: rotate(20deg);
+      z-index: 100;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+      background-color: #ffb3b3;
+    }
+    .p2:hover {
+      transform: rotate(90deg);
+      z-index: 100;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+      background-color: #ffe08a;
+    }
+    .p3:hover {
+      transform: translateX(80px);
+      z-index: 100;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+      background-color: #8fd9a8;
+    }
+    .p4:hover {
+      transform: translateY(-60px);
+      z-index: 100;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+      background-color: #80bfff;
+    }
+    .p5:hover {
+      transform: scale(1.5);
+      z-index: 100;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+      background-color: #b799e8;
+    }
+    .p6:hover {
+      transform: skewX(20deg);
+      z-index: 100;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+      background-color: #f9b98a;
+    }

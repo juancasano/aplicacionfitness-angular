@@ -1,0 +1,256 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 15px;
+}
+
+.seccion {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f9f9f9;
+    border-left: 5px solid #667eea;
+    border-radius: 5px;
+}
+
+h2 {
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.descripcion {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 15px;
+    background: #e8e8ff;
+    padding: 8px 12px;
+    border-radius: 3px;
+}
+
+/* ===== EJEMPLO 1: Child Selector (>) ===== */
+.parent > p {
+    color: red;
+    font-weight: bold;
+    padding: 8px;
+    background: #ffe0e0;
+    margin: 5px 0;
+    border-radius: 3px;
+}
+
+.parent {
+    background: white;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+.nested {
+    background: #f0f0f0;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 3px;
+}
+
+/* ===== EJEMPLO 2: Nth-Child(4) ===== */
+.lista-items li:nth-child(4) {
+    background: #90EE90;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 3px;
+}
+
+.lista-items li:nth-child(4n) {
+    background: #90EE90;
+    padding: 8px 12px;
+    border-radius: 3px;
+}
+
+.lista-items {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-items li {
+    padding: 10px;
+    margin: 5px 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+/* ===== EJEMPLO 3: Nth-Child(2n) - Pares ===== */
+.contenedor-pares {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.contenedor-pares .caja {
+    flex: 1;
+    min-width: 120px;
+    padding: 20px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.contenedor-pares .caja:nth-child(2n) {
+    background: #87CEEB;
+    color: white;
+}
+
+/* ===== EJEMPLO 4: Nth-Child(2n+1) - Impares ===== */
+.contenedor-impares {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.contenedor-impares .elemento {
+    flex: 1;
+    min-width: 120px;
+    padding: 20px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.contenedor-impares .elemento:nth-child(2n+1) {
+    background: #FFD700;
+    color: #333;
+}
+
+/* ===== EJEMPLO 5: First-Child y Last-Child ===== */
+.lista-especial {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-especial li {
+    padding: 12px;
+    margin: 8px 0;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.lista-especial li:first-child {
+    background: #FF6B6B;
+    color: white;
+    font-weight: bold;
+}
+
+.lista-especial li:last-child {
+    background: #FFA500;
+    color: white;
+    font-weight: bold;
+}
+
+/* ===== EJEMPLO 6: Nth-of-Type() ===== */
+.contenedor-tipos {
+    background: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.contenedor-tipos p:nth-of-type(1),
+.contenedor-tipos p:nth-of-type(3) {
+    background: #DDA0DD;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.contenedor-tipos span:nth-of-type(2) {
+    background: #DDA0DD;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.contenedor-tipos > * {
+    margin: 8px 0;
+}
+
+/* ===== EJEMPLO 7: Combinación - Child > nth-child ===== */
+.combinado {
+    background: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.combinado > p:nth-child(2) {
+    background: #00CED1;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.combinado > * {
+    margin: 8px 0;
+}
+
+/* ===== Estilos generales para mejor visualización ===== */
+p, span, div {
+    line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .contenedor-pares,
+    .contenedor-impares {
+        flex-direction: column;
+    }
+
+    .contenedor-pares .caja,
+    .contenedor-impares .elemento {
+        min-width: 100%;
+    }
+}

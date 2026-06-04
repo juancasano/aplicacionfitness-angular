@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript">
+	function visib(divId) {
+		var ar = ["ht", "cs", "js"];
+		for (var i=0; i < ar.length; i++) {
+			var divElem = document.getElementById(ar[i]);
+			if (divId == ar[i]) {
+				divElem.classList.remove('ocultar')
+			} else {
+				divElem.classList.add('ocultar')
+			}
+		};
+	}
+	</script>
+	<style type="text/css">
+.header {
+	border: 1px solid black;
+	cursor: pointer;
+	width: 200px;
+	height: 30px;
+	padding: 3px;
+	background-color: #C0C0FF;
+	font-size: 1.1em;
+}
+.content {
+	border: 1px solid black;
+	font-size: 0.9em;
+	width: 200px;
+	height: 80px;
+	padding: 3px;
+}
+.ocultar {
+	display: none;
+}
+
+	</style>
+</head>
+<body>
+	<div class="header" onclick="visib('ht')">
+		HTML
+	</div>
+	<div class="content ocultar" id="ht">
+		Lenguaje de contenido web
+	</div>
+	<div class="header" onclick="visib('cs')">
+		CSS
+	</div>
+	<div class="content ocultar" id="cs">
+		Estilos gráficos
+	</div>
+	<div class="header" onclick="visib('js')">
+		JavaScript
+	</div>
+	<div class="content ocultar" id="js">
+		Lenguaje para interacción dinámica
+	</div>
+</body>
+</html>

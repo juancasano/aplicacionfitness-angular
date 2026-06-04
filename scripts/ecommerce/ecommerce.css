@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#productos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.producto {
+    text-align: center;
+}
+
+.producto img {
+    max-width: 200px;
+    height: auto;
+}
+
+.producto a {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #6a4cff;
+    text-decoration: none;
+}
+
+.producto p {
+    font-size: 14px;
+    color: #333;
+}

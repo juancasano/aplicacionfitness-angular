@@ -1,0 +1,320 @@
+:root {
+  --bg: #0d0d12;
+  --surface: #16161f;
+  --surface2: #1e1e2a;
+  --border: rgba(255,255,255,0.07);
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-glow: rgba(201,168,76,0.15);
+  --text: #e8e6df;
+  --text-muted: #8a8790;
+  --green: #4caf82;
+  --amber: #e8a23a;
+  --red: #e05c5c;
+  --header-bg: linear-gradient(135deg, #1a1a28 0%, #22223a 100%);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(76,111,201,0.06) 0%, transparent 60%);
+  min-height: 100vh;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  padding: 60px 24px 80px;
+}
+
+.wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.page-header .eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.page-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, #a07830 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-header .subtitle {
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.section {
+  margin-bottom: 64px;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.section-label span {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold-glow), transparent);
+}
+
+.table-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.06),
+    0 24px 48px rgba(0,0,0,0.4),
+    0 4px 12px rgba(0,0,0,0.3);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead tr {
+  background: var(--header-bg);
+  border-bottom: 1px solid rgba(201,168,76,0.25);
+}
+
+th {
+  padding: 18px 24px;
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+tbody tr {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.25s ease, transform 0.2s ease;
+  cursor: default;
+  position: relative;
+}
+
+tbody tr:last-child { border-bottom: none; }
+
+tbody tr:nth-child(even) {
+  background: var(--surface2);
+}
+
+tbody tr:hover {
+  background: linear-gradient(90deg, rgba(201,168,76,0.06) 0%, rgba(201,168,76,0.02) 100%);
+  transform: translateX(2px);
+}
+
+tbody tr:hover td:first-child {
+  color: var(--gold-light);
+}
+
+td {
+  padding: 18px 24px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text);
+  transition: color 0.25s ease;
+}
+
+td.product-name {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+td.category {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+td.price {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--gold-light);
+  letter-spacing: 0.02em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.badge-stock {
+  background: rgba(76,175,130,0.12);
+  color: var(--green);
+  border: 1px solid rgba(76,175,130,0.2);
+}
+.badge-stock::before { background: var(--green); box-shadow: 0 0 6px var(--green); }
+
+.badge-low {
+  background: rgba(232,162,58,0.12);
+  color: var(--amber);
+  border: 1px solid rgba(232,162,58,0.2);
+}
+.badge-low::before { background: var(--amber); }
+
+.badge-out {
+  background: rgba(224,92,92,0.1);
+  color: var(--red);
+  border: 1px solid rgba(224,92,92,0.18);
+}
+.badge-out::before { background: var(--red); }
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2) 30%, rgba(201,168,76,0.2) 70%, transparent);
+  margin: 0 0 64px;
+}
+
+.cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hover-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: default;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.25s ease,
+    box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--gold);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+.hover-card:hover {
+  background: var(--surface2);
+  border-color: rgba(201,168,76,0.25);
+  transform: translateX(6px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,168,76,0.08);
+}
+
+.hover-card:hover::before {
+  transform: scaleY(1);
+}
+
+.card-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: rgba(201,168,76,0.18);
+  line-height: 1;
+  transition: color 0.3s ease;
+  min-width: 36px;
+}
+
+.hover-card:hover .card-number {
+  color: rgba(201,168,76,0.45);
+}
+
+.card-text {
+  flex: 1;
+}
+
+.card-text strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 2px;
+  transition: color 0.3s ease;
+}
+
+.hover-card:hover .card-text strong {
+  color: var(--gold-light);
+}
+
+.card-text p {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.card-arrow {
+  color: var(--text-muted);
+  font-size: 18px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.hover-card:hover .card-arrow {
+  color: var(--gold);
+  transform: translateX(4px);
+}
+
+.footer-note {
+  text-align: center;
+  margin-top: 56px;
+  font-size: 12px;
+  color: rgba(138,135,144,0.5);
+  letter-spacing: 0.06em;
+}

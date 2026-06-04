@@ -1,0 +1,121 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.contenedor {
+  padding: 0 1rem;
+}
+
+h1 {
+  text-align: center;
+  font-style: italic;
+  color: #cc0000;
+  margin: 1rem 0;
+}
+
+.sidebar {
+  margin-bottom: 1.5rem;
+}
+
+.sidebar h2 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar a {
+  color: #3a7abf;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.principal h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.principal p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.principal img {
+  float: right;
+  width: 160px;
+  margin: 0 0 1rem 1.5rem;
+}
+
+.clearfix {
+  overflow: hidden;
+}
+
+.servicios {
+  border-top: 1px solid #ccc;
+  padding-top: 1.5rem;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.servicio {
+  margin-bottom: 1.5rem;
+}
+
+.servicios h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.servicios a {
+  color: #3a7abf;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.servicios p {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    float: left;
+    width: 28%;
+    padding-right: 2rem;
+    margin-bottom: 0;
+  }
+
+  .principal {
+    float: left;
+    width: 72%;
+  }
+
+  .servicio {
+    float: left;
+    width: 50%;
+    padding-right: 1.5rem;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .contenedor {
+    width: 1000px;
+    margin: 0 auto;
+  }
+
+  .servicio {
+    width: 25%;
+  }
+}

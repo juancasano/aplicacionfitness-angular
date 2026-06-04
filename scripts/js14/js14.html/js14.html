@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+
+	<script type="text/javascript">
+		function esMayMin(){
+			cadena = document.getElementById("txt").value;
+			if(cadena == cadena.toUpperCase()){
+			   mensaje = "Es mayuscula";	
+			} else if (cadena == cadena.toLowerCase()){
+				mensaje = "Es minuscula";
+			} else {
+				mensaje = "No es ni mayuscula ni minuscula";
+			}
+			document.getElementById("res").innerHTML = mensaje;
+		}
+	</script>
+</head>
+<body>
+	Indica una cadena: <input type="text" id="txt">
+	<input type="button" onclick="esMayMin()" value="Es mayuscula o minuscula">
+	<div id="res"></div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geo-localización con HTML 5</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+<style>
+#mapa {
+height: 400px;
+width: 100%;
+}
+</style>
+</head>
+<body onload="initMap()">
+<h1>Ejemplo de Geo-localización con HTML 5</h1>
+<h2>Ubicación:</h2>
+<h5>Latitud: <span id="latitud">n/c</span></h5>
+<h5>Longitud: <span id="longitud">n/c</span></h5>
+<h5>Precisión: <span id="precision">n/c</span></h5>
+<div id="mapa"></div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script type="text/javascript" src="geolocalizacion.js"></script>
+</body>
+</html>

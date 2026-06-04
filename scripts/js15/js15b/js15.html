@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>JS15-b</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #f5f5f5;
+		}
+
+		.container {
+			background-color: white;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+		}
+
+		h1 {
+			color: #333;
+			text-align: center;
+		}
+
+		.bebida-list {
+			background-color: #e9f7ef;
+			padding: 15px;
+			border-radius: 5px;
+			margin: 15px 0;
+		}
+
+		.input-group {
+			margin: 15px 0;
+			display: grid;
+			grid-template-columns: 130px 1fr 90px;
+			align-items: center;
+			gap: 10px;
+		}
+
+		input[type="text"] {
+			padding: 8px;
+			border: 2px solid #ddd;
+			border-radius: 4px;
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		button {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 15px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-weight: bold;
+			width: 100%;
+		}
+
+		button:hover {
+			background-color: #45a049;
+		}
+
+		#resultado {
+			margin-top: 20px;
+			padding: 15px;
+			border-radius: 5px;
+			font-weight: bold;
+			text-align: center;
+		}
+
+		.success {
+			background-color: #d4edda;
+			color: #155724;
+			border: 1px solid #c3e6cb;
+		}
+
+		.error {
+			background-color: #f8d7da;
+			color: #721c24;
+			border: 1px solid #f5c6cb;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Añadir Bebidas a la Lista</h1>
+
+		<div class="bebida-list">
+			<p><strong>Menú de bebidas disponibles:</strong></p>
+			<ol id="listaBebidas">
+				<li>Café Espresso</li>
+				<li>Té Verde</li>
+				<li>Jugo de Naranja Natural</li>
+				<li>Smoothie de Frutas</li>
+				<li>Batido de Chocolate</li>
+				<li>Agua Mineral</li>
+			</ol>
+		</div>
+
+		<div class="input-group">
+			<label for="numBebida">Indica el número de bebida:</label>
+			<input type="text" id="numBebida" placeholder="Nº">
+			<button onclick="mostrarBebida()">Ver</button>
+		</div>
+
+		<div class="input-group">
+			<label for="nombreBebida">Nombre nueva bebida:</label>
+			<input type="text" id="nombreBebida" placeholder="Escribe el nombre de la bebida">
+			<button onclick="insertarBebida()">Añadir bebida</button>
+		</div>
+
+		<p id="resultado"></p>
+	</div>
+
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

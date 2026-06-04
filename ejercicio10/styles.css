@@ -1,0 +1,53 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+
+h1 {
+    text-align: center;
+    color: #cc0000;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.caja {
+    border: 1px solid green;
+    padding: 8px;
+    font-size: 0.9rem;
+}
+
+.izquierda-1 {
+    float: left;
+    width: 28%;
+    margin-right: 10px;
+}
+
+.izquierda-2 {
+    float: left;
+    width: 28%;
+    margin-right: 10px;
+}
+
+.derecha {
+    float: right;
+    width: 28%;
+}
+
+.sin-float {
+    clear: both;
+    border: none;
+    padding: 0;
+    font-size: 0.9rem;
+}

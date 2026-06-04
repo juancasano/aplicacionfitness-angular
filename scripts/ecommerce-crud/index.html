@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>E-commerce CRUD</title>
+    <link rel="stylesheet" type="text/css" href="ecommerce.css">
+</head>
+<body>
+
+    <h1>E-commerce CRUD</h1>
+
+    <h2>Formulario</h2>
+
+    <input type="hidden" id="idProducto">
+
+    <label>Título:</label>
+    <input type="text" id="title">
+    <br><br>
+
+    <label>Precio (€):</label>
+    <input type="number" id="price" step="0.01">
+    <br><br>
+
+    <label>Categoría:</label>
+    <input type="text" id="category">
+    <br><br>
+
+    <label>Imagen (URL):</label>
+    <input type="text" id="image">
+    <br><br>
+
+    <label>Descripción:</label>
+    <br>
+    <textarea id="description" rows="3" cols="60"></textarea>
+    <br><br>
+
+    <input type="button" id="botonCrear" value="Crear producto" onclick="crearProducto()">
+    <input type="button" id="botonModificar" value="Modificar producto" onclick="modificarProducto2()" style="display:none">
+    <input type="button" value="Resetear (recargar API)" onclick="resetearProductos()">
+
+    <h2>Listado de productos</h2>
+    <div id="productos-grid"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

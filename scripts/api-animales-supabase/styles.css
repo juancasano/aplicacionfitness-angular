@@ -1,0 +1,397 @@
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  zoom: 0.75;
+  font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+  margin: 0;
+  padding: 30px 40px;
+  background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+  color: #3E2723;
+  min-height: 100vh;
+}
+
+/* ===== Cabeceras ===== */
+.cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 0 0 30px 0;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #FF8C42;
+}
+
+.buscador-cabecera {
+  flex: 1 1 320px;
+  max-width: 480px;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid #FF8C42;
+  border-radius: 10px;
+  background: #FFFDFB;
+  color: #3E2723;
+  outline: none;
+}
+
+.buscador-cabecera:focus {
+  border-color: #D2691E;
+  box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.25);
+}
+
+h1 {
+  font-size: 36px;
+  color: #D2691E;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+h1::before { content: "🐾 "; }
+h1::after  { content: " 🐾"; }
+
+h2 {
+  font-size: 24px;
+  color: #6B4423;
+  margin: 30px 0 15px 0;
+  padding-left: 12px;
+  border-left: 5px solid #FF8C42;
+}
+
+/* ===== Layout: izquierda (formulario + dueños) | derecha (animales) ===== */
+.layout-superior {
+  display: grid;
+  grid-template-columns: minmax(380px, 1fr) 2fr;
+  gap: 30px;
+  align-items: start;
+  margin-bottom: 20px;
+}
+
+.columna-izquierda,
+.columna-animales {
+  min-width: 0;
+}
+
+.columna-izquierda h2:first-child,
+.columna-animales h2 {
+  margin-top: 0;
+}
+
+/* ===== Tarjeta del formulario ===== */
+#formulario {
+  background: #FFFFFF;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 1px solid #FFE8D6;
+}
+
+#idAnimal {
+  display: none;
+}
+
+label {
+  display: inline-block;
+  width: 140px;
+  font-weight: 600;
+  color: #5D4037;
+  padding: 6px 0;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: calc(100% - 150px);
+  max-width: 280px;
+  padding: 8px 12px;
+  border: 2px solid #FFD4A8;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #FFFFFF;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: #FF8C42;
+  box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.2);
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #FF8C42;
+  vertical-align: middle;
+}
+
+/* ===== Botones del formulario (Crear / Modificar) ===== */
+input[type="button"] {
+  padding: 10px 22px;
+  margin-right: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.1s, box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+#botonCrear {
+  background: linear-gradient(135deg, #7BB342, #558B2F);
+}
+
+#botonCrear:hover {
+  background: linear-gradient(135deg, #8BC34A, #689F38);
+  transform: translateY(-1px);
+}
+
+#botonModificar {
+  background: linear-gradient(135deg, #FF8C42, #E65100);
+}
+
+#botonModificar:hover {
+  background: linear-gradient(135deg, #FFA726, #F57C00);
+  transform: translateY(-1px);
+}
+
+/* ===== Grids de tarjetas ===== */
+#listadoAnimales,
+#listadoDuenos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 15px;
+}
+
+.tarjeta {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 18px 22px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  border: 1px solid #FFE8D6;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* ===== Colores por especie (animales) ===== */
+.tarjeta-perro     { background: linear-gradient(135deg, #FFFFFF 60%, #D7CCC8); border-color: #A1887F; }
+.tarjeta-perro    .tarjeta-titulo { color: #6D4C41; }
+
+.tarjeta-gato      { background: linear-gradient(135deg, #FFFFFF 60%, #FFE0B2); border-color: #FFB74D; }
+.tarjeta-gato     .tarjeta-titulo { color: #E65100; }
+
+.tarjeta-pájaro,
+.tarjeta-pajaro    { background: linear-gradient(135deg, #FFFFFF 60%, #BBDEFB); border-color: #64B5F6; }
+.tarjeta-pájaro   .tarjeta-titulo,
+.tarjeta-pajaro   .tarjeta-titulo { color: #1565C0; }
+
+.tarjeta-conejo    { background: linear-gradient(135deg, #FFFFFF 60%, #F8BBD0); border-color: #F06292; }
+.tarjeta-conejo   .tarjeta-titulo { color: #AD1457; }
+
+.tarjeta-hámster,
+.tarjeta-hamster   { background: linear-gradient(135deg, #FFFFFF 60%, #FFF9C4); border-color: #FBC02D; }
+.tarjeta-hámster  .tarjeta-titulo,
+.tarjeta-hamster  .tarjeta-titulo { color: #F57F17; }
+
+.tarjeta-pez       { background: linear-gradient(135deg, #FFFFFF 60%, #B2EBF2); border-color: #4DD0E1; }
+.tarjeta-pez      .tarjeta-titulo { color: #006064; }
+
+.tarjeta-caballo   { background: linear-gradient(135deg, #FFFFFF 60%, #BCAAA4); border-color: #795548; }
+.tarjeta-caballo  .tarjeta-titulo { color: #3E2723; }
+
+/* ===== Colores por sexo (dueños) ===== */
+.tarjeta-dueno-f { background: linear-gradient(135deg, #FFFFFF 60%, #FCE4EC); border-color: #F48FB1; }
+.tarjeta-dueno-f .tarjeta-titulo { color: #C2185B; }
+
+.tarjeta-dueno-m { background: linear-gradient(135deg, #FFFFFF 60%, #E3F2FD); border-color: #64B5F6; }
+.tarjeta-dueno-m .tarjeta-titulo { color: #1565C0; }
+
+.tarjeta-titulo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #D2691E;
+  margin-bottom: 4px;
+}
+
+.tarjeta-subtitulo {
+  font-size: 14px;
+  color: #6B4423;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.tarjeta-dato {
+  font-size: 13px;
+  color: #5D4037;
+  margin: 3px 0;
+}
+
+.tarjeta-dato strong {
+  color: #3E2723;
+}
+
+.tarjeta-dueno {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #FFD4A8;
+  font-size: 13px;
+  color: #6B4423;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.badge-si { background: #C8E6C9; color: #2E7D32; }
+.badge-no { background: #FFCDD2; color: #C62828; }
+
+.tarjeta-acciones {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.btn-modificar,
+.btn-borrar {
+  flex: 1;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-modificar {
+  background: #FFB74D;
+  color: #3E2723;
+}
+
+.btn-modificar:hover {
+  background: #FFA726;
+  transform: translateY(-1px);
+}
+
+.btn-borrar {
+  background: #EF5350;
+  color: white;
+}
+
+.btn-borrar:hover {
+  background: #E53935;
+  transform: translateY(-1px);
+}
+
+/* Emoji al lado del nombre del animal según especie */
+.emoji-especie {
+  font-size: 22px;
+  margin-right: 6px;
+}
+
+/* Mini-tarjetas de animales dentro del card del dueño */
+.lista-animales-dueno {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.animal-mini {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: #FFF8F0;
+  border: 1px solid #FFE8D6;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.animal-mini > span {
+  flex: 1;
+  color: #3E2723;
+  font-weight: 500;
+}
+
+.btn-mini-modificar,
+.btn-mini-borrar {
+  padding: 3px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.btn-mini-modificar {
+  background: #FFB74D;
+  color: #3E2723;
+}
+
+.btn-mini-modificar:hover {
+  background: #FFA726;
+  transform: translateY(-1px);
+}
+
+.btn-mini-borrar {
+  background: #EF5350;
+  color: white;
+}
+
+.btn-mini-borrar:hover {
+  background: #E53935;
+  transform: translateY(-1px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 950px) {
+  .layout-superior {
+    grid-template-columns: 1fr;
+  }
+  #formulario {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 15px;
+  }
+  h1 {
+    font-size: 26px;
+  }
+  label {
+    width: 100%;
+    display: block;
+    margin-bottom: 4px;
+  }
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    max-width: 100%;
+  }
+  #formulario {
+    padding: 18px;
+  }
+}

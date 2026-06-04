@@ -1,0 +1,45 @@
+h1 {
+  font-family: Arial, sans-serif;
+  font-size: 35px;
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+p {
+  font-family: Verdana, sans-serif;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.parrafo2 {
+  border-top: 5px solid red;
+  border-bottom: 5px solid red;
+  border-left: 5px solid green;
+  border-right: 5px solid green;
+  background-color: darkgray;
+  color: white;
+  padding: 10px;
+}
+a {
+  border: 5px solid blue;
+  padding: 10px 20px;
+  width: 150px;
+  margin: auto;
+  display: block;
+  font-size: 30px;
+  text-decoration: none;
+  color: white;
+  background-color: red;
+  text-align: center;
+  border-radius: 35px;
+}
+
+.boton:hover {
+  background-color: white;
+  color: red;
+  border: 5px solid gray;
+
+}

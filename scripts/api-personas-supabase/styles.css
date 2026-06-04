@@ -1,0 +1,304 @@
+/* ===== Variables ===== */
+:root {
+  --bg-0: #0b0f1a;
+  --bg-1: #131a2e;
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-strong: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #e8ecff;
+  --text-dim: #9aa6cc;
+  --cyan: #22d3ee;
+  --violet: #a855f7;
+  --green: #34d399;
+  --red: #fb7185;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+  margin: 0;
+  padding: 40px 32px 60px;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(900px 600px at 15% -5%, rgba(168, 85, 247, 0.25), transparent 60%),
+    radial-gradient(900px 600px at 95% 10%, rgba(34, 211, 238, 0.22), transparent 60%),
+    linear-gradient(160deg, var(--bg-0) 0%, var(--bg-1) 100%);
+  background-attachment: fixed;
+}
+
+/* ===== Cabeceras ===== */
+h1 {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin: 0 0 32px 0;
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 22px 0 14px 0;
+  padding-left: 12px;
+  border-left: 3px solid var(--cyan);
+}
+
+/* ===== Layout ===== */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(340px, 1fr) 2fr;
+  gap: 28px;
+  align-items: start;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.columna-formulario,
+.columna-listado {
+  min-width: 0;
+}
+
+.columna-formulario h2:first-child,
+.columna-listado h2 {
+  margin-top: 0;
+}
+
+/* ===== Tarjeta de cristal (formulario) ===== */
+#formulario,
+.tarjeta {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+#formulario {
+  padding: 24px 26px;
+}
+
+#idPersona {
+  display: none;
+}
+
+label {
+  display: inline-block;
+  width: 140px;
+  font-weight: 600;
+  color: var(--text-dim);
+  padding: 8px 0;
+  font-size: 13px;
+}
+
+input[type="text"] {
+  width: calc(100% - 150px);
+  max-width: 280px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.25);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+input[type="text"]::placeholder {
+  color: var(--text-dim);
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--cyan);
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.18);
+}
+
+#busqueda {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ===== Botones del formulario ===== */
+input[type="button"] {
+  padding: 11px 22px;
+  margin-right: 8px;
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #06121a;
+  transition: transform 0.12s ease, box-shadow 0.2s, filter 0.2s;
+}
+
+#botonCrear {
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  box-shadow: 0 6px 18px rgba(34, 211, 238, 0.35);
+}
+
+#botonModificar {
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  box-shadow: 0 6px 18px rgba(168, 85, 247, 0.35);
+  color: #fff;
+}
+
+input[type="button"]:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+/* ===== Grid de tarjetas ===== */
+#listadoPersonas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 18px;
+}
+
+#listadoPersonas > p {
+  color: var(--text-dim);
+}
+
+.tarjeta {
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.25s, border-color 0.25s;
+  animation: aparecer 0.4s ease both;
+}
+
+.tarjeta::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+  opacity: 0.8;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow: 0 14px 40px rgba(34, 211, 238, 0.18);
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Avatar con iniciales ===== */
+.tarjeta-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.18);
+}
+
+.tarjeta-nombre {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.tarjeta-apellidos {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.tarjeta-dni {
+  font-size: 12px;
+  color: var(--cyan);
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+
+.tarjeta-acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-modificar,
+.btn-borrar {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text);
+  background: var(--glass-strong);
+  transition: transform 0.12s, background 0.2s, border-color 0.2s;
+}
+
+.btn-modificar:hover {
+  background: rgba(168, 85, 247, 0.22);
+  border-color: var(--violet);
+  transform: translateY(-1px);
+}
+
+.btn-borrar:hover {
+  background: rgba(251, 113, 133, 0.22);
+  border-color: var(--red);
+  transform: translateY(-1px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 24px 16px 40px;
+  }
+  h1 {
+    font-size: 26px;
+  }
+  label {
+    width: 100%;
+    display: block;
+    margin-bottom: 4px;
+  }
+  input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+  }
+}

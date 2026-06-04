@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tareas</title>
+	<script type="text/javascript" src="personas2.js" defer></script>
+</head>
+<body>
+	<h2>Añade una Persona</h2>
+	<form id="nueva-persona">
+		<label for="nombre">Nombre:</label>
+		<input type="text" id="nombre" name="nombre">
+		<br>	
+		<label for="apellido1">Apellido1:</label>
+		<input type="text" id="apellido1" name="apellido1">
+		<br>	
+		<label for="apellido2">Apellido2:</label>
+		<input type="text" id="apellido2" name="apellido2">
+		<br>	
+		<label for="genero">Género:</label>
+		<input type="text" id="genero" name="genero">
+		<br>	
+		<input type="hidden" id="indice" name="indice">
+		<button type="submit" id="botonAnadir">Anadir</button>
+	</form>
+	<h2>Lista de Personas</h2>
+	<input type="text" id="buscador" name="buscador" placeholder="Busca un texto" oninput="lista.buscarPersonas()"><input type="button" id="boton-buscar" value="Buscar" onclick="lista.buscarPersonas()">
+	<div id="lista-personas"></div>
+	<div id="lista-personas-ordenadas"></div>
+</body>
+</html>

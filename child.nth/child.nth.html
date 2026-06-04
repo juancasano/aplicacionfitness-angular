@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSS Selectors - Child y Nth</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Selectores CSS: Child (>) y Nth-Child</h1>
+
+        <!-- Ejemplo 1: Child Selector (>) -->
+        <section class="seccion">
+            <h2>Ejemplo 1: Child Selector (>)</h2>
+            <p class="descripcion">El selector > aplica estilos solo a hijos directos</p>
+            
+            <div class="parent">
+                <p>Párrafo directo dentro de parent (color rojo)</p>
+                <div class="nested">
+                    <p>Párrafo dentro de nested (sin color especial)</p>
+                </div>
+                <p>Otro párrafo directo (color rojo)</p>
+            </div>
+        </section>
+
+        <!-- Ejemplo 2: Nth-Child -->
+        <section class="seccion">
+            <h2>Ejemplo 2: Nth-Child()</h2>
+            <p class="descripcion">Selecciona elementos basado en su posición</p>
+            
+            <ul class="lista-items">
+                <li>Item 1 - sin estilo</li>
+                <li>Item 2 - sin estilo</li>
+                <li>Item 3 - sin estilo</li>
+                <li>Item 4 - VERDE (nth-child(4))</li>
+                <li>Item 5 - sin estilo</li>
+                <li>Item 6 - VERDE (nth-child(4) en realidad es 6)</li>
+                <li>Item 7 - sin estilo</li>
+                <li>Item 8 - VERDE (nth-child(4n))</li>
+            </ul>
+        </section>
+
+        <!-- Ejemplo 3: Nth-Child con fórmula -->
+        <section class="seccion">
+            <h2>Ejemplo 3: Nth-Child(2n) - Pares</h2>
+            <p class="descripcion">nth-child(2n) selecciona todos los elementos pares</p>
+            
+            <div class="contenedor-pares">
+                <div class="caja">Caja 1</div>
+                <div class="caja">Caja 2 - Azul (par)</div>
+                <div class="caja">Caja 3</div>
+                <div class="caja">Caja 4 - Azul (par)</div>
+                <div class="caja">Caja 5</div>
+                <div class="caja">Caja 6 - Azul (par)</div>
+            </div>
+        </section>
+
+        <!-- Ejemplo 4: Nth-Child(2n+1) - Impares -->
+        <section class="seccion">
+            <h2>Ejemplo 4: Nth-Child(2n+1) - Impares</h2>
+            <p class="descripcion">nth-child(2n+1) selecciona todos los elementos impares</p>
+            
+            <div class="contenedor-impares">
+                <div class="elemento">Elemento 1 - Amarillo (impar)</div>
+                <div class="elemento">Elemento 2</div>
+                <div class="elemento">Elemento 3 - Amarillo (impar)</div>
+                <div class="elemento">Elemento 4</div>
+                <div class="elemento">Elemento 5 - Amarillo (impar)</div>
+                <div class="elemento">Elemento 6</div>
+            </div>
+        </section>
+
+        <!-- Ejemplo 5: First-Child y Last-Child -->
+        <section class="seccion">
+            <h2>Ejemplo 5: First-Child y Last-Child</h2>
+            <p class="descripcion">Selecciona el primer y último elemento</p>
+            
+            <ul class="lista-especial">
+                <li>Primer item - ROJO (first-child)</li>
+                <li>Item normal</li>
+                <li>Item normal</li>
+                <li>Item normal</li>
+                <li>Último item - NARANJA (last-child)</li>
+            </ul>
+        </section>
+
+        <!-- Ejemplo 6: Nth-of-Type -->
+        <section class="seccion">
+            <h2>Ejemplo 6: Nth-of-Type()</h2>
+            <p class="descripcion">Similar a nth-child pero considera solo el tipo de elemento</p>
+            
+            <div class="contenedor-tipos">
+                <p>Párrafo 1 - Púrpura (nth-of-type(1) para p)</p>
+                <span>Span 1</span>
+                <p>Párrafo 2</p>
+                <span>Span 2 - Púrpura (nth-of-type(2) para span)</span>
+                <p>Párrafo 3 - Púrpura (nth-of-type(3) para p)</p>
+            </div>
+        </section>
+
+        <!-- Ejemplo 7: Combinación - Child > nth-child -->
+        <section class="seccion">
+            <h2>Ejemplo 7: Combinación - div > p:nth-child(2)</h2>
+            <p class="descripcion">Solo paragrafos que son segundo hijo directo de un div</p>
+            
+            <div class="combinado">
+                <p>Primer párrafo</p>
+                <p>Segundo párrafo - CYAN (es 2do hijo directo)</p>
+                <span>Span aquí</span>
+                <p>Tercer párrafo</p>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>

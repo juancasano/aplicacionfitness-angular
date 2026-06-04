@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Georgia, serif;
+  background: #ffffff;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* -- DISEÑO DE ESCRITORIO CON GRID -- */
+.card {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 400px 400px;
+  grid-template-rows: 280px;
+  grid-template-areas: "imagen texto";
+  margin-bottom: 20px;
+}
+
+/* Fila invertida usando las áreas del Grid */
+.card.invertida {
+  grid-template-areas: "texto imagen";
+}
+
+.card img {
+  grid-area: imagen;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card .texto {
+  grid-area: texto;
+  background-color: #c8d400;
+  display: grid;
+  align-content: center;
+  padding: 24px 40px;
+}
+
+.card .texto h2 {
+  font-size: 1.8rem;
+  font-weight: normal;
+  color: #ffffff;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.card .texto p {
+  font-size: 0.9rem;
+  color: #2a2a2a;
+  line-height: 1.5;
+}
+
+/* -- DISEÑO DE MÓVIL (Cajas apiladas) -- */
+@media (max-width: 600px) {
+  .card,
+  .card.invertida {
+    grid-template-columns: minmax(0, 350px);
+    grid-template-rows: 300px 300px;
+    grid-template-areas:
+      "imagen"
+      "texto";
+  }
+
+  .card .texto {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,29 @@
+h1 h4 {
+			font-family: Georgia;
+			color: red;
+			width: 500px;
+			background-color: black;
+			text-align: center;
+		}
+h2 {
+			border: 5px solid black;
+			color: blue;
+			width: 500px;
+			background-color: green;
+			text-align: center;
+		}
+h3 {
+			color: yellow;
+			width: 500px;
+			background-color: orange;
+			text-align: center;
+		}
+p {
+
+			color: white;padding: 50px;
+			width: 500px;
+			background-color: gray;
+			text-align: center;
+		}
+.parrafo2 {background-color: yellow;color: red}
+#adios {width: 100px; background-color: yellow;color: red}

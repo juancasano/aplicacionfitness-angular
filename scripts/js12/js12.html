@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio JS12 - Par o Impar</title>
+</head>
+<body>
+    <h1>Ejercicio JS12</h1>
+    <p>Función que recibe un número entero y devuelve si es par o impar</p>
+
+    <button onclick="ejecutarEjemplos()">Ejecutar Ejemplos</button>
+
+    <script>
+        // Definición de la función
+        function esParOImpar(numero) {
+            if (numero % 2 === 0) {
+                return numero + " es un número par";
+            } else {
+                return numero + " es un número impar";
+            }
+        }
+
+        // Función para ejecutar ejemplos
+        function ejecutarEjemplos() {
+            var resultado1 = esParOImpar(15);
+            alert(resultado1);
+
+            var resultado2 = esParOImpar(7);
+            alert(resultado2);
+
+            var resultado3 = esParOImpar(20);
+            alert(resultado3);
+
+            var resultado4 = esParOImpar(4);
+            alert(resultado4);
+        }
+    </script>
+</body>
+</html>

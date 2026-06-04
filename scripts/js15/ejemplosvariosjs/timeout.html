@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript">
+	function showPwd() {
+		var pwd = "4321";
+		document.getElementById("pwd").innerHTML = pwd;
+		setTimeout(hidePwd, 5000);
+	}
+	function hidePwd() {
+		document.getElementById("pwd").innerHTML = "****";
+	}
+	</script>
+
+</head>
+<body>
+	<h1>Timeout</h1>
+	<p id="pwd">****</p>
+	<input type="button" value="Mostrar clave" onclick="showPwd()">
+</body>
+</html>

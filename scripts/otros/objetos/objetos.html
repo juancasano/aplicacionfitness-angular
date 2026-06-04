@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Objetos en JS - Edición Dark Souls</title>
+	<script>
+
+let personajeSolaire = {
+	nombre: "Solaire de Astora",
+	nivel: 45,
+	pacto: "Guerreros del Sol"
+}
+let jefeArtorias = {
+	nombre: "Artorias",
+	nivel: 80,
+	zona: "El Abismo"
+}
+let armaZweihander = {
+	tipo: "Espadón",	
+	nombre: "Zweihander",
+	escalado: "Fuerza",
+	dañoBase: 130
+}
+let noMuerto = {
+	nombre: "Ceniza Latente",
+	nivel: 15,
+	clase: "Caballero",
+	esHueco: true
+}
+
+// Accediendo a las propiedades con la notación de punto
+console.log(noMuerto.nombre);
+console.log(noMuerto.nivel);
+console.log(noMuerto.clase);
+console.log(noMuerto.esHueco);
+console.log(noMuerto);
+
+// Accediendo a las propiedades con la notación de corchetes
+const propiedad1 = "nombre";
+console.log(noMuerto[propiedad1]);
+console.log(noMuerto["nivel"]);
+console.log(noMuerto["clase"]);
+console.log(noMuerto["esHueco"]);
+
+// Modificando valores y eliminando propiedades
+noMuerto.nivel = 99;
+noMuerto.esHueco = "Humanidad restaurada";
+delete noMuerto.clase;
+
+console.log(noMuerto);
+
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

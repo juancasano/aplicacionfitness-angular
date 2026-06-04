@@ -1,0 +1,30 @@
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    color: #243746;
+    padding: 24px;
+}
+
+h1 {
+    margin-top: 0;
+    color: #3f5f7a;
+}
+
+p {
+    max-width: 680px;
+    line-height: 1.35;
+    color: #243746;
+}
+
+.rojo {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+#verde {
+    color: green;
+}

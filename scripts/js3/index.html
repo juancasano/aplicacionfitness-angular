@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio JS3 - Suma de Números</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f7f6;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #cc0000;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #555;
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Ejercicio JS3</h1>
+        <p>Haz clic en el botón para realizar una suma de dos números.</p>
+        
+        <button onclick="realizarSuma()">Ejecutar Suma</button>
+    </div>
+
+    <script>
+        function realizarSuma() {
+            // Capturamos los datos mediante prompts (se reciben como strings)
+            var dato1 = prompt("Introduce el primer número:");
+            var dato2 = prompt("Introduce el segundo número:");
+
+            // Convertimos los strings a valores numéricos usando Number()
+            // Esto evita que el símbolo "+" concatene los textos
+            var num1 = Number(dato1);
+            var num2 = Number(dato2);
+
+            // Realizamos la operación aritmética
+            var resultado = num1 + num2;
+
+            // Verificamos si los datos introducidos son números válidos
+            if (isNaN(resultado)) {
+                alert("Por favor, introduce solo valores numéricos.");
+            } else {
+                // Mostramos el resultado final
+                alert("La suma de " + num1 + " + " + num2 + " es igual a: " + resultado);
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formularios - Ejercicio 12</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Formulario - Ejercicio 12</h1>
+    <p>Si quieres recibir informacion sobre nuestros cursos y/o servicios, rellena este formulario con tus datos para poder atender tu consulta con la mayor brevedad posible.</p>
+
+    <form action="" method="post" enctype="text/plain">
+        <div class="fila">
+            <label for="nombre">Nombre y Apellidos*</label>
+            <input id="nombre" type="text" name="nombre" required>
+        </div>
+
+        <div class="fila">
+            <label for="correo">E-mail*</label>
+            <input id="correo" type="email" name="correo" required>
+        </div>
+
+        <div class="fila">
+            <label for="telefono">Telefono*</label>
+            <input id="telefono" type="text" name="telefono" required>
+        </div>
+
+        <div class="fila">
+            <label for="provincia">Provincia*</label>
+            <input id="provincia" type="text" name="provincia" required>
+        </div>
+
+        <div class="fila">
+            <label for="consulta">Consulta*</label>
+            <textarea id="consulta" name="consulta" rows="3" required></textarea>
+        </div>
+
+        <p class="seccion">Como nos has conocido?*</p>
+
+        <div class="fila">
+            <label for="internet">Internet</label>
+            <select id="internet" name="internet" required>
+                <option value="">Selecciona una opcion</option>
+                <option value="msn">MSN</option>
+                <option value="aprendemas">Aprendemas</option>
+                <option value="yahoo">Yahoo</option>
+                <option value="formazion">Formazion.com</option>
+                <option value="google">Google</option>
+                <option value="tecnosaber">Tecnosaber</option>
+                <option value="infocurso">Infocurso</option>
+            </select>
+        </div>
+
+        <div class="fila">
+            <label for="varios">Varios</label>
+            <select id="varios" name="varios">
+                <option value="">Selecciona una opcion</option>
+                <option value="amigos">Amigos</option>
+                <option value="publicidad">Publicidad</option>
+                <option value="prensa">Prensa</option>
+            </select>
+        </div>
+
+        <div class="fila">
+            <label for="otros">Otros</label>
+            <input id="otros" type="text" name="otros">
+        </div>
+
+        <div class="fila botones">
+            <label></label>
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Limpiar">
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Personas - Filter, Map y Reduce</title>
+	<script type="text/javascript" src="return.js" defer></script>
+	<style>
+		body { font-family: Arial, sans-serif; margin: 20px; }
+		.seccion { border: 1px solid #ccc; padding: 10px; margin-bottom: 15px; }
+		.seccion h3 { margin-top: 0; }
+		input, select, button { margin: 4px 0; }
+		hr { border: 0; border-top: 1px solid #ddd; }
+	</style>
+</head>
+<body>
+	<h2>Añade una Persona</h2>
+	<form id="form-persona">
+		<label for="nombre">Nombre:</label>
+		<input type="text" id="nombre" name="nombre">
+		<br>
+		<label for="apellido1">Primer apellido:</label>
+		<input type="text" id="apellido1" name="apellido1">
+		<br>
+		<label for="apellido2">Segundo apellido:</label>
+		<input type="text" id="apellido2" name="apellido2">
+		<br>
+		<label for="sexo">Sexo:</label>
+		<select id="sexo" name="sexo">
+			<option value="M">Masculino</option>
+			<option value="F">Femenino</option>
+		</select>
+		<br>
+		<label for="edad">Edad:</label>
+		<input type="number" id="edad" name="edad" min="0">
+		<br>
+		<label for="direccion">Dirección:</label>
+		<input type="text" id="direccion" name="direccion">
+		<br>
+		<button type="submit" id="btnAgregar">Agregar</button>
+	</form>
+
+	<h2>Lista de Personas</h2>
+	<div id="lista-personas" class="seccion"></div>
+
+	<h2>Filtros (filter)</h2>
+	<div class="seccion">
+		<button id="btnMayoresEdad">Mayores de edad</button>
+		<button id="btnMasculinos">Solo masculinos</button>
+		<button id="btnFemeninos">Solo femeninos</button>
+		<button id="btnNombresLargos">Nombres con más de 4 letras</button>
+		<br>
+		<label for="filtroBusqueda">Buscar por nombre:</label>
+		<input type="text" id="filtroBusqueda" placeholder="texto a buscar">
+		<button id="btnBuscar">Buscar</button>
+		<h3>Resultados filtrados</h3>
+		<div id="resultados-filtro"></div>
+	</div>
+
+	<h2>Transformaciones (map)</h2>
+	<div class="seccion">
+		<button id="btnNombresCompletos">Lista de nombres completos</button>
+		<button id="btnIniciales">Lista de iniciales</button>
+		<button id="btnMayusculas">Nombres en mayúsculas</button>
+		<button id="btnConCategoria">Añadir categoría por edad</button>
+		<h3>Resultado de la transformación</h3>
+		<pre id="resultados-map"></pre>
+	</div>
+
+	<h2>Reducciones (reduce)</h2>
+	<div class="seccion">
+		<button id="btnEdadTotal">Suma de edades</button>
+		<button id="btnEdadMedia">Edad media</button>
+		<button id="btnContarPorSexo">Contar por sexo</button>
+		<button id="btnAgruparPorSexo">Agrupar por sexo</button>
+		<h3>Resultado de la reducción</h3>
+		<pre id="resultados-reduce"></pre>
+	</div>
+</body>
+</html>

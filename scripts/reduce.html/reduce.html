@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+
+	<script type="text/javascript">
+//array.reduce(
+//          (acumulador, elementoActual) => {
+//  				return nuevoAcumulador;
+//			}, valorInicial);
+
+// reduce con un array de numeros
+		const numeros = [1, 2, 3, 4];
+		const suma = numeros.reduce((acumulador, numero) => {
+  								return acumulador + numero;
+									}, 0);
+		console.log(suma);
+//| Vuelta | acumulador | numero | resultado |
+//| ------ | ---------: | -----: | --------: |
+//| 1      |          0 |      1 |         1 |
+//| 2      |          1 |      2 |         3 |
+//| 3      |          3 |      3 |         6 |
+//| 4      |          6 |      4 |        10 |
+// reduce con un array de objetos
+const productos = [
+  { nombre: "Camisa", precio: 20 },
+  { nombre: "Pantalón", precio: 35 },
+  { nombre: "Zapatos", precio: 50 }
+];
+
+//const total2 = productos.reduce((acumulador, producto) => {
+//  return acumulador + producto.precio;
+//}, 0);
+const total2 = productos.reduce((acumulador, producto) => acumulador + producto.precio, 0);
+console.log(total2);
+
+// reduce con un array de objetos y un condicional
+const usuarios = [
+  { nombre: "Ana", activo: true },
+  { nombre: "Juan", activo: false },
+  { nombre: "Laura", activo: true },
+  { nombre: "Pedro", activo: true }
+];
+
+const totalActivos = usuarios.reduce((acumulador, usuario) => {
+  //if (usuario.activo) {
+  //  return acumulador + 1;
+  //}
+  //return acumulador;
+  return usuario.activo ? acumulador + 1 : acumulador;
+}, 0);
+
+console.log(totalActivos);
+//reduce para crear un string
+const palabras = ["Hola", "mundo", "desde", "JavaScript"];
+const frase = palabras.reduce((acumulador, palabra) => {
+  return acumulador + " " + palabra;
+},'');
+console.log(frase);
+// Reduce para crear un objeto que tiene 2 arrays de objetos
+
+const ventas = [
+  { producto: "Camisa", categoria: "ropa", precio: 20 },
+  { producto: "Pantalón", categoria: "ropa", precio: 35 },
+  { producto: "Portátil", categoria: "tecnologia", precio: 900 },
+  { producto: "Ratón", categoria: "tecnologia", precio: 25 }
+];
+
+
+const ventasPorCategoria = ventas.reduce((acumulador, venta) => {
+  const categoria = venta.categoria;
+
+  if (!acumulador[categoria]) { //acumulador['ropa']
+    acumulador[categoria] = [];
+  }
+
+  acumulador[categoria].push(venta);
+
+  return acumulador;
+}, {});
+// 1a vuelta
+// categoria = 'ropa'
+//acumulador: {ropa:[{ producto: "Camisa", categoria: "ropa", precio: 20 }]}
+//2a vuelta
+//categoria = 'ropa'
+//acumulador: {ropa:[{ producto: "Camisa", categoria: "ropa", precio: 20 },{ producto: "Pantalón", categoria: "ropa", precio: 35 }]}
+//3a Vuelta
+//categoria='tecnologia'
+//acumulador: {ropa:[{ producto: "Camisa", categoria: "ropa", precio: 20 },{ producto: "Pantalón", categoria: "ropa", precio: 35 }], tecnologia: [{ producto: "Portátil", categoria: "tecnologia", precio: 900 }]}
+//4a vuelta
+//categoria='tecnologia'
+//acumulador: {ropa:[{ producto: "Camisa", categoria: "ropa", precio: 20 },{ producto: "Pantalón", categoria: "ropa", precio: 35 }], tecnologia: [{ producto: "Portátil", categoria: "tecnologia", precio: 900 },{ proyecto: "Ratón", categoria: "tecnologia",precio: 25 }]}
+
+console.log(ventasPorCategoria);
+//reduce total por categoria
+
+const totalPorCategoria = ventas.reduce((acumulador, venta) => {
+  const categoria = venta.categoria;
+
+  if (!acumulador[categoria]) {
+    acumulador[categoria] = 0;
+  }
+
+  acumulador[categoria] += venta.precio;
+
+  return acumulador;
+}, {});
+
+console.log(totalPorCategoria);
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
