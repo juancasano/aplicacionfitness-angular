@@ -1,0 +1,38 @@
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor folders and files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*.swo
+*~
+
+# Log files
+*.log
+
+# Node/npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+out/
+
+tmp/
+temp/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
