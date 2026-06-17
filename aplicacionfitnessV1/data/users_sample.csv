@@ -1,0 +1,4 @@
+id,name,email,created_at
+1,Juan Perez,juan.perez@example.com,2026-06-15T10:00:00Z
+2,Ana García,ana.garcia@example.com,2026-06-15T10:05:00Z
+3,Carlos Ruiz,carlos.ruiz@example.com,2026-06-15T10:10:00Z

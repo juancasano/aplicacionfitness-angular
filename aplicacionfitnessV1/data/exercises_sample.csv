@@ -1,0 +1,5 @@
+id,name,category,description,level,created_at
+1,Sentadilla,Strength,"Pie apoyado, espalda recta",intermediate,2026-06-15T10:00:00Z
+2,Flexiones,Strength,"Mantener cuerpo recto, bajar pecho",beginner,2026-06-15T10:02:00Z
+3,Plancha,Core,"Mantener postura en línea",beginner,2026-06-15T10:04:00Z
+4,Carrera,Cardio,"Trote suave a ritmo constante",beginner,2026-06-15T10:06:00Z

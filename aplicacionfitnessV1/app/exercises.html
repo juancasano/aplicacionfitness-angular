@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ejercicios - Fitness App</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/config.js"></script>
+  <script defer src="js/api.js"></script>
+  <script defer src="js/app-exercises.js"></script>
+  <script defer src="js/ui.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Ejercicios</h1>
+    <nav>
+      <a href="users.html">Usuarios</a>
+      <a href="workouts.html">Entrenamientos</a>
+      <a href="exercises.html">Ejercicios</a>
+    </nav>
+  </header>
+  <main>
+    <section class="card">
+      <div id="errorDiv" class="error"></div>
+      <form id="exerciseForm">
+        <input type="hidden" id="exerciseId">
+        <label>Nombre:<input id="name" type="text"></label>
+        <label>Categoría:<input id="category" type="text"></label>
+        <label>Nivel:<input id="level" type="text"></label>
+        <label>Descripción:<textarea id="description"></textarea></label>
+        <div class="buttons">
+          <button type="submit">Guardar</button>
+          <button type="button" id="clearBtn" class="secondary">Limpiar</button>
+        </div>
+      </form>
+    </section>
+    <section class="card" style="margin-top: 24px;">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Nivel</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="exerciseRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

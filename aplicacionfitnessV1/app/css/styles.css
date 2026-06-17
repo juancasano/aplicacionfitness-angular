@@ -1,0 +1,210 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #111827 0%, #0f172a 45%, #08101c 100%);
+  color: #f8fafc;
+}
+
+header {
+  padding: 24px 32px;
+  background: rgba(15, 23, 42, 0.92);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 0.02em;
+}
+
+nav {
+  margin-top: 16px;
+}
+
+nav a {
+  color: #a5f3fc;
+  text-decoration: none;
+  margin-right: 18px;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: #fef08a;
+}
+
+main {
+  padding: 24px 32px 48px;
+}
+
+.card {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(15,23,42,0.35);
+  max-width: 1120px;
+  width: min(100%, 1120px);
+  margin: 0 auto;
+}
+
+.table-responsive {
+  width: 100%;
+}
+
+.checkbox-grid label {
+  width: 100%;
+}
+
+.error {
+  color: #ff7b72;
+  margin-bottom: 14px;
+}
+
+form {
+  display: grid;
+  gap: 16px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+input[type='text'], input[type='number'], input[type='email'], textarea, select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(148,163,184,0.35);
+  background: rgba(15, 23, 42, 0.8);
+  color: #f8fafc;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  background: #0ea5e9;
+}
+
+button.secondary {
+  background: rgba(148, 163, 184, 0.18);
+  color: #e2e8f0;
+}
+
+#list {
+  display: grid;
+  gap: 14px;
+}
+
+.item-card {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(30, 41, 59, 0.92);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.item-card h2 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.item-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.item-actions button {
+  border-radius: 999px;
+  padding: 8px 14px;
+}
+
+.item-actions .delete {
+  background: #f97316;
+  color: #ffffff;
+}
+
+.item-actions .delete:hover {
+  background: #ea580c;
+}
+
+.item-actions .edit {
+  background: #34d399;
+}
+
+.item-actions .edit:hover {
+  background: #22c55e;
+}
+.table-responsive {
+  overflow-x: auto;
+}
+
+table.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.table thead tr {
+  background: rgba(56, 189, 248, 0.12);
+}
+
+table.table th,
+ table.table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  vertical-align: middle;
+}
+
+table.table tbody tr:hover {
+  background: rgba(255,255,255,0.04);
+}
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.checkbox-grid label {
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+@media (max-width: 720px) {
+  main {
+    padding: 20px;
+  }
+}

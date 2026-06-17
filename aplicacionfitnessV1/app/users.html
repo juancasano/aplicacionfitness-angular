@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Usuarios - Fitness App</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/config.js"></script>
+  <script defer src="js/api.js"></script>
+  <script defer src="js/app-users.js"></script>
+  <script defer src="js/ui.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Usuarios</h1>
+    <nav>
+      <a href="users.html">Usuarios</a>
+      <a href="workouts.html">Entrenamientos</a>
+      <a href="exercises.html">Ejercicios</a>
+    </nav>
+  </header>
+  <main>
+    <section class="card">
+      <div id="errorDiv" class="error"></div>
+      <form id="userForm">
+        <input type="hidden" id="userId">
+        <label>Nombre:<input id="name" type="text"></label>
+        <label>Email:<input id="email" type="email"></label>
+        <div class="buttons">
+          <button type="submit">Guardar</button>
+          <button type="button" id="clearBtn" class="secondary">Limpiar</button>
+        </div>
+      </form>
+    </section>
+    <section class="card" style="margin-top: 24px;">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="userRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
