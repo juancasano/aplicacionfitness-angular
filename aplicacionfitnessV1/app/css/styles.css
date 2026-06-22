@@ -208,3 +208,119 @@ table.table tbody tr:hover {
     padding: 20px;
   }
 }
+
+/* --- mejoras v2: estilos más modernos y accesibles --- */
+:root{
+  --bg-0:#071226;
+  --bg-1:#0b1a2a;
+  --card:#0f1724;
+  --muted:#94a3b8;
+  --accent:#38bdf8;
+  --accent-2:#60a5fa;
+  --surface:rgba(255,255,255,0.04);
+  --glass:rgba(255,255,255,0.03);
+}
+
+*{box-sizing:border-box}
+body{
+  font-family:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin:0;
+  min-height:100vh;
+  background: linear-gradient(180deg,var(--bg-0) 0%, var(--bg-1) 60%);
+  color:#e6eef8;
+  -webkit-font-smoothing:antialiased;
+}
+
+header.app-header{
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:linear-gradient(90deg, rgba(6,8,15,0.6), rgba(6,8,25,0.55));
+  border-bottom:1px solid var(--surface);
+  backdrop-filter: blur(6px);
+}
+.container{
+  max-width:1120px;
+  margin:0 auto;
+  padding:20px 24px;
+}
+
+.brand-row{display:flex;align-items:center;gap:20px}
+.brand-row h1{margin:0;font-size:1.5rem;letter-spacing:0.02em}
+.brand-sub{color:var(--muted);font-size:0.9rem}
+
+nav.top-nav{margin-top:8px}
+nav.top-nav a{color:var(--accent);text-decoration:none;margin-right:16px;font-weight:600}
+nav.top-nav a:hover{color:var(--accent-2)}
+
+main{
+  padding:28px 20px 48px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px;
+  align-items:stretch;
+}
+
+.card{
+  background: linear-gradient(180deg,var(--card), rgba(10,14,20,0.9));
+  border:1px solid var(--glass);
+  border-radius:14px;
+  padding:22px;
+  box-shadow:0 12px 30px rgba(2,6,23,0.6);
+  flex:1 1 360px;
+  width:100%;
+  max-width:none;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+
+.hero{
+  padding:28px 22px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.hero h2{margin:0;font-size:1.6rem}
+.hero p{color:var(--muted)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+
+form{display:grid;gap:14px}
+label{display:block;color:var(--muted);font-weight:600}
+input[type='text'], input[type='number'], input[type='email'], textarea, select{
+  width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
+  background:transparent;color:inherit;outline:none;transition:box-shadow .15s ease,border-color .15s ease
+}
+input:focus,textarea:focus,select:focus{box-shadow:0 6px 20px rgba(56,189,248,0.06);border-color:var(--accent)}
+textarea{min-height:110px}
+
+.buttons{display:flex;gap:12px;flex-wrap:wrap}
+button{border:none;border-radius:10px;padding:10px 16px;background:var(--accent);color:#051124;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(56,189,248,0.08);transition:transform .12s ease,filter .12s}
+button:hover{transform:translateY(-3px);filter:brightness(1.03)}
+button.secondary{background:transparent;color:var(--muted);border:1px solid var(--surface)}
+
+#list{display:grid;gap:14px}
+.item-card{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+.item-card h2{margin:0 0 6px;font-size:1.05rem}
+.item-meta{display:flex;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:.95rem}
+.item-actions{margin-top:12px;display:flex;gap:8px}
+.item-actions button{border-radius:8px;padding:8px 12px}
+.item-actions .delete{background:#fb923c;color:#051124}
+.item-actions .edit{background:#34d399;color:#05211a}
+
+.table-responsive{overflow:auto}
+table.table{width:100%;border-collapse:collapse}
+table.table th,table.table td{padding:12px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.03)}
+table.table thead tr{background:rgba(255,255,255,0.02)}
+table.table tbody tr:hover{background:rgba(255,255,255,0.02)}
+
+.checkbox-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.checkbox-grid label{background:rgba(255,255,255,0.02);border-radius:10px;padding:10px}
+
+.muted{color:var(--muted)}
+
+@media (max-width:720px){
+  .container{padding:14px}
+  .brand-row h1{font-size:1.25rem}
+  main{padding:18px}
+}

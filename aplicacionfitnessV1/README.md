@@ -127,13 +127,4 @@ git clone https://github.com/juancasano/aplicacionfitnessV1.git
 
 ---
 
-## Cómo contribuir
 
-Si quieres mejorar el proyecto, puedes:
-
-1. Crear un fork del repo.
-2. Añadir o mejorar documentación en `docs/`.
-3. Añadir funcionalidades en `app/js/`.
-4. Subir cambios con `git commit` y `git push`.
-
-> Ten cuidado con las claves: no subas claves privadas ni archivos de configuración local.

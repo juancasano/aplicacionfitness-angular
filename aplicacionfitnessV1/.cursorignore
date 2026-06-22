@@ -1,0 +1,10 @@
+# Ignorar archivos y carpetas de contexto de agentes y temporales
+.git/
+app/js/config.js
+node_modules/
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+desktop.ini
