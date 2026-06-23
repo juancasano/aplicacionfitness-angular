@@ -1,7 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
 import { NgFor } from '@angular/common';
 
-type Workout = {
+export type Workout = {
   id: number;
   name: string;
   duration: string;
@@ -10,12 +10,12 @@ type Workout = {
 
 @Component({
   standalone: true,
-  selector: 'app-root',
+  selector: 'app-v1',
   imports: [NgFor],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
-export class App {
+export class AppV1 {
   protected readonly title = signal('Aplicación Fitness');
 
   protected readonly workouts = signal<Workout[]>([
