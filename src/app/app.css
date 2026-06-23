@@ -1,0 +1,227 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+  background: radial-gradient(circle at top, #f8fbff 0%, #eff6ff 35%, #f8fafc 100%);
+  color: #1f2937;
+  font-family: Inter, system-ui, sans-serif;
+  padding: 1.5rem;
+}
+
+.page {
+  max-width: 52rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2rem;
+}
+
+.hero {
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background: white;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  color: #2563eb;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  line-height: 1;
+}
+
+.intro {
+  margin: 1rem 0 0;
+  max-width: 40rem;
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.planner {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 1.75rem;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+}
+
+.planner-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.planner-header h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.subtext {
+  margin: 0.5rem 0 0;
+  color: #6b7280;
+}
+
+.summary {
+  font-weight: 700;
+  color: #111827;
+}
+
+.workout-form {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: 1fr auto;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  height: auto;
+}
+
+.label-text {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  color: #111827;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+input:hover {
+  border-color: #d1d5db;
+}
+
+button {
+  border: 0;
+  border-radius: 0.75rem;
+  padding: 0.65rem 1.75rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+  font-size: 0.95rem;
+  text-transform: none;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.45);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+button:disabled {
+  background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+  cursor: not-allowed;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+  transform: none;
+}
+
+.workout-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.workout-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 1.1rem;
+}
+
+.check {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  border: 2.5px solid #e5e7eb;
+  background: white;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.check:hover {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.check[aria-pressed="true"] {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border-color: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  animation: checkPulse 0.5s ease-out;
+}
+
+@keyframes checkPulse {
+  0% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 8px rgba(37, 99, 235, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  }
+}
+
+.info strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.info span {
+  color: #6b7280;
+}
+
+@media (max-width: 640px) {
+  .workout-form {
+    grid-template-columns: 1fr;
+  }
+
+  .planner-header {
+    align-items: flex-start;
+  }
+}

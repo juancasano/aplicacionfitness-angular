@@ -1,0 +1,52 @@
+<main class="page">
+  <section class="hero">
+    <p class="eyebrow">Primer ejercicio</p>
+    <h1>{{ title() }}</h1>
+    <p class="intro">Organiza tus entrenamientos, marca objetivos y añade nuevas rutinas.</p>
+  </section>
+
+  <section class="planner" aria-labelledby="planner-title">
+    <header class="planner-header">
+      <div>
+        <h2 id="planner-title">Planificador de rutinas</h2>
+        <p class="subtext">Marca las rutinas completadas y agrega nuevas sesiones.</p>
+      </div>
+      <div class="summary">
+        <span>{{ workouts().length }}</span> rutinas •
+        <span>{{ completedCount() }}</span> completadas
+      </div>
+    </header>
+
+    <form class="workout-form" (submit)="addWorkout(); $event.preventDefault()">
+      <label class="field">
+        <span class="label-text">Nueva rutina</span>
+        <input
+          type="text"
+          [value]="newWorkout()"
+          (input)="newWorkout.set($any($event.target).value)"
+          placeholder="Ej: Fuerza de piernas"
+          aria-label="Nombre de la rutina"
+        />
+      </label>
+      <button type="submit" [disabled]="!newWorkout().trim()">Añadir</button>
+    </form>
+
+    <ul class="workout-list">
+      <li class="workout-item" *ngFor="let workout of workouts()">
+        <button
+          type="button"
+          class="check"
+          [attr.aria-pressed]="workout.completed"
+          (click)="toggleCompleted(workout.id)"
+        >
+          {{ workout.completed ? '✔' : '○' }}
+        </button>
+
+        <div class="info">
+          <strong>{{ workout.name }}</strong>
+          <span>{{ workout.duration }}</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+</main>

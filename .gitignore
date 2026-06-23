@@ -1,0 +1,17 @@
+# Node
+node_modules/
+# Build output
+/dist
+# Angular build
+.angular/
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# IDEs
+.vscode/
+.idea/
+# Misc
+.DS_Store
+# Optional caches
+package-lock.json
