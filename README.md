@@ -7,8 +7,8 @@ Proyecto Angular con dos versiones dentro de la misma app:
 
 ## Enlaces locales
 
-- Versión 1: `http://localhost:4200/`
-- Versión 2: `http://localhost:4200/v2`
+- Versión 1: [http://localhost:4200/](http://localhost:4200/)
+- Versión 2: [http://localhost:4200/v2](http://localhost:4200/v2)
 
 ## Uso
 
