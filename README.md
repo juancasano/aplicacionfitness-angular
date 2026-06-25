@@ -1,14 +1,16 @@
 # AplicacionFitness Angular
 
-Proyecto Angular con dos versiones dentro de la misma app:
+Proyecto Angular con tres versiones dentro de la misma app:
 
 - **v1**: versión original de la aplicación de rutinas.
 - **v2**: versión del ejercicio 2 con la versión 2 mejorada.
+- **v3**: versión del ejercicio 3 con rutinas, categorías y ejercicios relacionales.
 
 ## Enlaces locales
 
 - Versión 1: [http://localhost:4200/](http://localhost:4200/)
 - Versión 2: [http://localhost:4200/v2](http://localhost:4200/v2)
+- Versión 3: [http://localhost:4200/v3](http://localhost:4200/v3)
 
 ## Uso
 
@@ -28,7 +30,7 @@ Proyecto Angular con dos versiones dentro de la misma app:
 
 ## Notas
 
-- `AppRoot` controla la navegación entre la versión 1 y la versión 2.
+- `AppRoot` controla la navegación entre la versión 1, la versión 2 y la versión 3.
 - Si el puerto `4200` ya está en uso, puedes arrancar en otro puerto con:
 
   ```bash
@@ -37,3 +39,4 @@ Proyecto Angular con dos versiones dentro de la misma app:
 
 - El tag `v1` en GitHub marca el commit de la versión inicial.
 - El tag `v2` en GitHub marca el commit con la versión 2 del ejercicio.
+- El tag `v3` en GitHub marcará el commit con la versión 3 del ejercicio.

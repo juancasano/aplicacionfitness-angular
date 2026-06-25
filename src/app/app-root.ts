@@ -9,6 +9,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     <header class="app-bar">
       <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Versión 1</a>
       <a routerLink="v2" routerLinkActive="active">Versión 2 (Ejercicio 2)</a>
+      <a routerLink="v3" routerLinkActive="active">Versión 3 (Ejercicio 3)</a>
     </header>
     <main class="app-content">
       <router-outlet></router-outlet>
