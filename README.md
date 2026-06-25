@@ -12,18 +12,19 @@ Proyecto Angular con dos versiones dentro de la misma app:
 
 ## Uso
 
-1. Abrir la carpeta del proyecto `aplicaciontfitness.angular`.
-2. Instalar dependencias con:
+1. Si ya tienes la carpeta local del proyecto, ábrela en tu editor.
+   Si la estás usando desde GitHub, clona el repositorio primero.
+2. Instala dependencias con:
 
    ```bash
    npm install
    ```
-3. Ejecutar el servidor local con:
+3. Ejecuta el servidor local con:
 
    ```bash
    npm start
    ```
-4. Abrir el navegador en `http://localhost:4200/`.
+4. Abre el navegador en `http://localhost:4200/`.
 
 ## Notas
 
