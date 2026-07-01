@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 interface Categoria {
   id: number;
@@ -94,21 +93,36 @@ interface Rutina {
         </div>
 
         <!-- Reproductor de video para el ejercicio seleccionado -->
-        <div class="video-section" *ngIf="ejercicioSeleccionadoVideoUrl()">
+        <div class="video-section" *ngIf="ejercicioSeleccionadoVideo()">
           <h3>Video Explicativo</h3>
           <div class="video-container">
-            <iframe
-              [src]="ejercicioSeleccionadoVideoUrl()"
-              width="100%"
-              height="315"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
+            <video
+              controls
+              [src]="ejercicioSeleccionadoVideo()?.videoUrl"
+              poster="https://placehold.co/600x315?text=Video+no+disponible"
+            ></video>
           </div>
         </div>
 
         <form class="workout-form" (ngSubmit)="addRutina();">
+          <label class="field">
+            <span class="label-text">Categoría</span>
+            <select [ngModel]="categoriaSeleccionada()" (ngModelChange)="categoriaSeleccionada.set($event)" name="categoria">
+              <option *ngFor="let categoria of categorias()" [ngValue]="categoria.id">
+                {{ categoria.nombre }}
+              </option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="label-text">Ejercicio</span>
+            <select [ngModel]="ejercicioSeleccionado()" (ngModelChange)="ejercicioSeleccionado.set($event)" name="ejercicio">
+              <option *ngFor="let ejercicio of ejerciciosFiltrados()" [ngValue]="ejercicio.id">
+                {{ ejercicio.nombre }}
+              </option>
+            </select>
+          </label>
+
           <label class="field">
             <span class="label-text">Duración</span>
             <input
@@ -523,8 +537,6 @@ interface Rutina {
   `]
 })
 export class AppV4 {
-  constructor(private sanitizer: DomSanitizer) {}
-
   protected readonly title = signal('Rutinas Fitness v4');
 
   protected readonly categorias = signal<Categoria[]>([
@@ -540,38 +552,40 @@ protected readonly ejercicios = signal<Ejercicio[]>([
   nombre: 'Sentadillas', 
   idCategoria: 1, 
   descripcion: 'Ejercicio compuesto que trabaja piernas y glúteos',
-  imagenUrl: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=400&h=300',
-  videoUrl: 'https://www.youtube.com/embed/ysz5S6PUM-U' // Video demo estable
+  imagenUrl: 'https://via.placeholder.com/400x300/dae1ff/1f2937?text=Sentadillas',
+  videoUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
 },
 { 
   id: 2, 
   nombre: 'Peso muerto', 
   idCategoria: 1, 
   descripcion: 'Ejercicio básico para espalda y posterior de cadena',
-  imagenUrl: 'https://images.unsplash.com/photo-1539571696357-0f8d721f22d1?auto=format&fit=crop&w=400&h=300',
-  videoUrl: 'https://www.youtube.com/embed/ysz5S6PUM-U' // Video demo estable
+  imagenUrl: 'https://via.placeholder.com/400x300/dae1ff/1f2937?text=Peso+muerto',
+  videoUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
 },
 { 
   id: 3, 
   nombre: 'Estiramientos', 
   idCategoria: 2, 
   descripcion: 'Movimientos para mejorar flexibilidad y movilidad',
-  imagenUrl: 'https://placehold.co/400x300?text=Estiramientos'
+  imagenUrl: 'https://via.placeholder.com/400x300/dae1ff/1f2937?text=Estiramientos',
+  videoUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
 },
 { 
   id: 4, 
   nombre: 'Carrera continua', 
   idCategoria: 3, 
   descripcion: 'Actividad aeróbica para mejorar resistencia cardiovascular',
-  imagenUrl: 'https://placehold.co/400x300?text=Cardio'
+  imagenUrl: 'https://via.placeholder.com/400x300/dae1ff/1f2937?text=Cardio',
+  videoUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
 },
 { 
   id: 5, 
   nombre: 'Saludo al sol', 
   idCategoria: 4, 
   descripcion: 'Secuencia de yoga para calentar y movilizar el cuerpo',
-  imagenUrl: 'https://placehold.co/400x300?text=Yoga',
-  videoUrl: 'https://www.youtube.com/embed/ysz5S6PUM-U' // Video demo estable
+  imagenUrl: 'https://via.placeholder.com/400x300/dae1ff/1f2937?text=Yoga',
+  videoUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
 }
 
 ]);
@@ -593,13 +607,6 @@ protected readonly ejercicios = signal<Ejercicio[]>([
   protected readonly ejercicioSeleccionadoVideo = computed(() =>
     this.ejercicios().find((ejercicio) => ejercicio.id === this.ejercicioSeleccionado() && ejercicio.videoUrl)
   );
-
-  protected readonly ejercicioSeleccionadoVideoUrl = computed<SafeResourceUrl>(() => {
-    const videoUrl = this.ejercicioSeleccionadoVideo()?.videoUrl;
-    return videoUrl
-      ? this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl)
-      : '' as unknown as SafeResourceUrl;
-  });
 
   protected readonly completedCount = computed(
     () => this.rutinas().filter((rutina) => rutina.completada).length
