@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { V5bExerciseList } from './app-v5b-exercise-list.component';
+import { V5bExerciseDetail } from './app-v5b-exercise-detail.component';
 
 interface Categoria {
   id: number;
@@ -26,7 +28,7 @@ interface Rutina {
 @Component({
   standalone: true,
   selector: 'app-v5b',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, V5bExerciseList, V5bExerciseDetail],
   template: `
     <main class="page">
       <section class="hero">
@@ -80,15 +82,8 @@ interface Rutina {
           <button type="submit" [disabled]="!duracionNueva().trim()">Programar rutina</button>
         </form>
 
-        <div class="exercise-preview" *ngIf="ejercicioSeleccionadoPreview() as ejercicio">
-          <div class="exercise-image">
-            <img [src]="ejercicio.imagenUrl" [alt]="ejercicio.nombre" />
-          </div>
-          <div class="exercise-details">
-            <h3>{{ ejercicio.nombre }}</h3>
-            <p>{{ ejercicio.descripcion }}</p>
-          </div>
-        </div>
+        <v5b-exercise-list [ejercicios]="ejercicios()" (seleccionar)="onSeleccion($event)"></v5b-exercise-list>
+        <v5b-exercise-detail [ejercicio]="ejercicioSeleccionadoObj()"></v5b-exercise-detail>
 
         <div class="rutinas-list">
           <h3>Rutinas del día</h3>
@@ -406,9 +401,11 @@ export class AppV5b {
 
   protected readonly progressPercent = computed(() => Math.min(100, (this.completedCount() / 3) * 100));
 
-  protected readonly ejercicioSeleccionadoPreview = computed(() =>
-    this.ejercicios().find((ejercicio) => ejercicio.id === this.ejercicioSeleccionado())
-  );
+  protected readonly ejercicioSeleccionadoObj = signal<Ejercicio | null>(null);
+
+  protected onSeleccion(e: Ejercicio): void {
+    this.ejercicioSeleccionadoObj.set(e);
+  }
 
   protected addRutina(): void {
     const duracion = this.duracionNueva().trim();
