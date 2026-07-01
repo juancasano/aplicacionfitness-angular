@@ -11,6 +11,7 @@ Proyecto Angular con tres versiones dentro de la misma app:
 - Versión 1: [http://localhost:4200/](http://localhost:4200/)
 - Versión 2: [http://localhost:4200/v2](http://localhost:4200/v2)
 - Versión 3: [http://localhost:4200/v3](http://localhost:4200/v3)
+- Versión 4: [http://localhost:4200/v4](http://localhost:4200/v4)
 
 ## Uso
 
@@ -39,4 +40,5 @@ Proyecto Angular con tres versiones dentro de la misma app:
 
 - El tag `v1` en GitHub marca el commit de la versión inicial.
 - El tag `v2` en GitHub marca el commit con la versión 2 del ejercicio.
-- El tag `v3` en GitHub marcará el commit con la versión 3 del ejercicio.
+- El tag `v3` en GitHub marca el commit con la versión 3 del ejercicio.
+- El tag `v4` en GitHub marcará el commit con la versión 4 del ejercicio multimedia.
