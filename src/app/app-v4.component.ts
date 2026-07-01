@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 interface Categoria {
@@ -96,14 +97,15 @@ interface Rutina {
         <div class="video-section" *ngIf="ejercicioSeleccionadoVideo()">
           <h3>Video Explicativo</h3>
           <div class="video-container">
-            <video
-              controls
-              autoplay
-              muted
-              playsinline
-              [src]="ejercicioSeleccionadoVideo()?.videoUrl"
-              poster="https://placehold.co/600x315?text=Video+no+disponible"
-            ></video>
+            <iframe
+              width="100%"
+              height="100%"
+              [src]="ejercicioSeleccionadoVideoUrl()"
+              title="Video explicativo de ejercicio"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
 
@@ -373,15 +375,20 @@ interface Rutina {
     }
 
     .video-container {
+      position: relative;
       background: #1f2937;
       border-radius: 0.75rem;
       overflow: hidden;
+      aspect-ratio: 16 / 9;
+      min-height: 250px;
     }
 
+    .video-container iframe,
     .video-container video {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
+      border: 0;
     }
 
     .workout-form {
@@ -540,6 +547,8 @@ interface Rutina {
   `]
 })
 export class AppV4 {
+  constructor(private sanitizer: DomSanitizer) {}
+
   protected readonly title = signal('Rutinas Fitness v4');
 
   protected readonly categorias = signal<Categoria[]>([
@@ -555,40 +564,40 @@ protected readonly ejercicios = signal<Ejercicio[]>([
   nombre: 'Sentadillas', 
   idCategoria: 1, 
   descripcion: 'Ejercicio compuesto que trabaja piernas y glúteos',
-  imagenUrl: 'https://via.placeholder.com/400x300/dae1ff/1f2937?text=Sentadillas',
-  videoUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
+  imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Cdefs%3E%3ClinearGradient id="g1" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" stop-color="%2302063b"/%3E%3Cstop offset="100%25" stop-color="%231f78ff"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="400" height="300" fill="url(%23g1)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23ffffff"%3E💪%3C/text%3E%3Ctext x="50%25" y="65%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="%23ffffff"%3ESentadillas%3C/text%3E%3C/svg%3E',
+  videoUrl: 'https://www.youtube.com/embed/ph9MC08ibn4'
 },
 { 
   id: 2, 
   nombre: 'Peso muerto', 
   idCategoria: 1, 
   descripcion: 'Ejercicio básico para espalda y posterior de cadena',
-  imagenUrl: 'https://via.placeholder.com/400x300/dae1ff/1f2937?text=Peso+muerto',
-  videoUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
+  imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Cdefs%3E%3ClinearGradient id="g2" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" stop-color="%230a0c26"/%3E%3Cstop offset="100%25" stop-color="%23ff6f00"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="400" height="300" fill="url(%23g2)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23ffffff"%3E🏋️‍♂️%3C/text%3E%3Ctext x="50%25" y="65%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="%23ffffff"%3EPeso%20muerto%3C/text%3E%3C/svg%3E',
+  videoUrl: 'https://www.youtube.com/embed/ph9MC08ibn4'
 },
 { 
   id: 3, 
   nombre: 'Estiramientos', 
   idCategoria: 2, 
   descripcion: 'Movimientos para mejorar flexibilidad y movilidad',
-  imagenUrl: 'https://via.placeholder.com/400x300/dae1ff/1f2937?text=Estiramientos',
-  videoUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
+  imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Cdefs%3E%3ClinearGradient id="g3" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" stop-color="%231a3c25"/%3E%3Cstop offset="100%25" stop-color="%2382d186"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="400" height="300" fill="url(%23g3)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23ffffff"%3E🧘‍♀️%3C/text%3E%3Ctext x="50%25" y="65%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="%23ffffff"%3EEstiramientos%3C/text%3E%3C/svg%3E',
+  videoUrl: 'https://www.youtube.com/embed/ph9MC08ibn4'
 },
 { 
   id: 4, 
   nombre: 'Carrera continua', 
   idCategoria: 3, 
   descripcion: 'Actividad aeróbica para mejorar resistencia cardiovascular',
-  imagenUrl: 'https://via.placeholder.com/400x300/dae1ff/1f2937?text=Cardio',
-  videoUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
+  imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Cdefs%3E%3ClinearGradient id="g4" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" stop-color="%2328360c"/%3E%3Cstop offset="100%25" stop-color="%23ffd600"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="400" height="300" fill="url(%23g4)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%230f172a"%3E🏃‍♂️%3C/text%3E%3Ctext x="50%25" y="65%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="%230f172a"%3ECarrera%20continua%3C/text%3E%3C/svg%3E',
+  videoUrl: 'https://www.youtube.com/embed/ph9MC08ibn4'
 },
 { 
   id: 5, 
   nombre: 'Saludo al sol', 
   idCategoria: 4, 
   descripcion: 'Secuencia de yoga para calentar y movilizar el cuerpo',
-  imagenUrl: 'https://via.placeholder.com/400x300/dae1ff/1f2937?text=Yoga',
-  videoUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
+  imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Cdefs%3E%3ClinearGradient id="g5" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" stop-color="%23236d71"/%3E%3Cstop offset="100%25" stop-color="%237a5dff"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="400" height="300" fill="url(%23g5)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23ffffff"%3E🧘‍♂️%3C/text%3E%3Ctext x="50%25" y="65%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="%23ffffff"%3ESaludo%20al%20sol%3C/text%3E%3C/svg%3E',
+  videoUrl: 'https://www.youtube.com/embed/ph9MC08ibn4'
 }
 
 ]);
@@ -610,6 +619,11 @@ protected readonly ejercicios = signal<Ejercicio[]>([
   protected readonly ejercicioSeleccionadoVideo = computed(() =>
     this.ejercicios().find((ejercicio) => ejercicio.id === this.ejercicioSeleccionado() && ejercicio.videoUrl)
   );
+
+  protected readonly ejercicioSeleccionadoVideoUrl = computed<SafeResourceUrl | undefined>(() => {
+    const videoUrl = this.ejercicioSeleccionadoVideo()?.videoUrl;
+    return videoUrl ? this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl) : undefined;
+  });
 
   protected readonly completedCount = computed(
     () => this.rutinas().filter((rutina) => rutina.completada).length
