@@ -39,7 +39,7 @@ interface Rutina {
         <header class="planner-header">
           <div>
             <h2 id="planner-title">Rutinas Fitness v5b</h2>
-            <p class="subtext">Perspective diaria de entrenamiento con logros y progreso.</p>
+            <p class="subtext">Perspectiva diaria de entrenamiento con logros y progreso.</p>
           </div>
           <div class="summary">
             <span>{{ rutinas().length }}</span> rutinas programadas •
@@ -79,6 +79,16 @@ interface Rutina {
 
           <button type="submit" [disabled]="!duracionNueva().trim()">Programar rutina</button>
         </form>
+
+        <div class="exercise-preview" *ngIf="ejercicioSeleccionadoPreview() as ejercicio">
+          <div class="exercise-image">
+            <img [src]="ejercicio.imagenUrl" [alt]="ejercicio.nombre" />
+          </div>
+          <div class="exercise-details">
+            <h3>{{ ejercicio.nombre }}</h3>
+            <p>{{ ejercicio.descripcion }}</p>
+          </div>
+        </div>
 
         <div class="rutinas-list">
           <h3>Rutinas del día</h3>
@@ -212,6 +222,43 @@ interface Rutina {
         gap: 0.5rem;
       }
 
+      .exercise-preview {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 1rem;
+        background: #f8fafc;
+        padding: 1.25rem;
+        border-radius: 1rem;
+        border: 1px solid #e5e7eb;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .exercise-image {
+        width: 100%;
+        min-width: 160px;
+        overflow: hidden;
+        border-radius: 1rem;
+      }
+
+      .exercise-image img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .exercise-details h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .exercise-details p {
+        margin: 0;
+        color: #475569;
+        line-height: 1.6;
+      }
+
       .label-text {
         font-size: 0.9rem;
         color: #374151;
@@ -316,10 +363,34 @@ export class AppV5b {
   protected readonly title = signal('Desafío diario');
 
   protected readonly ejercicios = signal<Ejercicio[]>([
-    { id: 1, nombre: 'Puentes de glúteo', idCategoria: 1, descripcion: 'Fortalece la cadena posterior y cadera.', imagenUrl: '' },
-    { id: 2, nombre: 'Estocadas alternas', idCategoria: 1, descripcion: 'Activa piernas y estabilidad en cada repetición.', imagenUrl: '' },
-    { id: 3, nombre: 'Salto de cuerda', idCategoria: 3, descripcion: 'Cardio dinámico para elevar la frecuencia.', imagenUrl: '' },
-    { id: 4, nombre: 'Tijeras de piernas', idCategoria: 3, descripcion: 'Ejercicio rápido para core y coordinación.', imagenUrl: '' }
+    {
+      id: 1,
+      nombre: 'Puentes de glúteo',
+      idCategoria: 1,
+      descripcion: 'Fortalece la cadena posterior y cadera.',
+      imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="280"%3E%3Crect width="400" height="280" fill="%2320354f"/%3E%3Ctext x="50%25" y="42%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23ffffff"%3E🦵%3C/text%3E%3Ctext x="50%25" y="70%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="%23ffffff"%3EPuentes%20de%20gl%C3%BAteo%3C/text%3E%3C/svg%3E'
+    },
+    {
+      id: 2,
+      nombre: 'Estocadas alternas',
+      idCategoria: 1,
+      descripcion: 'Activa piernas y estabilidad en cada repetición.',
+      imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="280"%3E%3Crect width="400" height="280" fill="%232c4e16"/%3E%3Ctext x="50%25" y="42%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23ffffff"%3E🏃%3C/text%3E%3Ctext x="50%25" y="70%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="%23ffffff"%3EEstocadas%3C/text%3E%3C/svg%3E'
+    },
+    {
+      id: 3,
+      nombre: 'Salto de cuerda',
+      idCategoria: 3,
+      descripcion: 'Cardio dinámico para elevar la frecuencia.',
+      imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="280"%3E%3Crect width="400" height="280" fill="%230f172a"/%3E%3Ctext x="50%25" y="42%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23facc15"%3E🤸%3C/text%3E%3Ctext x="50%25" y="70%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="%23ffffff"%3ESalto%20de%20cuerda%3C/text%3E%3C/svg%3E'
+    },
+    {
+      id: 4,
+      nombre: 'Tijeras de piernas',
+      idCategoria: 3,
+      descripcion: 'Ejercicio rápido para core y coordinación.',
+      imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="280"%3E%3Crect width="400" height="280" fill="%23282c34"/%3E%3Ctext x="50%25" y="42%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23ffffff"%3E✂️%3C/text%3E%3Ctext x="50%25" y="70%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="%23ffffff"%3ETijeras%3C/text%3E%3C/svg%3E'
+    }
   ]);
 
   protected readonly duracionNueva = signal('20 min');
@@ -334,6 +405,10 @@ export class AppV5b {
   );
 
   protected readonly progressPercent = computed(() => Math.min(100, (this.completedCount() / 3) * 100));
+
+  protected readonly ejercicioSeleccionadoPreview = computed(() =>
+    this.ejercicios().find((ejercicio) => ejercicio.id === this.ejercicioSeleccionado())
+  );
 
   protected addRutina(): void {
     const duracion = this.duracionNueva().trim();

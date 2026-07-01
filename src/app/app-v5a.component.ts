@@ -15,7 +15,7 @@ interface Ejercicio {
   imagenUrl: string;
 }
 
-interface PlaylistItem {
+interface RutinaFavoritaItem {
   id: number;
   idEjercicio: number;
   fecha: Date;
@@ -31,18 +31,18 @@ interface PlaylistItem {
       <section class="hero">
         <p class="eyebrow">Versión 5A</p>
         <h1>{{ title() }}</h1>
-        <p class="intro">Workout planner con playlist personalizada y ejercicios destacados.</p>
+        <p class="intro">Gestión de rutinas favoritas con ejercicios personalizados.</p>
       </section>
 
       <section class="planner" aria-labelledby="planner-title">
         <header class="planner-header">
           <div>
             <h2 id="planner-title">Rutinas Fitness v5a</h2>
-            <p class="subtext">Crea tu playlist de ejercicios y controla el progreso de tu entrenamiento.</p>
+            <p class="subtext">Agrega tus rutinas favoritas y controla el progreso de tu entrenamiento.</p>
           </div>
           <div class="summary">
-            <span>{{ playlist().length }}</span> items en la playlist •
-            <span>{{ completedCount() }}</span> completados
+            <span>{{ rutinasFavoritas().length }}</span> rutinas favoritas •
+            <span>{{ completedCount() }}</span> completadas
           </div>
         </header>
 
@@ -66,7 +66,7 @@ interface PlaylistItem {
               </select>
             </label>
 
-            <button type="button" (click)="addToPlaylist()" [disabled]="!ejercicioSeleccionado()">Agregar a playlist</button>
+            <button type="button" (click)="addToRutinasFavoritas()" [disabled]="!ejercicioSeleccionado()">Agregar a rutinas favoritas</button>
           </div>
 
           <div class="preview-card" *ngIf="ejercicioSeleccionadoPreview() as ejercicio">
@@ -81,10 +81,10 @@ interface PlaylistItem {
         </div>
 
         <div class="playlist-section">
-          <h3>Playlist de entrenamiento</h3>
+          <h3>Rutinas favoritas</h3>
           <ul class="playlist-list">
-            <li *ngFor="let item of playlist()" class="playlist-item" [class.completed]="item.completada">
-              <button type="button" class="check" [attr.aria-pressed]="item.completada" (click)="togglePlaylistItem(item.id)">
+            <li *ngFor="let item of rutinasFavoritas()" class="playlist-item" [class.completed]="item.completada">
+              <button type="button" class="check" [attr.aria-pressed]="item.completada" (click)="toggleRutinaFavoritaItem(item.id)">
                 {{ item.completada ? '✔' : '○' }}
               </button>
               <div>
@@ -307,7 +307,7 @@ interface PlaylistItem {
   ]
 })
 export class AppV5a {
-  protected readonly title = signal('Playlist de entrenamiento');
+  protected readonly title = signal('Rutinas favoritas');
 
   protected readonly categorias = signal<Categoria[]>([
     { id: 1, nombre: 'Fuerza' },
@@ -349,7 +349,7 @@ export class AppV5a {
 
   protected readonly categoriaSeleccionada = signal(1);
   protected readonly ejercicioSeleccionado = signal(1);
-  protected readonly playlist = signal<PlaylistItem[]>([]);
+  protected readonly rutinasFavoritas = signal<RutinaFavoritaItem[]>([]);
 
   protected readonly ejerciciosFiltrados = computed(() =>
     this.ejercicios().filter((item) => item.idCategoria === this.categoriaSeleccionada())
@@ -360,23 +360,23 @@ export class AppV5a {
   );
 
   protected readonly completedCount = computed(
-    () => this.playlist().filter((item) => item.completada).length
+    () => this.rutinasFavoritas().filter((item) => item.completada).length
   );
 
-  protected addToPlaylist(): void {
+  protected addToRutinasFavoritas(): void {
     const selectedId = this.ejercicioSeleccionado();
-    const exists = this.playlist().some((item) => item.idEjercicio === selectedId);
+    const exists = this.rutinasFavoritas().some((item) => item.idEjercicio === selectedId);
     if (exists) return;
 
-    const nextId = this.playlist().reduce((max, item) => Math.max(max, item.id), 0) + 1;
-    this.playlist.update((items) => [
+    const nextId = this.rutinasFavoritas().reduce((max, item) => Math.max(max, item.id), 0) + 1;
+    this.rutinasFavoritas.update((items) => [
       ...items,
       { id: nextId, idEjercicio: selectedId, fecha: new Date(), completada: false }
     ]);
   }
 
-  protected togglePlaylistItem(id: number): void {
-    this.playlist.update((items) =>
+  protected toggleRutinaFavoritaItem(id: number): void {
+    this.rutinasFavoritas.update((items) =>
       items.map((item) =>
         item.id === id ? { ...item, completada: !item.completada } : item
       )
