@@ -37,18 +37,9 @@ Proyecto Angular con varias versiones dentro de la misma aplicación:
    ```
 4. Abre el navegador en `http://localhost:4200/`.
 
-## v7 - Configuración de Supabase
+## v7
 
-1. Abre `src/app/config/supabase.config.ts`.
-2. Rellena estos valores con tu proyecto de Supabase:
-
-   ```ts
-   export const SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';
-   export const SUPABASE_ANON_KEY = 'TU_ANON_KEY';
-   ```
-
-3. Crea las tablas en Supabase usando `supabase-v7-fitness.sql`.
-4. Abre `http://localhost:4200/v7` para ver la versión `v7`.
+La versión `v7` consume datos reales desde Supabase usando `HttpClient` y las tablas `categorias`, `ejercicios` y `rutinas`.
 
 ## Navegación actual en la app
 
@@ -71,5 +62,6 @@ Proyecto Angular con varias versiones dentro de la misma aplicación:
   - `v5a`
   - `v5b`
   - `v6`
+  - `v7`
 
 - Los tags permiten identificar cada versión del proyecto en GitHub.
