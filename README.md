@@ -9,38 +9,7 @@ Proyecto Angular con varias versiones dentro de la misma aplicación:
 - **v5a**: versión de rutinas favoritas.
 - **v5b**: versión de desafío diario.
 - **v6**: versión de control semanal y seguimiento de días.
-- **v7**: versión con **HttpClient + Supabase** - Datos reales desde API REST (no mock).
-
-## 🔄 Cambios en v7
-
-La versión 7 conecta la aplicación con **Supabase** usando **HttpClient**:
-
-- ✅ Los datos vienen de tablas reales en Supabase (no de arrays mock)
-- ✅ Implementado `ngOnInit()` para cargar datos al iniciar
-- ✅ Signals inicialmente vacías, se actualizan cuando llegan los datos
-- ✅ Mensajes de carga y error
-- ✅ Métodos async en el servicio usando `firstValueFrom()`
-
-### Tablas creadas en Supabase
-
-1. `categorias` — categorías de ejercicios
-2. `ejercicios` — ejercicios con referencia a categoría
-3. `rutinas` — rutinas de entrenamiento
-4. `workout_ejercicios` — relación entre rutinas y ejercicios
-
-### Configuración necesaria
-
-Antes de ejecutar v7, configura tus credenciales de Supabase:
-
-```bash
-# Edita este archivo con tus valores
-src/app/config/supabase.config.ts
-
-export const SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';
-export const SUPABASE_ANON_KEY = 'TU_ANON_KEY';
-```
-
-Consulta [INSTRUCCIONES-V7.md](./INSTRUCCIONES-V7.md) para guía detallada.
+- **v7**: versión con HttpClient y Supabase usando tablas de `marcas`, `modelos` y `coches`.
 
 ## Enlaces locales
 
@@ -51,7 +20,7 @@ Consulta [INSTRUCCIONES-V7.md](./INSTRUCCIONES-V7.md) para guía detallada.
 - Versión 5A: [http://localhost:4200/v5a](http://localhost:4200/v5a)
 - Versión 5B: [http://localhost:4200/v5b](http://localhost:4200/v5b)
 - Versión 6: [http://localhost:4200/v6](http://localhost:4200/v6)
-- Versión 7: [http://localhost:4200/](http://localhost:4200/) (default, requiere Supabase)
+- Versión 7: [http://localhost:4200/v7](http://localhost:4200/v7)
 
 ## Uso
 
@@ -67,6 +36,19 @@ Consulta [INSTRUCCIONES-V7.md](./INSTRUCCIONES-V7.md) para guía detallada.
    npm start
    ```
 4. Abre el navegador en `http://localhost:4200/`.
+
+## v7 - Configuración de Supabase
+
+1. Abre `src/app/config/supabase.config.ts`.
+2. Rellena estos valores con tu proyecto de Supabase:
+
+   ```ts
+   export const SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';
+   export const SUPABASE_ANON_KEY = 'TU_ANON_KEY';
+   ```
+
+3. Crea las tablas en Supabase usando `supabase-v7-coches.sql`.
+4. Abre `http://localhost:4200/v7` para ver la versión `v7`.
 
 ## Navegación actual en la app
 
@@ -89,14 +71,5 @@ Consulta [INSTRUCCIONES-V7.md](./INSTRUCCIONES-V7.md) para guía detallada.
   - `v5a`
   - `v5b`
   - `v6`
-  - `v7` — HttpClient + Supabase
 
 - Los tags permiten identificar cada versión del proyecto en GitHub.
-
-## Tecnología
-
-- **Angular 19+** — Framework principal
-- **Signals** — Gestión de estado reactivo
-- **HttpClient** — Peticiones HTTP (desde v7)
-- **Supabase** — Base de datos backend (desde v7)
-- **TypeScript** — Lenguaje de programación
