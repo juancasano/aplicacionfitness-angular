@@ -6,14 +6,12 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   imports: [RouterLink, RouterLinkActive, RouterOutlet],
   template: `
     <header class="app-bar">
-      <nav class="tabs" role="tablist" aria-label="Versiones de la app">
-        <a role="tab" class="tab" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Versión 1</a>
-        <a role="tab" class="tab" routerLink="v2" routerLinkActive="active">Versión 2</a>
-        <a role="tab" class="tab" routerLink="v3" routerLinkActive="active">Versión 3</a>
-        <a role="tab" class="tab" routerLink="v4" routerLinkActive="active">Versión 4</a>
-        <a role="tab" class="tab" routerLink="v5a" routerLinkActive="active">Versión 5A</a>
-        <a role="tab" class="tab" routerLink="v5b" routerLinkActive="active">Versión 5B</a>
-      </nav>
+      <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Versión 1</a>
+      <a routerLink="v2" routerLinkActive="active">Versión 2 (Ejercicio 2)</a>
+      <a routerLink="v3" routerLinkActive="active">Versión 3 (Ejercicio 3)</a>
+      <a routerLink="v4" routerLinkActive="active">Versión 4 (Multimedia)</a>
+      <a routerLink="v5a" routerLinkActive="active">Versión 5A</a>
+      <a routerLink="v5b" routerLinkActive="active">Versión 5B</a>
     </header>
     <main class="app-content">
       <router-outlet></router-outlet>
@@ -36,31 +34,6 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
         padding: 0.75rem 1rem;
         border-radius: 0.85rem;
         transition: background 0.2s ease;
-      }
-      .tabs {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        width: 100%;
-        flex-wrap: wrap;
-      }
-      .tab {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.6rem 0.9rem;
-        border-radius: 0.7rem;
-        background: transparent;
-        color: #1d4ed8;
-        text-decoration: none;
-        border: 1px solid transparent;
-      }
-      .tab:hover {
-        background: rgba(37, 99, 235, 0.06);
-      }
-      .tab.active {
-        background: #e0f2fe;
-        border-color: rgba(37, 99, 235, 0.12);
       }
       .app-bar a:hover,
       .app-bar a.active {
