@@ -101,6 +101,7 @@ interface Rutina {
                 <strong>{{ obtenerNombreEjercicio(rutina.idEjercicio) }}</strong>
                 <span>{{ rutina.duracion }}</span>
                 <span>{{ rutina.fecha | date:'shortTime' }}</span>
+                <span *ngIf="rutina.completada" class="status-badge">Completado</span>
               </div>
             </li>
           </ul>
@@ -184,6 +185,35 @@ interface Rutina {
       .summary {
         font-weight: 700;
         color: #111827;
+      }
+
+      .version-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .version-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.85rem 1.2rem;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        background: #eef2ff;
+        color: #3730a3;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .version-button:hover,
+      .version-button.active {
+        background: #4338ca;
+        border-color: #4338ca;
+        color: white;
       }
 
       .goals-card {
@@ -332,6 +362,11 @@ interface Rutina {
         opacity: 0.75;
       }
 
+      .rutinas-list li.completed strong {
+        text-decoration: line-through;
+        color: #4b5563;
+      }
+
       .check {
         width: 3rem;
         height: 3rem;
@@ -355,6 +390,17 @@ interface Rutina {
         color: #6b7280;
         font-size: 0.95rem;
         display: block;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        margin-top: 0.5rem;
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+        background: #d1fae5;
+        color: #166534;
+        font-size: 0.8rem;
+        font-weight: 700;
       }
     `
   ]

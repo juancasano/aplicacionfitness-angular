@@ -6,12 +6,10 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   imports: [RouterLink, RouterLinkActive, RouterOutlet],
   template: `
     <header class="app-bar">
-      <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Versión 1</a>
-      <a routerLink="v2" routerLinkActive="active">Versión 2 (Ejercicio 2)</a>
-      <a routerLink="v3" routerLinkActive="active">Versión 3 (Ejercicio 3)</a>
-      <a routerLink="v4" routerLinkActive="active">Versión 4 (Multimedia)</a>
-      <a routerLink="v5a" routerLinkActive="active">Versión 5A</a>
-      <a routerLink="v5b" routerLinkActive="active">Versión 5B</a>
+      <a routerLink="/v4" routerLinkActive="active">Multimedia Fitness</a>
+      <a routerLink="/v5a" routerLinkActive="active">Rutinas Favoritas</a>
+      <a routerLink="/v5b" routerLinkActive="active">Desafío Diario</a>
+      <a routerLink="/v6" routerLinkActive="active">Control Semanal</a>
     </header>
     <main class="app-content">
       <router-outlet></router-outlet>

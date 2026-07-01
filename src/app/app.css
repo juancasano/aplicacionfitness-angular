@@ -225,3 +225,123 @@ button:disabled {
     align-items: flex-start;
   }
 }
+
+/* Nuevos estilos para v7 - Supabase */
+
+.status-messages {
+  display: grid;
+  gap: 1rem;
+}
+
+.loading-message {
+  background: linear-gradient(135deg, #fef08a 0%, #fef3c7 100%);
+  border: 1px solid #fcd34d;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  color: #92400e;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.error-message {
+  background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+  border: 1px solid #f87171;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  color: #7c2d12;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.categories-section {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 1.75rem;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+}
+
+.categories-section h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.35rem;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.category-card {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border: 1px solid #93c5fd;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.category-card strong {
+  color: #1e3a8a;
+  font-size: 1rem;
+}
+
+.category-id {
+  color: #0369a1;
+  font-size: 0.85rem;
+}
+
+.exercises-section {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 1.75rem;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+}
+
+.exercises-section h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.35rem;
+}
+
+.exercises-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.exercise-card {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  border: 1px solid #86efac;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.exercise-card strong {
+  color: #166534;
+  font-size: 1rem;
+}
+
+.exercise-card .description {
+  color: #15803d;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.category-tag {
+  background: rgba(22, 101, 52, 0.1);
+  color: #166534;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  width: fit-content;
+}
+

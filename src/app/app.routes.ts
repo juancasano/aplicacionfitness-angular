@@ -13,5 +13,6 @@ export const routes: Routes = [
   { path: 'v3', component: AppV3 },
   { path: 'v4', component: AppV4 },
   { path: 'v5a', component: AppV5a },
-  { path: 'v5b', component: AppV5b }
+  { path: 'v5b', component: AppV5b },
+  { path: 'v6', component: AppV6 }
 ];

@@ -90,6 +90,7 @@ interface RutinaFavoritaItem {
               <div>
                 <strong>{{ obtenerNombreEjercicio(item.idEjercicio) }}</strong>
                 <span>Agregado: {{ item.fecha | date:'shortDate' }}</span>
+                <span *ngIf="item.completada" class="status-badge">Completado</span>
               </div>
             </li>
           </ul>
@@ -292,9 +293,25 @@ interface RutinaFavoritaItem {
         margin-bottom: 0.25rem;
       }
 
+      .playlist-item.completed strong {
+        text-decoration: line-through;
+        color: #4b5563;
+      }
+
       .playlist-item span {
         color: #6b7280;
         font-size: 0.9rem;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        margin-top: 0.5rem;
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+        background: #d1fae5;
+        color: #166534;
+        font-size: 0.8rem;
+        font-weight: 700;
       }
 
       @media (min-width: 768px) {
@@ -330,6 +347,13 @@ export class AppV5a {
       idCategoria: 1,
       descripcion: 'Core estable para mejorar postura y fuerza media.',
       imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="280"%3E%3Crect width="400" height="280" fill="%232f4f02"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-size="44" fill="%23fff"%3E🪵%3C/text%3E%3Ctext x="50%25" y="66%25" dominant-baseline="middle" text-anchor="middle" font-size="26" fill="%23fff"%3EPlancha%20lateral%3C/text%3E%3C/svg%3E'
+    },
+    {
+      id: 5,
+      nombre: 'Estiramientos dinámicos',
+      idCategoria: 2,
+      descripcion: 'Mejora movilidad y flexibilidad con movimientos suaves y controlados.',
+      imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="280"%3E%3Crect width="400" height="280" fill="%23006d5b"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-size="44" fill="%23fff"%3E🧘%3C/text%3E%3Ctext x="50%25" y="66%25" dominant-baseline="middle" text-anchor="middle" font-size="26" fill="%23fff"%3EEstiramientos%20dinámicos%3C/text%3E%3C/svg%3E'
     },
     {
       id: 3,
