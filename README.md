@@ -9,7 +9,7 @@ Proyecto Angular con varias versiones dentro de la misma aplicación:
 - **v5a**: versión de rutinas favoritas.
 - **v5b**: versión de desafío diario.
 - **v6**: versión de control semanal y seguimiento de días.
-- **v7**: versión con HttpClient y Supabase usando tablas de `marcas`, `modelos` y `coches`.
+- **v7**: versión con HttpClient y Supabase usando tablas de `categorias`, `ejercicios` y `rutinas`.
 
 ## Enlaces locales
 
@@ -47,7 +47,7 @@ Proyecto Angular con varias versiones dentro de la misma aplicación:
    export const SUPABASE_ANON_KEY = 'TU_ANON_KEY';
    ```
 
-3. Crea las tablas en Supabase usando `supabase-v7-coches.sql`.
+3. Crea las tablas en Supabase usando `supabase-v7-fitness.sql`.
 4. Abre `http://localhost:4200/v7` para ver la versión `v7`.
 
 ## Navegación actual en la app

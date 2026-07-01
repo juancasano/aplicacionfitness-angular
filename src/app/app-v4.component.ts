@@ -1,30 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-
-interface Categoria {
-  id: number;
-  nombre: string;
-}
-
-interface Ejercicio {
-  id: number;
-  nombre: string;
-  idCategoria: number;
-  descripcion: string;
-  imagenUrl?: string;
-  videoUrl?: string;
-}
-
-interface Rutina {
-  id: number;
-  duracion: string;
-  completada: boolean;
-  idCategoria: number;
-  idEjercicio: number;
-  fecha: Date;
-}
+import { DatosFitnessService } from './services/datos-fitness.service';
+import { Categoria } from './models/categoria';
+import { Ejercicio } from './models/ejercicio';
+import { Rutina } from './models/rutina';
 
 @Component({
   standalone: true,
@@ -157,7 +138,7 @@ interface Rutina {
               <div class="info">
                 <strong>{{ obtenerNombreCategoria(rutina.idCategoria) }} - {{ obtenerNombreEjercicio(rutina.idEjercicio) }}</strong>
                 <span>Duración: {{ rutina.duracion }}</span>
-                <span>Fecha: {{ rutina.fecha | date:'short' }}</span>
+                <span>Fecha: {{ rutina.created_at | date:'short' }}</span>
               </div>
             </li>
           </ul>
@@ -546,82 +527,49 @@ interface Rutina {
     }
   `]
 })
-export class AppV4 {
-  constructor(private sanitizer: DomSanitizer) {}
+export class AppV4 implements OnInit {
+  private readonly sanitizer = inject(DomSanitizer);
+  private readonly datosFitnessService = inject(DatosFitnessService);
 
   protected readonly title = signal('Rutinas Fitness v4');
 
-  protected readonly categorias = signal<Categoria[]>([
-    { id: 1, nombre: 'Fuerza' },
-    { id: 2, nombre: 'Flexibilidad' },
-    { id: 3, nombre: 'Cardio' },
-    { id: 4, nombre: 'Yoga' }
-  ]);
-
-protected readonly ejercicios = signal<Ejercicio[]>([
-{ 
-  id: 1, 
-  nombre: 'Sentadillas', 
-  idCategoria: 1, 
-  descripcion: 'Ejercicio compuesto que trabaja piernas y glúteos',
-  imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Cdefs%3E%3ClinearGradient id="g1" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" stop-color="%2302063b"/%3E%3Cstop offset="100%25" stop-color="%231f78ff"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="400" height="300" fill="url(%23g1)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23ffffff"%3E💪%3C/text%3E%3Ctext x="50%25" y="65%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="%23ffffff"%3ESentadillas%3C/text%3E%3C/svg%3E',
-  videoUrl: 'https://www.youtube.com/embed/ph9MC08ibn4'
-},
-{ 
-  id: 2, 
-  nombre: 'Peso muerto', 
-  idCategoria: 1, 
-  descripcion: 'Ejercicio básico para espalda y posterior de cadena',
-  imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Cdefs%3E%3ClinearGradient id="g2" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" stop-color="%230a0c26"/%3E%3Cstop offset="100%25" stop-color="%23ff6f00"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="400" height="300" fill="url(%23g2)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23ffffff"%3E🏋️‍♂️%3C/text%3E%3Ctext x="50%25" y="65%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="%23ffffff"%3EPeso%20muerto%3C/text%3E%3C/svg%3E',
-  videoUrl: 'https://www.youtube.com/embed/ph9MC08ibn4'
-},
-{ 
-  id: 3, 
-  nombre: 'Estiramientos', 
-  idCategoria: 2, 
-  descripcion: 'Movimientos para mejorar flexibilidad y movilidad',
-  imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Cdefs%3E%3ClinearGradient id="g3" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" stop-color="%231a3c25"/%3E%3Cstop offset="100%25" stop-color="%2382d186"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="400" height="300" fill="url(%23g3)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23ffffff"%3E🧘‍♀️%3C/text%3E%3Ctext x="50%25" y="65%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="%23ffffff"%3EEstiramientos%3C/text%3E%3C/svg%3E',
-  videoUrl: 'https://www.youtube.com/embed/ph9MC08ibn4'
-},
-{ 
-  id: 4, 
-  nombre: 'Carrera continua', 
-  idCategoria: 3, 
-  descripcion: 'Actividad aeróbica para mejorar resistencia cardiovascular',
-  imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Cdefs%3E%3ClinearGradient id="g4" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" stop-color="%2328360c"/%3E%3Cstop offset="100%25" stop-color="%23ffd600"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="400" height="300" fill="url(%23g4)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%230f172a"%3E🏃‍♂️%3C/text%3E%3Ctext x="50%25" y="65%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="%230f172a"%3ECarrera%20continua%3C/text%3E%3C/svg%3E',
-  videoUrl: 'https://www.youtube.com/embed/ph9MC08ibn4'
-},
-{ 
-  id: 5, 
-  nombre: 'Saludo al sol', 
-  idCategoria: 4, 
-  descripcion: 'Secuencia de yoga para calentar y movilizar el cuerpo',
-  imagenUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Cdefs%3E%3ClinearGradient id="g5" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" stop-color="%23236d71"/%3E%3Cstop offset="100%25" stop-color="%237a5dff"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="400" height="300" fill="url(%23g5)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="%23ffffff"%3E🧘‍♂️%3C/text%3E%3Ctext x="50%25" y="65%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="%23ffffff"%3ESaludo%20al%20sol%3C/text%3E%3C/svg%3E',
-  videoUrl: 'https://www.youtube.com/embed/ph9MC08ibn4'
-}
-
-]);
-  protected readonly rutinas = signal<Rutina[]>([
-    { id: 1, duracion: '20 min', completada: false, idCategoria: 1, idEjercicio: 1, fecha: new Date() },
-    { id: 2, duracion: '30 min', completada: false, idCategoria: 2, idEjercicio: 3, fecha: new Date() },
-    { id: 3, duracion: '40 min', completada: false, idCategoria: 3, idEjercicio: 4, fecha: new Date() },
-    { id: 4, duracion: '25 min', completada: false, idCategoria: 4, idEjercicio: 5, fecha: new Date() }
-  ]);
+  protected readonly categorias = signal<Categoria[]>([]);
+  protected readonly ejercicios = signal<Ejercicio[]>([]);
+  protected readonly rutinas = signal<Rutina[]>([]);
 
   protected readonly duracionNueva = signal('30 min');
   protected readonly categoriaSeleccionada = signal(1);
   protected readonly ejercicioSeleccionado = signal(1);
+
+  async ngOnInit(): Promise<void> {
+    try {
+      const [categorias, ejercicios, rutinas] = await Promise.all([
+        this.datosFitnessService.obtenerCategorias(),
+        this.datosFitnessService.obtenerEjercicios(),
+        this.datosFitnessService.obtenerRutinas()
+      ]);
+      this.categorias.set(categorias);
+      this.ejercicios.set(ejercicios);
+      this.rutinas.set(rutinas);
+
+      if (categorias.length > 0) this.categoriaSeleccionada.set(categorias[0].id);
+      if (ejercicios.length > 0) this.ejercicioSeleccionado.set(ejercicios[0].id);
+    } catch (err) {
+      console.error('Error cargando datos:', err);
+    }
+  }
 
   protected readonly ejerciciosFiltrados = computed(() =>
     this.ejercicios().filter((ejercicio) => ejercicio.idCategoria === this.categoriaSeleccionada())
   );
 
   protected readonly ejercicioSeleccionadoVideo = computed(() =>
-    this.ejercicios().find((ejercicio) => ejercicio.id === this.ejercicioSeleccionado() && ejercicio.videoUrl)
+    this.ejercicios().find((ejercicio) => ejercicio.id === this.ejercicioSeleccionado())
   );
 
   protected readonly ejercicioSeleccionadoVideoUrl = computed<SafeResourceUrl | undefined>(() => {
-    const videoUrl = this.ejercicioSeleccionadoVideo()?.videoUrl;
+    const ejercicio = this.ejercicioSeleccionadoVideo();
+    const videoUrl = (ejercicio as any)?.videoUrl;
     return videoUrl ? this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl) : undefined;
   });
 
@@ -633,27 +581,43 @@ protected readonly ejercicios = signal<Ejercicio[]>([
     const duracion = this.duracionNueva().trim();
     if (!duracion) return;
 
-    const nextId = this.rutinas().reduce((max, rutina) => Math.max(max, rutina.id), 0) + 1;
-    this.rutinas.update((items) => [
-      ...items,
-      {
-        id: nextId,
-        duracion,
-        completada: false,
-        idCategoria: this.categoriaSeleccionada(),
-        idEjercicio: this.ejercicioSeleccionado(),
-        fecha: new Date()
-      }
-    ]);
-    this.duracionNueva.set('30 min');
+    const nuevaRutina: Omit<Rutina, 'id'> = {
+      duracion,
+      completada: false,
+      idCategoria: this.categoriaSeleccionada(),
+      idEjercicio: this.ejercicioSeleccionado()
+    };
+
+    this.datosFitnessService.crearRutina(nuevaRutina).then((rutina) => {
+      this.rutinas.update((items) => [...items, rutina]);
+      this.duracionNueva.set('30 min');
+    }).catch((err) => {
+      console.error('Error al crear rutina:', err);
+    });
   }
 
   protected toggleRutina(id: number): void {
-    this.rutinas.update((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, completada: !item.completada } : item
-      )
-    );
+    const rutina = this.rutinas().find((r) => r.id === id);
+    if (!rutina) return;
+
+    const updated = { ...rutina, completada: !rutina.completada };
+    this.datosFitnessService.actualizarRutina(id, { completada: updated.completada }).then(() => {
+      this.rutinas.update((items) =>
+        items.map((item) =>
+          item.id === id ? updated : item
+        )
+      );
+    }).catch((err) => {
+      console.error('Error al actualizar rutina:', err);
+    });
+  }
+
+  protected eliminarRutina(id: number): void {
+    this.datosFitnessService.eliminarRutina(id).then(() => {
+      this.rutinas.update((items) => items.filter((item) => item.id !== id));
+    }).catch((err) => {
+      console.error('Error al eliminar rutina:', err);
+    });
   }
 
   protected obtenerNombreCategoria(idCategoria: number): string {

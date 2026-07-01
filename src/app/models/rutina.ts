@@ -4,4 +4,7 @@ export interface Rutina {
   completada: boolean;
   idCategoria: number;
   idEjercicio: number;
+  favorita?: boolean;
+  diaria?: boolean;
+  created_at?: string | Date;
 }

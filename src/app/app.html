@@ -1,41 +1,8 @@
 <main class="page">
   <section class="hero">
-    <p class="eyebrow">Versión 7 - HttpClient + Supabase</p>
+    <p class="eyebrow">Primer ejercicio</p>
     <h1>{{ title() }}</h1>
     <p class="intro">Organiza tus entrenamientos, marca objetivos y añade nuevas rutinas.</p>
-  </section>
-
-  <!-- Mensajes de carga y error -->
-  <section class="status-messages" *ngIf="cargando() || error()">
-    <div class="loading-message" *ngIf="cargando()">
-      ⏳ Cargando datos desde Supabase...
-    </div>
-    <div class="error-message" *ngIf="error()">
-      ❌ {{ error() }}
-    </div>
-  </section>
-
-  <!-- Sección de Categorías desde Supabase -->
-  <section class="categories-section" *ngIf="categorias().length > 0 && !cargando()">
-    <h2>Categorías de ejercicios</h2>
-    <div class="categories-grid">
-      <div class="category-card" *ngFor="let categoria of categorias()">
-        <strong>{{ categoria.nombre }}</strong>
-        <span class="category-id">#{{ categoria.id }}</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sección de Ejercicios desde Supabase -->
-  <section class="exercises-section" *ngIf="ejercicios().length > 0 && !cargando()">
-    <h2>Ejercicios disponibles</h2>
-    <div class="exercises-grid">
-      <div class="exercise-card" *ngFor="let ejercicio of ejercicios()">
-        <strong>{{ ejercicio.nombre }}</strong>
-        <p class="description">{{ ejercicio.descripcion }}</p>
-        <span class="category-tag">Cat: {{ ejercicio.id_categoria }}</span>
-      </div>
-    </div>
   </section>
 
   <section class="planner" aria-labelledby="planner-title">
