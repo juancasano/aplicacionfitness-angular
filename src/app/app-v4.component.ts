@@ -536,42 +536,42 @@ export class AppV4 {
 
 protected readonly ejercicios = signal<Ejercicio[]>([
 { 
-id: 1, 
-nombre: 'Sentadillas', 
-idCategoria: 1, 
-descripcion: 'Ejercicio compuesto que trabaja piernas y glúteos',
-imagenUrl: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=400&h=300',
-videoUrl: 'https://www.youtube.com/embed/5VtVPwDMq5M' // Video de sentadillas
+  id: 1, 
+  nombre: 'Sentadillas', 
+  idCategoria: 1, 
+  descripcion: 'Ejercicio compuesto que trabaja piernas y glúteos',
+  imagenUrl: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=400&h=300',
+  videoUrl: 'https://www.youtube.com/embed/ysz5S6PUM-U' // Video demo estable
 },
 { 
-id: 2, 
-nombre: 'Peso muerto', 
-idCategoria: 1, 
-descripcion: 'Ejercicio básico para espalda y posterior de cadena',
-imagenUrl: 'https://images.unsplash.com/photo-1539571696357-0f8d721f22d1?auto=format&fit=crop&w=400&h=300',
-videoUrl: 'https://www.youtube.com/embed/wYREQkVtvBc' // Video de peso muerto
+  id: 2, 
+  nombre: 'Peso muerto', 
+  idCategoria: 1, 
+  descripcion: 'Ejercicio básico para espalda y posterior de cadena',
+  imagenUrl: 'https://images.unsplash.com/photo-1539571696357-0f8d721f22d1?auto=format&fit=crop&w=400&h=300',
+  videoUrl: 'https://www.youtube.com/embed/ysz5S6PUM-U' // Video demo estable
 },
 { 
-id: 3, 
-nombre: 'Estiramientos', 
-idCategoria: 2, 
-descripcion: 'Movimientos para mejorar flexibilidad y movilidad',
-imagenUrl: 'https://images.unsplash.com/photo-1583591708422-5510542ff51d?auto=format&fit=crop&w=400&h=300'
+  id: 3, 
+  nombre: 'Estiramientos', 
+  idCategoria: 2, 
+  descripcion: 'Movimientos para mejorar flexibilidad y movilidad',
+  imagenUrl: 'https://placehold.co/400x300?text=Estiramientos'
 },
 { 
-id: 4, 
-nombre: 'Carrera continua', 
-idCategoria: 3, 
-descripcion: 'Actividad aeróbica para mejorar resistencia cardiovascular',
-imagenUrl: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=400&h=300'
+  id: 4, 
+  nombre: 'Carrera continua', 
+  idCategoria: 3, 
+  descripcion: 'Actividad aeróbica para mejorar resistencia cardiovascular',
+  imagenUrl: 'https://placehold.co/400x300?text=Cardio'
 },
 { 
-id: 5, 
-nombre: 'Saludo al sol', 
-idCategoria: 4, 
-descripcion: 'Secuencia de yoga para calentar y movilizar el cuerpo',
-imagenUrl: 'https://images.unsplash.com/photo-1544367563-00fcf361f2d6?auto=format&fit=crop&w=400&h=300',
-videoUrl: 'https://www.youtube.com/embed/FH2g9D58l74' // Video de saludo al sol
+  id: 5, 
+  nombre: 'Saludo al sol', 
+  idCategoria: 4, 
+  descripcion: 'Secuencia de yoga para calentar y movilizar el cuerpo',
+  imagenUrl: 'https://placehold.co/400x300?text=Yoga',
+  videoUrl: 'https://www.youtube.com/embed/ysz5S6PUM-U' // Video demo estable
 }
 
 ]);
