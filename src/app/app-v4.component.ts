@@ -98,6 +98,9 @@ interface Rutina {
           <div class="video-container">
             <video
               controls
+              autoplay
+              muted
+              playsinline
               [src]="ejercicioSeleccionadoVideo()?.videoUrl"
               poster="https://placehold.co/600x315?text=Video+no+disponible"
             ></video>
