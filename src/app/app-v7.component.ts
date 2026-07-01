@@ -7,8 +7,6 @@ import { Categoria } from './models/categoria';
 import { Ejercicio } from './models/ejercicio';
 import { Rutina } from './models/rutina';
 
-type TabType = 'misrutinas' | 'favoritas' | 'diarias';
-
 interface RutinaFavoritaItem {
   id: number;
   idEjercicio: number;
@@ -41,38 +39,88 @@ interface RutinaFavoritaItem {
           </div>
         </header>
 
-        <div class="status-messages" *ngIf="cargando() || error()">
-          <div class="loading-message" *ngIf="cargando()">Cargando datos desde Supabase...</div>
-          <div class="error-message" *ngIf="error()">{{ error() }}</div>
-        </div>
+        <section class="section-block" *ngIf="!cargando() && !error()">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Multimedia</p>
+              <h3>Galería de ejercicios</h3>
+            </div>
+            <p class="section-description">Selecciona categoría para ver ejercicios con imagen, descripción y video en una sola página.</p>
+          </div>
 
-        <!-- TABS NAVIGATION -->
-        <div class="tabs-nav" *ngIf="!cargando() && !error()">
-          <button 
-            class="tab-button"
-            [class.active]="tabActual() === 'misrutinas'"
-            (click)="tabActual.set('misrutinas')">
-            Mis Rutinas
-          </button>
-          <button 
-            class="tab-button"
-            [class.active]="tabActual() === 'favoritas'"
-            (click)="tabActual.set('favoritas')">
-            Rutinas Favoritas
-          </button>
-          <button 
-            class="tab-button"
-            [class.active]="tabActual() === 'diarias'"
-            (click)="tabActual.set('diarias')">
-            Rutinas Diarias
-          </button>
-        </div>
+          <div class="categorias-grid">
+            <button
+              type="button"
+              *ngFor="let categoria of categorias()"
+              class="categoria-card"
+              [class.active]="categoriaSeleccionadaV4() === categoria.id"
+              (click)="categoriaSeleccionadaV4.set(categoria.id)">
+              <span class="categoria-icon">{{ obtenerCategoriaEmoji(categoria.id) }}</span>
+              <strong>{{ categoria.nombre }}</strong>
+            </button>
+          </div>
 
-        <!-- TAB: MIS RUTINAS (v3 style) -->
-        <div class="tab-content" *ngIf="tabActual() === 'misrutinas'">
-          <div class="tab-header">
-            <h3>Mis Rutinas</h3>
-            <div class="tab-stats">{{ rutinasV3().length }} rutinas • {{ completedCountV3() }} completadas</div>
+          <div class="ejercicios-grid">
+            <article
+              *ngFor="let ejercicio of ejerciciosFiltradosGaleria()"
+              class="ejercicio-card"
+              [class.selected]="ejercicioSeleccionadoV4() === ejercicio.id"
+              (click)="ejercicioSeleccionadoV4.set(ejercicio.id)">
+              <div class="ejercicio-imagen">
+                <img
+                  [src]="ejercicio.imagenUrl || placeholderImage(ejercicio.nombre)"
+                  [alt]="ejercicio.nombre"
+                  (error)="onImageError($event, ejercicio.nombre)" />
+              </div>
+              <div class="ejercicio-content">
+                <h4>{{ ejercicio.nombre }}</h4>
+                <p>{{ ejercicio.descripcion || 'Ejercicio disponible en tu plan.' }}</p>
+                <span class="video-flag" *ngIf="ejercicio.videoUrl">🎥 Video disponible</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="exercise-preview" *ngIf="ejercicioSeleccionadoGaleria() as ejercicio">
+            <div class="preview-card">
+              <div class="preview-image">
+                <img
+                  [src]="ejercicio.imagenUrl || placeholderImage(ejercicio.nombre)"
+                  [alt]="ejercicio.nombre"
+                  (error)="onImageError($event, ejercicio.nombre)" />
+              </div>
+              <div class="preview-details">
+                <span class="eyebrow">Ejercicio seleccionado</span>
+                <h3>{{ ejercicio.nombre }}</h3>
+                <p>{{ ejercicio.descripcion || 'Descripción no disponible.' }}</p>
+                <div class="preview-meta">
+                  <span>Categoría: {{ obtenerNombreCategoriaV3(ejercicio.idCategoria) }}</span>
+                  <span *ngIf="ejercicio.videoUrl">Video listo para ver</span>
+                  <span *ngIf="!ejercicio.videoUrl">Sin video disponible</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-section" *ngIf="ejercicioSeleccionadoVideoUrl()">
+            <h3>Video explicativo</h3>
+            <div class="video-container">
+              <iframe
+                [src]="ejercicioSeleccionadoVideoUrl()"
+                title="Video explicativo de ejercicio"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block" *ngIf="!cargando() && !error()">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Mis rutinas</p>
+              <h3>Gestiona tus entrenamientos</h3>
+            </div>
+            <p class="section-description">Añade nuevas rutinas con categoría, ejercicio y duración en un listado claro.</p>
           </div>
 
           <form class="workout-form" (ngSubmit)="addRutinaV3()">
@@ -111,13 +159,15 @@ interface RutinaFavoritaItem {
               <button type="button" class="delete-btn" (click)="eliminarRutinaV3(rutina.id)" title="Eliminar">×</button>
             </li>
           </ul>
-        </div>
+        </section>
 
-        <!-- TAB: RUTINAS FAVORITAS (v5a style) -->
-        <div class="tab-content" *ngIf="tabActual() === 'favoritas'">
-          <div class="tab-header">
-            <h3>Rutinas Favoritas - Versión 5A</h3>
-            <div class="tab-stats">{{ rutinasFavoritas().length }} favoritas • {{ completedCountV5a() }} completadas</div>
+        <section class="section-block" *ngIf="!cargando() && !error()">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Favoritas</p>
+              <h3>Rutinas favoritas</h3>
+            </div>
+            <p class="section-description">Guarda tus ejercicios preferidos con vista previa de la imagen.</p>
           </div>
 
           <div class="selector-grid">
@@ -138,14 +188,20 @@ interface RutinaFavoritaItem {
             </div>
 
             <div class="preview-card" *ngIf="ejercicioSeleccionadoPreviewV5a() as ejercicio">
+              <div class="imagen-preview">
+                <img
+                  [src]="ejercicio.imagenUrl || placeholderImage(ejercicio.nombre)"
+                  [alt]="ejercicio.nombre"
+                  (error)="onImageError($event, ejercicio.nombre)" />
+              </div>
               <div class="preview-content">
                 <h3>{{ ejercicio.nombre }}</h3>
+                <p>{{ ejercicio.descripcion || 'Ejercicio favorito seleccionado.' }}</p>
               </div>
             </div>
           </div>
 
           <div class="playlist-section">
-            <h3>Rutinas favoritas agregadas</h3>
             <ul class="playlist-list">
               <li *ngFor="let item of rutinasFavoritas()" class="playlist-item" [class.completed]="item.completada">
                 <button type="button" class="check" [attr.aria-pressed]="item.completada" (click)="toggleRutinaFavoritaItem(item.id)">
@@ -160,20 +216,22 @@ interface RutinaFavoritaItem {
               </li>
             </ul>
           </div>
-        </div>
+        </section>
 
-        <!-- TAB: RUTINAS DIARIAS (v5b style) -->
-        <div class="tab-content" *ngIf="tabActual() === 'diarias'">
-          <div class="tab-header">
-            <h3>Desafío Diario - Versión 5B</h3>
-            <div class="tab-stats">{{ rutinasV5b().length }} programadas • {{ completedCountV5b() }} completadas</div>
+        <section class="section-block" *ngIf="!cargando() && !error()">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Diarias</p>
+              <h3>Rutinas del día</h3>
+            </div>
+            <p class="section-description">Gestiona el flujo diario con progreso visual y un listado ordenado.</p>
           </div>
 
           <div class="goals-card">
             <h3>Meta diaria</h3>
             <p>Completa al menos <strong>3 rutinas</strong> para cerrar el día.</p>
             <div class="progress-bar">
-              <div class="progress-fill" [style.width]="progressPercentV5b() + '%'"></div>
+              <div class="progress-fill" [style.width]="progressPercentV5b() + '%'" />
             </div>
           </div>
 
@@ -192,7 +250,6 @@ interface RutinaFavoritaItem {
           </form>
 
           <div class="rutinas-list">
-            <h3>Rutinas del día</h3>
             <ul>
               <li *ngFor="let rutina of rutinasV5b()" [class.completed]="rutina.completada">
                 <button type="button" class="check" [attr.aria-pressed]="rutina.completada" (click)="toggleRutinaV5b(rutina.id)">
@@ -208,7 +265,7 @@ interface RutinaFavoritaItem {
               </li>
             </ul>
           </div>
-        </div>
+        </section>
       </section>
     </main>
   `,
@@ -311,64 +368,220 @@ interface RutinaFavoritaItem {
       color: #7c2d12;
     }
 
-    /* TABS */
-    .tabs-nav {
+    .section-block {
+      margin-top: 2rem;
+      padding-top: 1px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .section-heading {
       display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid #e5e7eb;
-    }
-
-    .tab-button {
-      flex: 1;
-      padding: 1rem 1.25rem;
-      border: none;
-      background: transparent;
-      color: #6b7280;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      transition: all 0.3s ease;
-      margin-bottom: -2px;
-    }
-
-    .tab-button:hover {
-      color: #374151;
-      background: #f9fafb;
-    }
-
-    .tab-button.active {
-      color: #2563eb;
-      border-bottom-color: #2563eb;
-    }
-
-    .tab-content {
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .tab-header {
-      display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
-      align-items: center;
+      gap: 1rem;
+      align-items: flex-start;
       margin-bottom: 1.5rem;
     }
 
-    .tab-header h3 {
+    .section-heading h3 {
       margin: 0;
-      font-size: 1.1rem;
+      font-size: 1.35rem;
       color: #111827;
     }
 
-    .tab-stats {
-      font-weight: 600;
-      color: #2563eb;
-      font-size: 0.9rem;
+    .section-description {
+      margin: 0;
+      color: #475569;
+      max-width: 40rem;
+      line-height: 1.6;
+    }
+
+    .categorias-grid,
+    .ejercicios-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .categorias-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      margin-bottom: 1.5rem;
+    }
+
+    .categoria-card {
+      display: grid;
+      gap: 0.5rem;
+      justify-items: center;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      background: #f8fafc;
+      color: #111827;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .categoria-card:hover {
+      transform: translateY(-1px);
+      border-color: #93c5fd;
+      background: #eff6ff;
+    }
+
+    .categoria-card.active {
+      border-color: #2563eb;
+      background: #dbeafe;
+    }
+
+    .categoria-icon {
+      font-size: 1.75rem;
+      display: block;
+    }
+
+    .ejercicios-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-bottom: 1.5rem;
+    }
+
+    .ejercicio-card {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      background: #f8fafc;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .ejercicio-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .ejercicio-card.selected {
+      border-color: #2563eb;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.12);
+    }
+
+    .ejercicio-imagen {
+      min-height: 180px;
+      overflow: hidden;
+      background: #e5e7eb;
+    }
+
+    .ejercicio-imagen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ejercicio-content {
+      padding: 1rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .ejercicio-content h4 {
+      margin: 0;
+      font-size: 1rem;
+      color: #111827;
+    }
+
+    .ejercicio-content p {
+      margin: 0;
+      color: #475569;
+      line-height: 1.5;
+      min-height: 3rem;
+    }
+
+    .video-flag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #0c4a6e;
+      font-size: 0.85rem;
+      font-weight: 700;
+      width: fit-content;
+    }
+
+    .exercise-preview {
+      margin-bottom: 1.5rem;
+    }
+
+    .preview-card {
+      display: grid;
+      gap: 1rem;
+      padding: 1.5rem;
+      border-radius: 1.25rem;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+    }
+
+    .preview-image {
+      overflow: hidden;
+      border-radius: 1rem;
+      min-height: 240px;
+      background: #e5e7eb;
+    }
+
+    .preview-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .preview-details h3 {
+      margin: 0;
+      font-size: 1.3rem;
+      color: #111827;
+    }
+
+    .preview-details p {
+      margin: 0;
+      color: #475569;
+      line-height: 1.75;
+    }
+
+    .preview-meta {
+      display: grid;
+      gap: 0.45rem;
+      margin-top: 0.75rem;
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+
+    .video-section {
+      margin-top: 1rem;
+      padding: 1.5rem;
+      border-radius: 1.25rem;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+    }
+
+    .video-section h3 {
+      margin: 0 0 1rem;
+      font-size: 1.2rem;
+      color: #111827;
+    }
+
+    .video-container {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      min-height: 250px;
+      overflow: hidden;
+      border-radius: 1rem;
+      background: #000;
+    }
+
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
     }
 
     /* FORM STYLES */
@@ -697,20 +910,12 @@ interface RutinaFavoritaItem {
         grid-column: 2;
         justify-self: end;
       }
-
-      .tabs-nav {
-        overflow-x: auto;
-      }
-
-      .tab-button {
-        flex: 0 0 auto;
-        white-space: nowrap;
-      }
     }
   `]
 })
 export class AppV7 implements OnInit {
   private datosFitnessService = inject(DatosFitnessService);
+  private readonly sanitizer = inject(DomSanitizer);
 
   protected readonly title = signal('Fitness Manager v7');
   protected readonly categorias = signal<Categoria[]>([]);
@@ -718,7 +923,9 @@ export class AppV7 implements OnInit {
   protected readonly rutinas = signal<Rutina[]>([]);
   protected readonly cargando = signal(false);
   protected readonly error = signal('');
-  protected readonly tabActual = signal<TabType>('misrutinas');
+
+  protected readonly categoriaSeleccionadaV4 = signal(1);
+  protected readonly ejercicioSeleccionadoV4 = signal(1);
 
   // V3
   protected readonly rutinasV3 = signal<Rutina[]>([]);
@@ -748,6 +955,20 @@ export class AppV7 implements OnInit {
   protected readonly ejercicioSeleccionadoPreviewV5a = computed(() =>
     this.ejercicios().find((ej) => ej.id === this.ejercicioSeleccionadoV5a())
   );
+
+  protected readonly ejerciciosFiltradosGaleria = computed(() =>
+    this.ejercicios().filter((ej) => ej.idCategoria === this.categoriaSeleccionadaV4())
+  );
+
+  protected readonly ejercicioSeleccionadoGaleria = computed(() =>
+    this.ejercicios().find((ej) => ej.id === this.ejercicioSeleccionadoV4())
+  );
+
+  protected readonly ejercicioSeleccionadoVideoUrl = computed<SafeResourceUrl | undefined>(() => {
+    const ejercicio = this.ejercicioSeleccionadoGaleria();
+    const videoUrl = (ejercicio as any)?.videoUrl;
+    return videoUrl ? this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl) : undefined;
+  });
 
   protected readonly completedCountV3 = computed(() =>
     this.rutinasV3().filter((r) => r.completada).length
@@ -810,11 +1031,13 @@ export class AppV7 implements OnInit {
       if (categorias.length > 0) {
         this.categoriaSeleccionadaV3.set(categorias[0].id);
         this.categoriaSeleccionadaV5a.set(categorias[0].id);
+        this.categoriaSeleccionadaV4.set(categorias[0].id);
       }
       if (ejercicios.length > 0) {
         this.ejercicioSeleccionadoV3.set(ejercicios[0].id);
         this.ejercicioSeleccionadoV5a.set(ejercicios[0].id);
         this.ejercicioSeleccionadoV5b.set(ejercicios[0].id);
+        this.ejercicioSeleccionadoV4.set(ejercicios[0].id);
       }
     } catch (err) {
       console.error(err);
@@ -879,6 +1102,29 @@ export class AppV7 implements OnInit {
 
   protected obtenerNombreEjercicioV3(idEjercicio: number): string {
     return this.ejercicios().find((ej) => ej.id === idEjercicio)?.nombre ?? 'Desconocido';
+  }
+
+  protected obtenerCategoriaEmoji(idCategoria: number): string {
+    switch (idCategoria) {
+      case 1:
+        return '💪';
+      case 2:
+        return '🧘';
+      case 3:
+        return '🏃';
+      case 4:
+        return '⚡';
+      default:
+        return '🏋️';
+    }
+  }
+
+  protected placeholderImage(nombre: string): string {
+    return `https://placehold.co/400x280?text=${encodeURIComponent(nombre)}`;
+  }
+
+  protected onImageError(event: any, nombre: string): void {
+    event.target.src = this.placeholderImage(nombre);
   }
 
   // V5A METHODS
