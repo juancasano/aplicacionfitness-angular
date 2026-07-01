@@ -1,10 +1,14 @@
 # AplicacionFitness Angular
 
-Proyecto Angular con tres versiones dentro de la misma app:
+Proyecto Angular con varias versiones dentro de la misma aplicación:
 
-- **v1**: versión original de la aplicación de rutinas.
-- **v2**: versión del ejercicio 2 con la versión 2 mejorada.
+- **v1**: versión inicial de la aplicación de rutinas.
+- **v2**: iteración del ejercicio 2.
 - **v3**: versión del ejercicio 3 con rutinas, categorías y ejercicios relacionales.
+- **v4**: versión multimedia con ejercicios y componentes visuales.
+- **v5a**: versión de rutinas favoritas.
+- **v5b**: versión de desafío diario.
+- **v6**: versión de control semanal y seguimiento de días.
 
 ## Enlaces locales
 
@@ -14,11 +18,11 @@ Proyecto Angular con tres versiones dentro de la misma app:
 - Versión 4: [http://localhost:4200/v4](http://localhost:4200/v4)
 - Versión 5A: [http://localhost:4200/v5a](http://localhost:4200/v5a)
 - Versión 5B: [http://localhost:4200/v5b](http://localhost:4200/v5b)
+- Versión 6: [http://localhost:4200/v6](http://localhost:4200/v6)
 
 ## Uso
 
-1. Si ya tienes la carpeta local del proyecto, ábrela en tu editor.
-   Si la estás usando desde GitHub, clona el repositorio primero.
+1. Abre la carpeta del proyecto en tu editor.
 2. Instala dependencias con:
 
    ```bash
@@ -31,18 +35,26 @@ Proyecto Angular con tres versiones dentro de la misma app:
    ```
 4. Abre el navegador en `http://localhost:4200/`.
 
+## Navegación actual en la app
+
+- La barra principal muestra ahora las versiones `v4`, `v5a`, `v5b` y `v6`.
+- Las versiones anteriores (`v1`, `v2`, `v3`) siguen disponibles por URL directa.
+
 ## Notas
 
-- `AppRoot` controla la navegación entre la versión 1, la versión 2 y la versión 3.
-- Si el puerto `4200` ya está en uso, puedes arrancar en otro puerto con:
+- Si el puerto `4200` ya está en uso, arranca en otro puerto con:
 
   ```bash
   npm start -- --port 4201
   ```
 
-- El tag `v1` en GitHub marca el commit de la versión inicial.
-- El tag `v2` en GitHub marca el commit con la versión 2 del ejercicio.
-- El tag `v3` en GitHub marca el commit con la versión 3 del ejercicio.
-- El tag `v4` en GitHub marca el commit con la versión 4 del ejercicio multimedia.
-- El tag `v5a` en GitHub marcará el commit con la versión 5A del ejercicio.
-- El tag `v5b` en GitHub marcará el commit con la versión 5B del ejercicio.
+- Los tags Git están definidos como:
+  - `v1`
+  - `v2`
+  - `v3`
+  - `v4`
+  - `v5a`
+  - `v5b`
+  - `v6`
+
+- Los tags permiten identificar cada versión del proyecto en GitHub.

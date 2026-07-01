@@ -5,6 +5,7 @@ import { AppV3 } from './app-v3.component';
 import { AppV4 } from './app-v4.component';
 import { AppV5a } from './app-v5a.component';
 import { AppV5b } from './app-v5b.component';
+import { AppV6 } from './app-v6.component';
 
 export const routes: Routes = [
   { path: '', component: AppV1 },
