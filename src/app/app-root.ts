@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-
 @Component({
   standalone: true,
   selector: 'app-root',
@@ -10,7 +9,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
       <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Versión 1</a>
       <a routerLink="v2" routerLinkActive="active">Versión 2 (Ejercicio 2)</a>
       <a routerLink="v3" routerLinkActive="active">Versión 3 (Ejercicio 3)</a>
-    </header>
+      <a routerLink="v4" routerLinkActive="active">Versión 4 (Multimedia)</a>      <a routerLink="v5a" routerLinkActive="active">Versión 5A</a>
+      <a routerLink="v5b" routerLinkActive="active">Versión 5B</a>    </header>
     <main class="app-content">
       <router-outlet></router-outlet>
     </main>
