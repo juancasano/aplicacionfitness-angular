@@ -11,6 +11,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
       <a routerLink="/v5b" routerLinkActive="active">Desafío Diario</a>
       <a routerLink="/v6" routerLinkActive="active">Control Semanal</a>
       <a routerLink="/v7" routerLinkActive="active">Supabase Fitness</a>
+      <a routerLink="/v8" routerLinkActive="active">Formulario Fitness</a>
     </header>
     <main class="app-content">
       <router-outlet></router-outlet>

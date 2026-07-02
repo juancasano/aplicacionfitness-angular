@@ -10,6 +10,7 @@ Proyecto Angular con varias versiones dentro de la misma aplicación:
 - **v5b**: versión de desafío diario.
 - **v6**: versión de control semanal y seguimiento de días.
 - **v7**: versión con HttpClient y Supabase usando tablas de `categorias`, `ejercicios` y `rutinas`.
+- **v8**: Fitness Manager con formulario reactivo y gestión completa de rutinas en Supabase.
 
 ## Enlaces locales
 
@@ -21,6 +22,7 @@ Proyecto Angular con varias versiones dentro de la misma aplicación:
 - Versión 5B: [http://localhost:4200/v5b](http://localhost:4200/v5b)
 - Versión 6: [http://localhost:4200/v6](http://localhost:4200/v6)
 - Versión 7: [http://localhost:4200/v7](http://localhost:4200/v7)
+- Versión 8: [http://localhost:4200/v8](http://localhost:4200/v8)
 
 ## Uso
 
@@ -63,5 +65,6 @@ La versión `v7` consume datos reales desde Supabase usando `HttpClient` y las t
   - `v5b`
   - `v6`
   - `v7`
+  - `v8`
 
 - Los tags permiten identificar cada versión del proyecto en GitHub.
