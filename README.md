@@ -66,5 +66,6 @@ La versión `v7` consume datos reales desde Supabase usando `HttpClient` y las t
   - `v6`
   - `v7`
   - `v8`
+  - `v9` (Editar y borrar rutinas)
 
 - Los tags permiten identificar cada versión del proyecto en GitHub.

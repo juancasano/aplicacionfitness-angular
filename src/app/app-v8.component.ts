@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatosFitnessService } from './services/datos-fitness.service';
 import { Categoria } from './models/categoria';
@@ -34,8 +34,8 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
         </header>
 
         <section class="new-routine-section">
-          <h3>Crear nueva rutina</h3>
-          <form class="workout-form" [formGroup]="rutinasForm" (ngSubmit)="crearNuevaRutina()">
+          <h3>{{ rutinaEditando() ? 'Editar rutina' : 'Crear nueva rutina' }}</h3>
+          <form class="workout-form" [formGroup]="rutinasForm" (ngSubmit)="guardarRutina()">
             <label class="field">
               <span class="label-text">Categoría</span>
               <select formControlName="idCategoria">
@@ -67,7 +67,13 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
             </label>
 
             <div class="form-actions">
-              <button type="submit" [disabled]="rutinasForm.invalid">Crear rutina</button>
+              <ng-container *ngIf="rutinaEditando(); else crearButton">
+                <button type="submit" [disabled]="rutinasForm.invalid">Guardar cambios</button>
+                <button type="button" class="boton-secundario" (click)="cancelarEdicion()">Cancelar edición</button>
+              </ng-container>
+              <ng-template #crearButton>
+                <button type="submit" [disabled]="rutinasForm.invalid">Crear rutina</button>
+              </ng-template>
             </div>
 
             <p class="error-formulario" *ngIf="rutinasForm.invalid && rutinasForm.touched">
@@ -109,7 +115,7 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
           </div>
 
           <ul class="workout-list">
-            <li *ngFor="let rutina of rutinasV3()" class="workout-item" [class.completed]="rutina.completada">
+              <li *ngFor="let rutina of rutinasV3()" class="workout-item" [class.completed]="rutina.completada">
               <button type="button" class="check" [attr.aria-pressed]="rutina.completada" (click)="toggleRutinaV3(rutina.id)">
                 {{ rutina.completada ? '✔' : '○' }}
               </button>
@@ -118,6 +124,7 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
                 <span>Duración: {{ rutina.duracion }}</span>
                 <span *ngIf="rutina.completada" class="status-badge">Completada</span>
               </div>
+              <button type="button" class="edit-btn" (click)="editarRutinaById(rutina.id)" title="Editar">Editar</button>
               <button type="button" class="delete-btn" (click)="eliminarRutinaV3(rutina.id)" title="Eliminar">×</button>
             </li>
           </ul>
@@ -131,7 +138,7 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
 
           <div class="playlist-section">
             <ul class="playlist-list">
-              <li *ngFor="let item of rutinasFavoritas()" class="playlist-item" [class.completed]="item.completada">
+                <li *ngFor="let item of rutinasFavoritas()" class="playlist-item" [class.completed]="item.completada">
                 <button type="button" class="check" [attr.aria-pressed]="item.completada" (click)="toggleRutinaFavoritaItem(item.id)">
                   {{ item.completada ? '✔' : '○' }}
                 </button>
@@ -140,6 +147,7 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
                   <span>Agregado: {{ item.fecha | date:'shortDate' }}</span>
                   <span *ngIf="item.completada" class="status-badge">Completado</span>
                 </div>
+                <button type="button" class="edit-btn" (click)="editarRutinaById(item.id)" title="Editar">Editar</button>
                 <button type="button" class="delete-btn" (click)="eliminarRutinaFavoritaItem(item.id)" title="Eliminar">×</button>
               </li>
             </ul>
@@ -163,7 +171,7 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
 
           <div class="rutinas-list">
             <ul>
-              <li *ngFor="let rutina of rutinasV5b()" [class.completed]="rutina.completada">
+                <li *ngFor="let rutina of rutinasV5b()" [class.completed]="rutina.completada">
                 <button type="button" class="check" [attr.aria-pressed]="rutina.completada" (click)="toggleRutinaV5b(rutina.id)">
                   {{ rutina.completada ? '✔' : '○' }}
                 </button>
@@ -173,6 +181,7 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
                   <span>{{ rutina.fecha | date:'shortTime' }}</span>
                   <span *ngIf="rutina.completada" class="status-badge">Completado</span>
                 </div>
+                <button type="button" class="edit-btn" (click)="editarRutinaById(rutina.id)" title="Editar">Editar</button>
                 <button type="button" class="delete-btn" (click)="eliminarRutinaV5b(rutina.id)" title="Eliminar">×</button>
               </li>
             </ul>
@@ -589,6 +598,7 @@ export class AppV8 implements OnInit {
   private datosFitnessService = inject(DatosFitnessService);
 
   protected readonly title = signal('Fitness Manager v8');
+  protected readonly rutinaEditando = signal<Rutina | null>(null);
   protected readonly categorias = signal<Categoria[]>([]);
   protected readonly ejercicios = signal<Ejercicio[]>([]);
   protected readonly rutinas = signal<Rutina[]>([]);
@@ -618,6 +628,20 @@ export class AppV8 implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.cargarDatos();
+  }
+
+  constructor() {
+    effect(() => {
+      const r = this.rutinaEditando();
+      if (r) {
+        this.rutinasForm.patchValue({
+          idCategoria: r.idCategoria ?? null,
+          idEjercicio: r.idEjercicio ?? null,
+          duracion: r.duracion ?? '30 min',
+          tipoRutina: r.favorita ? 'favorita' : r.diaria ? 'diaria' : 'normal'
+        });
+      }
+    });
   }
 
   private async cargarDatos(): Promise<void> {
@@ -742,6 +766,59 @@ export class AppV8 implements OnInit {
       console.error('Error al eliminar rutina:', err);
       this.error.set('Error al eliminar rutina de Supabase');
     });
+  }
+
+  protected editarRutina(rutina: Rutina): void {
+    this.rutinaEditando.set(rutina);
+  }
+
+  protected editarRutinaById(id: number): void {
+    const r = this.rutinas().find((x) => x.id === id);
+    if (r) this.rutinaEditando.set(r);
+  }
+
+  protected async guardarRutina(): Promise<void> {
+    if (this.rutinasForm.invalid) {
+      this.rutinasForm.markAllAsTouched();
+      return;
+    }
+
+    const tipo = this.rutinasForm.controls.tipoRutina.value;
+    const cambios: Partial<Rutina> = {
+      duracion: this.rutinasForm.controls.duracion.value?.trim() ?? '30 min',
+      favorita: tipo === 'favorita',
+      diaria: tipo === 'diaria',
+      idCategoria: this.rutinasForm.controls.idCategoria.value ?? 1,
+      idEjercicio: this.rutinasForm.controls.idEjercicio.value ?? 1
+    };
+
+    const editando = this.rutinaEditando();
+    try {
+      this.cargando.set(true);
+      this.error.set('');
+
+      if (editando) {
+        await this.datosFitnessService.actualizarRutina(editando.id, cambios);
+        this.rutinaEditando.set(null);
+      } else {
+        // crear nueva rutina usando el método existente
+        this.crearNuevaRutina();
+      }
+
+      await this.cargarDatos();
+      this.rutinasForm.controls.duracion.setValue('30 min');
+      this.rutinasForm.controls.tipoRutina.setValue('normal');
+    } catch (err) {
+      console.error('Error al guardar rutina:', err);
+      this.error.set('Error al guardar rutina en Supabase');
+    } finally {
+      this.cargando.set(false);
+    }
+  }
+
+  protected cancelarEdicion(): void {
+    this.rutinaEditando.set(null);
+    this.rutinasForm.reset({ duracion: '30 min', tipoRutina: 'normal', idCategoria: this.categorias()[0]?.id ?? null, idEjercicio: this.ejercicios()[0]?.id ?? null });
   }
 
   protected obtenerNombreCategoriaV3(idCategoria: number): string {
