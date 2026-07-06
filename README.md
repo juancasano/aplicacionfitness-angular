@@ -11,6 +11,7 @@ Proyecto Angular con varias versiones dentro de la misma aplicación:
 - **v6**: versión de control semanal y seguimiento de días.
 - **v7**: versión con HttpClient y Supabase usando tablas de `categorias`, `ejercicios` y `rutinas`.
 - **v8**: Fitness Manager con formulario reactivo y gestión completa de rutinas en Supabase.
+- **v9**: versión con filtrado por categoría, edición y borrado de rutinas.
 
 ## Enlaces locales
 
@@ -23,6 +24,7 @@ Proyecto Angular con varias versiones dentro de la misma aplicación:
 - Versión 6: [http://localhost:4200/v6](http://localhost:4200/v6)
 - Versión 7: [http://localhost:4200/v7](http://localhost:4200/v7)
 - Versión 8: [http://localhost:4200/v8](http://localhost:4200/v8)
+- Versión 9: [http://localhost:4200/v9](http://localhost:4200/v9)
 
 ## Uso
 
