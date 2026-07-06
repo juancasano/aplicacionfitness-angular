@@ -133,7 +133,10 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
         <div class="tab-content" *ngIf="tabActual() === 'favoritas'">
           <div class="tab-header">
             <h3>Rutinas Favoritas</h3>
-            <div class="tab-stats">{{ rutinasFavoritas().length }} favoritas • {{ completedCountV5a() }} completadas</div>
+            <div style="display:flex;gap:0.5rem;align-items:center">
+              <div class="tab-stats">{{ rutinasFavoritas().length }} favoritas • {{ completedCountV5a() }} completadas</div>
+              <button type="button" class="tab-button" (click)="crearAqui('favorita')">Crear aquí</button>
+            </div>
           </div>
 
           <div class="playlist-section">
@@ -157,7 +160,10 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
         <div class="tab-content" *ngIf="tabActual() === 'diarias'">
           <div class="tab-header">
             <h3>Rutinas Diarias</h3>
-            <div class="tab-stats">{{ rutinasV5b().length }} programadas • {{ completedCountV5b() }} completadas</div>
+            <div style="display:flex;gap:0.5rem;align-items:center">
+              <div class="tab-stats">{{ rutinasV5b().length }} programadas • {{ completedCountV5b() }} completadas</div>
+              <button type="button" class="tab-button" (click)="crearAqui('diaria')">Crear aquí</button>
+            </div>
           </div>
 
           <div class="goals-card">
@@ -760,6 +766,9 @@ export class AppV8 implements OnInit {
   }
 
   protected eliminarRutinaV3(id: number): void {
+    const confirmar = confirm('¿Seguro que quieres borrar esta rutina?');
+    if (!confirmar) return;
+
     this.datosFitnessService.eliminarRutina(id).then(() => {
       this.rutinasV3.update((items) => items.filter((item) => item.id !== id));
     }).catch((err) => {
@@ -819,6 +828,17 @@ export class AppV8 implements OnInit {
   protected cancelarEdicion(): void {
     this.rutinaEditando.set(null);
     this.rutinasForm.reset({ duracion: '30 min', tipoRutina: 'normal', idCategoria: this.categorias()[0]?.id ?? null, idEjercicio: this.ejercicios()[0]?.id ?? null });
+  }
+
+  protected crearAqui(tipo: 'normal' | 'favorita' | 'diaria'): void {
+    this.rutinasForm.controls.tipoRutina.setValue(tipo as any);
+    // scroll and focus to form
+    setTimeout(() => {
+      const el = document.querySelector('.new-routine-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const input = document.querySelector('input[formcontrolname="duracion"]') as HTMLElement | null;
+      input?.focus();
+    }, 100);
   }
 
   protected obtenerNombreCategoriaV3(idCategoria: number): string {
