@@ -135,7 +135,7 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
             <h3>Rutinas Favoritas</h3>
             <div style="display:flex;gap:0.5rem;align-items:center">
               <div class="tab-stats">{{ rutinasFavoritas().length }} favoritas • {{ completedCountV5a() }} completadas</div>
-              <button type="button" class="tab-button" (click)="crearAqui('favorita')">Crear aquí</button>
+              <button type="button" class="quick-create" (click)="crearAqui('favorita')" aria-label="Crear rutina favorita">＋ Crear aquí</button>
             </div>
           </div>
 
@@ -162,7 +162,7 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
             <h3>Rutinas Diarias</h3>
             <div style="display:flex;gap:0.5rem;align-items:center">
               <div class="tab-stats">{{ rutinasV5b().length }} programadas • {{ completedCountV5b() }} completadas</div>
-              <button type="button" class="tab-button" (click)="crearAqui('diaria')">Crear aquí</button>
+              <button type="button" class="quick-create" (click)="crearAqui('diaria')" aria-label="Crear rutina diaria">＋ Crear aquí</button>
             </div>
           </div>
 

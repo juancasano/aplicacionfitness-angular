@@ -8,6 +8,7 @@ import { AppV5b } from './app-v5b.component';
 import { AppV6 } from './app-v6.component';
 import { AppV7 } from './app-v7.component';
 import { AppV8 } from './app-v8.component';
+import { AppV9 } from './app-v9.component';
 
 export const routes: Routes = [
   { path: '', component: AppV1 },
@@ -18,5 +19,6 @@ export const routes: Routes = [
   { path: 'v5b', component: AppV5b },
   { path: 'v6', component: AppV6 },
   { path: 'v7', component: AppV7 },
-  { path: 'v8', component: AppV8 }
+  { path: 'v8', component: AppV8 },
+  { path: 'v9', component: AppV9 }
 ];

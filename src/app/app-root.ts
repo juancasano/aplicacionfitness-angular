@@ -1,18 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [CommonModule, RouterOutlet],
   template: `
-    <header class="app-bar">
-      <a routerLink="/v4" routerLinkActive="active">Multimedia Fitness</a>
-      <a routerLink="/v5a" routerLinkActive="active">Rutinas Favoritas</a>
-      <a routerLink="/v5b" routerLinkActive="active">Desafío Diario</a>
-      <a routerLink="/v6" routerLinkActive="active">Control Semanal</a>
-      <a routerLink="/v7" routerLinkActive="active">Supabase Fitness</a>
-      <a routerLink="/v8" routerLinkActive="active">Formulario Fitness</a>
-    </header>
     <main class="app-content">
       <router-outlet></router-outlet>
     </main>
