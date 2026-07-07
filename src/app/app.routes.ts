@@ -10,11 +10,10 @@ import { AppV7 } from './app-v7.component';
 import { AppV8 } from './app-v8.component';
 import { AppV9 } from './app-v9.component';
 import { InicioComponent } from './pages/inicio/inicio';
-import { GestionRutinasComponent } from './pages/gestion-rutinas/gestion-rutinas';
 
 export const routes: Routes = [
   { path: '', component: InicioComponent },
-  { path: 'rutinas', component: GestionRutinasComponent },
+  { path: 'rutinas', component: AppV9 },
   { path: 'v1', component: AppV1 },
   { path: 'v2', component: AppV2 },
   { path: 'v3', component: AppV3 },
