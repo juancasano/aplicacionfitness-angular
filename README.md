@@ -18,7 +18,8 @@ Proyecto Angular de Fitness Manager. Esta app gestiona rutinas, categorías y ej
 
 ## Enlaces locales
 
-- Versión 1: [http://localhost:4200/](http://localhost:4200/)
+- Versión 1.0 (release actual): [http://localhost:4200/](http://localhost:4200/)
+- Versión 1: [http://localhost:4200/v1](http://localhost:4200/v1)
 - Versión 2: [http://localhost:4200/v2](http://localhost:4200/v2)
 - Versión 3: [http://localhost:4200/v3](http://localhost:4200/v3)
 - Versión 4: [http://localhost:4200/v4](http://localhost:4200/v4)
