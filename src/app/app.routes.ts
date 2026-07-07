@@ -9,9 +9,13 @@ import { AppV6 } from './app-v6.component';
 import { AppV7 } from './app-v7.component';
 import { AppV8 } from './app-v8.component';
 import { AppV9 } from './app-v9.component';
+import { InicioComponent } from './pages/inicio/inicio';
+import { GestionRutinasComponent } from './pages/gestion-rutinas/gestion-rutinas';
 
 export const routes: Routes = [
-  { path: '', component: AppV1 },
+  { path: '', component: InicioComponent },
+  { path: 'rutinas', component: GestionRutinasComponent },
+  { path: 'v1', component: AppV1 },
   { path: 'v2', component: AppV2 },
   { path: 'v3', component: AppV3 },
   { path: 'v4', component: AppV4 },
@@ -20,5 +24,6 @@ export const routes: Routes = [
   { path: 'v6', component: AppV6 },
   { path: 'v7', component: AppV7 },
   { path: 'v8', component: AppV8 },
-  { path: 'v9', component: AppV9 }
+  { path: 'v9', component: AppV9 },
+  { path: '**', redirectTo: '' }
 ];

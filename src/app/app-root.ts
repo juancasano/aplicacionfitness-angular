@@ -1,11 +1,25 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterLink, RouterLinkActive, RouterOutlet],
   template: `
+    <nav class="app-bar">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+      <a routerLink="/rutinas" routerLinkActive="active">Gestión de rutinas</a>
+      <a routerLink="/v1" routerLinkActive="active">v1</a>
+      <a routerLink="/v2" routerLinkActive="active">v2</a>
+      <a routerLink="/v3" routerLinkActive="active">v3</a>
+      <a routerLink="/v4" routerLinkActive="active">v4</a>
+      <a routerLink="/v5a" routerLinkActive="active">v5a</a>
+      <a routerLink="/v5b" routerLinkActive="active">v5b</a>
+      <a routerLink="/v6" routerLinkActive="active">v6</a>
+      <a routerLink="/v7" routerLinkActive="active">v7</a>
+      <a routerLink="/v8" routerLinkActive="active">v8</a>
+      <a routerLink="/v9" routerLinkActive="active">v9</a>
+    </nav>
     <main class="app-content">
       <router-outlet></router-outlet>
     </main>
