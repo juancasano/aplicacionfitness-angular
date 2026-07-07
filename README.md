@@ -1,34 +1,21 @@
 # AplicacionFitness Angular
 
-Proyecto Angular con varias versiones dentro de la misma aplicación:
+Proyecto Angular de Fitness Manager. Esta app gestiona rutinas, categorías y ejercicios, y está diseñada para mostrar la versión final `v1.0` de la aplicación de fitness.
 
-- **v1**: versión inicial de la aplicación de rutinas.
-- **v2**: iteración del ejercicio 2.
-- **v3**: versión del ejercicio 3 con rutinas, categorías y ejercicios relacionales.
-- **v4**: versión multimedia con ejercicios y componentes visuales.
-- **v5a**: versión de rutinas favoritas.
-- **v5b**: versión de desafío diario.
-- **v6**: versión de control semanal y seguimiento de días.
-- **v7**: versión con HttpClient y Supabase usando tablas de `categorias`, `ejercicios` y `rutinas`.
-- **v8**: Fitness Manager con formulario reactivo y gestión completa de rutinas en Supabase.
-- **v9**: versión con filtrado por categoría, edición y borrado de rutinas.
+## Estado del repositorio
+
+- **v1**: versión inicial histórica de la aplicación de rutinas.
+- **v1.0**: release final de la aplicación de fitness, que consolida la entrega actual.
+- También existen tags históricos de desarrollo (`v2` a `v9`).
 
 ## Enlaces locales
 
-- Versión 1: [http://localhost:4200/](http://localhost:4200/)
-- Versión 2: [http://localhost:4200/v2](http://localhost:4200/v2)
-- Versión 3: [http://localhost:4200/v3](http://localhost:4200/v3)
-- Versión 4: [http://localhost:4200/v4](http://localhost:4200/v4)
-- Versión 5A: [http://localhost:4200/v5a](http://localhost:4200/v5a)
-- Versión 5B: [http://localhost:4200/v5b](http://localhost:4200/v5b)
-- Versión 6: [http://localhost:4200/v6](http://localhost:4200/v6)
-- Versión 7: [http://localhost:4200/v7](http://localhost:4200/v7)
-- Versión 8: [http://localhost:4200/v8](http://localhost:4200/v8)
-- Versión 9: [http://localhost:4200/v9](http://localhost:4200/v9)
+- App principal (release actual): [http://localhost:4200/](http://localhost:4200/)
+- Si usas versiones anteriores, añade el sufijo correspondiente (`/v2`, `/v3`, etc.).
 
 ## Release v1.0
 
-Esta versión final del proyecto se marca como `v1.0`.
+Esta versión final se publica como `v1.0`.
 Asegúrate de configurar tus credenciales de Supabase en `src/app/config/supabase.config.ts` antes de ejecutar la aplicación.
 
 ## Uso
@@ -46,33 +33,12 @@ Asegúrate de configurar tus credenciales de Supabase en `src/app/config/supabas
    ```
 4. Abre el navegador en `http://localhost:4200/`.
 
-## v7
+## Notas importantes
 
-La versión `v7` consume datos reales desde Supabase usando `HttpClient` y las tablas `categorias`, `ejercicios` y `rutinas`.
-
-## Navegación actual en la app
-
-- La barra principal muestra ahora las versiones `v4`, `v5a`, `v5b` y `v6`.
-- Las versiones anteriores (`v1`, `v2`, `v3`) siguen disponibles por URL directa.
-
-## Notas
-
-- Si el puerto `4200` ya está en uso, arranca en otro puerto con:
+- Esta aplicación es un proyecto de fitness, no un proyecto de gestión de coches.
+- Mantén los tags `v1` y `v1.0` para distinguir la versión histórica de la versión final.
+- Si el puerto `4200` está ocupado, usa:
 
   ```bash
   npm start -- --port 4201
   ```
-
-- Los tags Git están definidos como:
-  - `v1`
-  - `v2`
-  - `v3`
-  - `v4`
-  - `v5a`
-  - `v5b`
-  - `v6`
-  - `v7`
-  - `v8`
-  - `v9` (Editar y borrar rutinas)
-
-- Los tags permiten identificar cada versión del proyecto en GitHub.
