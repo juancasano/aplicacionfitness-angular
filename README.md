@@ -26,6 +26,11 @@ Proyecto Angular con varias versiones dentro de la misma aplicación:
 - Versión 8: [http://localhost:4200/v8](http://localhost:4200/v8)
 - Versión 9: [http://localhost:4200/v9](http://localhost:4200/v9)
 
+## Release v1.0
+
+Esta versión final del proyecto se marca como `v1.0`.
+Asegúrate de configurar tus credenciales de Supabase en `src/app/config/supabase.config.ts` antes de ejecutar la aplicación.
+
 ## Uso
 
 1. Abre la carpeta del proyecto en tu editor.

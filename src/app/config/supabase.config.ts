@@ -1,2 +1,3 @@
-export const SUPABASE_URL = 'https://owifsktslpiefgboaeul.supabase.co';
-export const SUPABASE_ANON_KEY = 'sb_publishable_9ivaLQ4edOWLJLYW9ahTYA_D-iysyzW';
+// Reemplazar con tus credenciales de Supabase
+export const SUPABASE_URL = 'https://tu-proyecto.supabase.co';
+export const SUPABASE_ANON_KEY = 'tu-clave-publica-aqui';
