@@ -1,17 +1,33 @@
 # AplicacionFitness Angular
 
-Proyecto Angular de Fitness Manager. Esta app gestiona rutinas, categorías y ejercicios, y está diseñada para mostrar la versión final `v1.0` de la aplicación de fitness.
+Proyecto Angular de Fitness Manager. Esta app gestiona rutinas, categorías y ejercicios, y ahora incluye la versión final `v1.0` junto con los tags históricos.
 
-## Estado del repositorio
+## Versiones
 
 - **v1**: versión inicial histórica de la aplicación de rutinas.
-- **v1.0**: release final de la aplicación de fitness, que consolida la entrega actual.
-- También existen tags históricos de desarrollo (`v2` a `v9`).
+- **v1.0**: release final de la aplicación de fitness.
+- **v2**: iteración del ejercicio 2.
+- **v3**: versión del ejercicio 3 con rutinas, categorías y ejercicios relacionales.
+- **v4**: versión multimedia con ejercicios y componentes visuales.
+- **v5a**: versión de rutinas favoritas.
+- **v5b**: versión de desafío diario.
+- **v6**: versión de control semanal y seguimiento de días.
+- **v7**: versión con HttpClient y Supabase usando tablas de `categorias`, `ejercicios` y `rutinas`.
+- **v8**: Fitness Manager con formulario reactivo y gestión completa de rutinas en Supabase.
+- **v9**: versión con filtrado por categoría, edición y borrado de rutinas.
 
 ## Enlaces locales
 
-- App principal (release actual): [http://localhost:4200/](http://localhost:4200/)
-- Si usas versiones anteriores, añade el sufijo correspondiente (`/v2`, `/v3`, etc.).
+- Versión 1: [http://localhost:4200/](http://localhost:4200/)
+- Versión 2: [http://localhost:4200/v2](http://localhost:4200/v2)
+- Versión 3: [http://localhost:4200/v3](http://localhost:4200/v3)
+- Versión 4: [http://localhost:4200/v4](http://localhost:4200/v4)
+- Versión 5A: [http://localhost:4200/v5a](http://localhost:4200/v5a)
+- Versión 5B: [http://localhost:4200/v5b](http://localhost:4200/v5b)
+- Versión 6: [http://localhost:4200/v6](http://localhost:4200/v6)
+- Versión 7: [http://localhost:4200/v7](http://localhost:4200/v7)
+- Versión 8: [http://localhost:4200/v8](http://localhost:4200/v8)
+- Versión 9: [http://localhost:4200/v9](http://localhost:4200/v9)
 
 ## Release v1.0
 
