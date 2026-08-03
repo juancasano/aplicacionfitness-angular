@@ -1,6 +1,6 @@
 # AplicacionFitness Angular
 
-Proyecto Angular de Fitness Manager. Esta app gestiona rutinas, categorías y ejercicios, y ahora incluye la versión final `v1.0` junto con los tags históricos.
+Proyecto Angular de Fitness Manager. Esta app gestiona rutinas, categorías y ejercicios, y ahora incluye la versión final `v9` junto con los tags históricos.
 
 ## Versiones
 
