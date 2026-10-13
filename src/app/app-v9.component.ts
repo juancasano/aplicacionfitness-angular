@@ -52,11 +52,14 @@ interface DiaSemana {
             </label>
 
             <label class="field">
-              <span class="label-text">Ejercicio</span>
+              <span class="label-text">Ejercicio ({{ ejerciciosFiltrados().length }})</span>
               <select formControlName="idEjercicio">
                 <option [ngValue]="null">Selecciona un ejercicio</option>
                 <option *ngFor="let ejercicio of ejerciciosFiltrados()" [ngValue]="ejercicio.id">{{ ejercicio.nombre }}</option>
               </select>
+              <small class="field-hint" *ngIf="selectedCategoria() && ejerciciosFiltrados().length === 0">
+                No hay ejercicios en esta categoría.
+              </small>
             </label>
 
             <label class="field">
@@ -371,6 +374,13 @@ interface DiaSemana {
         margin-bottom: 1rem;
         font-family: var(--font-display);
         color: var(--ink);
+      }
+
+      .field-hint {
+        display: block;
+        margin-top: 0.35rem;
+        color: var(--danger, #c23b2a);
+        font-size: 0.82rem;
       }
 
       .status-messages {
@@ -854,7 +864,8 @@ export class AppV9 implements OnInit {
     });
   }
 
-  private async cargarDatos(): Promise<void> {
+  private async cargarDatos(options: { resetForm?: boolean } = {}): Promise<void> {
+    const resetForm = options.resetForm ?? true;
     this.cargando.set(true);
     this.error.set('');
 
@@ -892,72 +903,33 @@ export class AppV9 implements OnInit {
       this.rutinasFavoritas.set(rutinasFavoritas);
       this.rutinasV5b.set(rutinasDiarias);
 
-      if (categorias.length > 0) {
-        this.rutinasForm.controls.idCategoria.setValue(categorias[0].id);
-        this.selectedCategoria.set(categorias[0].id);
-      }
-      if (ejercicios.length > 0) {
-        // seleccionar por defecto el primer ejercicio que pertenezca a la categoría seleccionada
+      if (resetForm) {
+        if (categorias.length > 0) {
+          this.rutinasForm.controls.idCategoria.setValue(categorias[0].id);
+          this.selectedCategoria.set(categorias[0].id);
+        }
         const categoriaAct = this.rutinasForm.controls.idCategoria.value;
-        const primerPorCategoria = ejercicios.find((ej) => ej.idCategoria === categoriaAct)?.id ?? ejercicios[0].id;
+        const primerPorCategoria =
+          ejercicios.find((ej) => ej.idCategoria === categoriaAct)?.id ?? ejercicios[0]?.id ?? null;
         this.rutinasForm.controls.idEjercicio.setValue(primerPorCategoria);
+      } else {
+        const catId = this.rutinasForm.controls.idCategoria.value;
+        this.selectedCategoria.set(catId);
+        const ejercicioActual = this.rutinasForm.controls.idEjercicio.value;
+        const sigueValido = ejercicios.some(
+          (ej) => ej.id === ejercicioActual && ej.idCategoria === catId
+        );
+        if (!sigueValido) {
+          const primer = ejercicios.find((ej) => ej.idCategoria === catId)?.id ?? null;
+          this.rutinasForm.controls.idEjercicio.setValue(primer);
+        }
       }
     } catch (err) {
       console.error(err);
-      this.error.set('No se han podido cargar los datos desde Supabase.');
+      this.error.set('No se han podido cargar los datos.');
     } finally {
       this.cargando.set(false);
     }
-  }
-
-  protected crearNuevaRutina(): void {
-    if (this.rutinasForm.invalid) {
-      this.rutinasForm.markAllAsTouched();
-      return;
-    }
-
-    const tipo = this.rutinasForm.controls.tipoRutina.value;
-    const nuevaRutina: Omit<Rutina, 'id'> = {
-      duracion: this.rutinasForm.controls.duracion.value?.trim() ?? '30 min',
-      completada: false,
-      favorita: tipo === 'favorita',
-      diaria: tipo === 'diaria',
-      idCategoria: this.rutinasForm.controls.idCategoria.value ?? 1,
-      idEjercicio: this.rutinasForm.controls.idEjercicio.value ?? 1
-    };
-
-    this.datosFitnessService.crearRutina(nuevaRutina).then((rutina) => {
-      this.rutinas.update((items) => [...items, rutina]);
-      if (rutina.favorita) {
-        this.rutinasFavoritas.update((items) => [
-          ...items,
-          {
-            id: rutina.id,
-            idEjercicio: rutina.idEjercicio,
-            fecha: rutina.created_at ? String(rutina.created_at) : new Date().toISOString(),
-            completada: rutina.completada
-          }
-        ]);
-      } else if (rutina.diaria) {
-        this.rutinasV5b.update((items) => [
-          ...items,
-          {
-            id: rutina.id,
-            idEjercicio: rutina.idEjercicio,
-            duracion: rutina.duracion,
-            completada: rutina.completada,
-            fecha: rutina.created_at ? String(rutina.created_at) : new Date().toISOString()
-          }
-        ]);
-      } else {
-        this.rutinasV3.update((items) => [...items, rutina]);
-      }
-      this.rutinasForm.controls.duracion.setValue('30 min');
-      this.rutinasForm.controls.tipoRutina.setValue('normal');
-    }).catch((err) => {
-      console.error('Error al crear rutina:', err);
-      this.error.set('Error al guardar rutina en Supabase');
-    });
   }
 
   protected toggleRutinaV3(id: number): void {
@@ -973,16 +945,15 @@ export class AppV9 implements OnInit {
     });
   }
 
-  protected eliminarRutinaV3(id: number): void {
-    const confirmar = confirm('¿Seguro que quieres borrar esta rutina?');
-    if (!confirmar) return;
-
-    this.datosFitnessService.eliminarRutina(id).then(() => {
-      this.rutinasV3.update((items) => items.filter((item) => item.id !== id));
-    }).catch((err) => {
+  protected async eliminarRutinaV3(id: number): Promise<void> {
+    if (!confirm('¿Seguro que quieres borrar esta rutina?')) return;
+    try {
+      await this.datosFitnessService.eliminarRutina(id);
+      await this.cargarDatos({ resetForm: false });
+    } catch (err) {
       console.error('Error al eliminar rutina:', err);
-      this.error.set('Error al eliminar rutina de Supabase');
-    });
+      this.error.set('No se pudo eliminar la rutina.');
+    }
   }
 
   protected editarRutina(rutina: Rutina): void {
@@ -1000,9 +971,10 @@ export class AppV9 implements OnInit {
       return;
     }
 
-    const tipo = this.rutinasForm.controls.tipoRutina.value;
-    const cambios: Partial<Rutina> = {
-      duracion: this.rutinasForm.controls.duracion.value?.trim() ?? '30 min',
+    const tipo = this.rutinasForm.controls.tipoRutina.value ?? 'normal';
+    const cambios: Omit<Rutina, 'id'> = {
+      duracion: this.rutinasForm.controls.duracion.value?.trim() || '30 min',
+      completada: false,
       favorita: tipo === 'favorita',
       diaria: tipo === 'diaria',
       idCategoria: this.rutinasForm.controls.idCategoria.value ?? 1,
@@ -1015,18 +987,28 @@ export class AppV9 implements OnInit {
       this.error.set('');
 
       if (editando) {
-        await this.datosFitnessService.actualizarRutina(editando.id, cambios);
+        await this.datosFitnessService.actualizarRutina(editando.id, {
+          duracion: cambios.duracion,
+          favorita: cambios.favorita,
+          diaria: cambios.diaria,
+          idCategoria: cambios.idCategoria,
+          idEjercicio: cambios.idEjercicio
+        });
         this.rutinaEditando.set(null);
       } else {
-        this.crearNuevaRutina();
+        await this.datosFitnessService.crearRutina(cambios);
       }
 
-      await this.cargarDatos();
+      await this.cargarDatos({ resetForm: false });
       this.rutinasForm.controls.duracion.setValue('30 min');
       this.rutinasForm.controls.tipoRutina.setValue('normal');
+
+      if (tipo === 'favorita') this.tabActual.set('favoritas');
+      else if (tipo === 'diaria') this.tabActual.set('diarias');
+      else this.tabActual.set('misrutinas');
     } catch (err) {
       console.error('Error al guardar rutina:', err);
-      this.error.set('Error al guardar rutina en Supabase');
+      this.error.set('No se pudo guardar la rutina.');
     } finally {
       this.cargando.set(false);
     }
@@ -1067,16 +1049,15 @@ export class AppV9 implements OnInit {
     });
   }
 
-  protected eliminarRutinaFavoritaItem(id: number): void {
-    const confirmar = confirm('¿Seguro que quieres borrar esta rutina?');
-    if (!confirmar) return;
-
-    this.datosFitnessService.eliminarRutina(id).then(() => {
-      this.rutinasFavoritas.update((items) => items.filter((item) => item.id !== id));
-    }).catch((err) => {
+  protected async eliminarRutinaFavoritaItem(id: number): Promise<void> {
+    if (!confirm('¿Seguro que quieres borrar esta rutina?')) return;
+    try {
+      await this.datosFitnessService.eliminarRutina(id);
+      await this.cargarDatos({ resetForm: false });
+    } catch (err) {
       console.error('Error al eliminar favorita:', err);
-      this.error.set('Error al eliminar de Supabase');
-    });
+      this.error.set('No se pudo eliminar la rutina.');
+    }
   }
 
   protected obtenerNombreEjercicioV5a(idEjercicio: number): string {
@@ -1095,16 +1076,15 @@ export class AppV9 implements OnInit {
     });
   }
 
-  protected eliminarRutinaV5b(id: number): void {
-    const confirmar = confirm('¿Seguro que quieres borrar esta rutina?');
-    if (!confirmar) return;
-
-    this.datosFitnessService.eliminarRutina(id).then(() => {
-      this.rutinasV5b.update((items) => items.filter((item) => item.id !== id));
-    }).catch((err) => {
+  protected async eliminarRutinaV5b(id: number): Promise<void> {
+    if (!confirm('¿Seguro que quieres borrar esta rutina?')) return;
+    try {
+      await this.datosFitnessService.eliminarRutina(id);
+      await this.cargarDatos({ resetForm: false });
+    } catch (err) {
       console.error('Error al eliminar rutina diaria:', err);
-      this.error.set('Error al eliminar de Supabase');
-    });
+      this.error.set('No se pudo eliminar la rutina.');
+    }
   }
 
   protected obtenerNombreEjercicioV5b(idEjercicio: number): string {

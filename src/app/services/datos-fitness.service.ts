@@ -30,23 +30,51 @@ export class DatosFitnessService {
   private mockCategorias: Categoria[] = [
     { id: 1, nombre: 'Fuerza' },
     { id: 2, nombre: 'Cardio' },
-    { id: 3, nombre: 'Movilidad' }
+    { id: 3, nombre: 'Movilidad' },
+    { id: 4, nombre: 'Core' }
   ];
 
   private mockEjercicios: Ejercicio[] = [
+    // Fuerza
     { id: 1, nombre: 'Sentadilla', idCategoria: 1, descripcion: 'Piernas y glúteos' },
     { id: 2, nombre: 'Press banca', idCategoria: 1, descripcion: 'Pecho' },
-    { id: 3, nombre: 'Carrera continua', idCategoria: 2, descripcion: 'Resistencia' },
-    { id: 4, nombre: 'Estiramientos', idCategoria: 3, descripcion: 'Flexibilidad' }
+    { id: 3, nombre: 'Peso muerto', idCategoria: 1, descripcion: 'Cadena posterior' },
+    { id: 4, nombre: 'Dominadas', idCategoria: 1, descripcion: 'Espalda y biceps' },
+    { id: 5, nombre: 'Press militar', idCategoria: 1, descripcion: 'Hombros' },
+    { id: 6, nombre: 'Remo con barra', idCategoria: 1, descripcion: 'Espalda' },
+    { id: 7, nombre: 'Zancadas', idCategoria: 1, descripcion: 'Piernas unilaterales' },
+    { id: 8, nombre: 'Fondos en paralelas', idCategoria: 1, descripcion: 'Tríceps y pecho' },
+    // Cardio
+    { id: 9, nombre: 'Carrera continua', idCategoria: 2, descripcion: 'Resistencia' },
+    { id: 10, nombre: 'Bicicleta', idCategoria: 2, descripcion: 'Cardio de bajo impacto' },
+    { id: 11, nombre: 'Saltar cuerda', idCategoria: 2, descripcion: 'Coordinación y cardio' },
+    { id: 12, nombre: 'HIIT', idCategoria: 2, descripcion: 'Intervalos de alta intensidad' },
+    { id: 13, nombre: 'Remo máquina', idCategoria: 2, descripcion: 'Full body cardio' },
+    { id: 14, nombre: 'Elíptica', idCategoria: 2, descripcion: 'Cardio articulado' },
+    // Movilidad
+    { id: 15, nombre: 'Estiramientos generales', idCategoria: 3, descripcion: 'Flexibilidad global' },
+    { id: 16, nombre: 'Yoga flow', idCategoria: 3, descripcion: 'Movilidad y respiración' },
+    { id: 17, nombre: 'Movilidad de cadera', idCategoria: 3, descripcion: 'Apertura de cadera' },
+    { id: 18, nombre: 'Foam roller', idCategoria: 3, descripcion: 'Liberación miofascial' },
+    { id: 19, nombre: 'Movilidad de hombro', idCategoria: 3, descripcion: 'Rango articular' },
+    { id: 20, nombre: 'Movilidad torácica', idCategoria: 3, descripcion: 'Columna y postura' },
+    // Core
+    { id: 21, nombre: 'Plancha', idCategoria: 4, descripcion: 'Estabilidad abdominal' },
+    { id: 22, nombre: 'Crunch', idCategoria: 4, descripcion: 'Recto abdominal' },
+    { id: 23, nombre: 'Elevación de piernas', idCategoria: 4, descripcion: 'Core inferior' },
+    { id: 24, nombre: 'Russian twist', idCategoria: 4, descripcion: 'Oblicuos' },
+    { id: 25, nombre: 'Bird dog', idCategoria: 4, descripcion: 'Core y estabilidad' }
   ];
 
   private mockRutinas: Rutina[] = [
     { id: 1, duracion: '45 min', completada: false, idCategoria: 1, idEjercicio: 1, favorita: true },
-    { id: 2, duracion: '30 min', completada: true, idCategoria: 2, idEjercicio: 3, diaria: true },
-    { id: 3, duracion: '20 min', completada: false, idCategoria: 3, idEjercicio: 4 }
+    { id: 2, duracion: '30 min', completada: true, idCategoria: 2, idEjercicio: 9, diaria: true },
+    { id: 3, duracion: '20 min', completada: false, idCategoria: 3, idEjercicio: 15 },
+    { id: 4, duracion: '15 min', completada: false, idCategoria: 4, idEjercicio: 21, favorita: true },
+    { id: 5, duracion: '40 min', completada: false, idCategoria: 1, idEjercicio: 3 }
   ];
 
-  private nextRutinaId = 4;
+  private nextRutinaId = 6;
 
   async obtenerCategorias(): Promise<Categoria[]> {
     if (!this.useRemote) {
