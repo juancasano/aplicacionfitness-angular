@@ -41,7 +41,7 @@ Abre [http://localhost:4200/](http://localhost:4200/).
 Las versiones v7–v9 usan la API REST de Supabase vía `HttpClient`.
 
 1. Copia tus credenciales en [`src/app/config/supabase.config.ts`](src/app/config/supabase.config.ts).
-2. Si dejas los placeholders (`tu-proyecto.supabase.co`), la app usa **datos mock locales** para que la UI no falle.
+2. Si dejas los placeholders (`tu-proyecto.supabase.co`), la app usa **datos mock locales** (demo sin BD real). En la UI aparece el aviso «Modo demo».
 
 Tablas esperadas: `categorias`, `ejercicios`, `rutinas`.
 

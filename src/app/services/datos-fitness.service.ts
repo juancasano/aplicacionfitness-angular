@@ -17,6 +17,8 @@ import {
 export class DatosFitnessService {
   private http = inject(HttpClient);
   private readonly useRemote = isSupabaseConfigured();
+  /** true = demo local sin Supabase / sin BD real */
+  readonly usandoDatosLocales = !this.useRemote;
   private baseUrl = `${SUPABASE_URL}/rest/v1`;
 
   private headers = new HttpHeaders({

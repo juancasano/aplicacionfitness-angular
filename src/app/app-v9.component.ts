@@ -25,6 +25,9 @@ interface DiaSemana {
       <section class="hero">
         <h1>{{ title() }}</h1>
         <p class="intro">App final: rutinas, favoritas, diarias y plan semanal en un solo sitio.</p>
+        <p class="demo-banner" *ngIf="usandoDatosLocales">
+          Modo demo: datos locales de prueba · no hay base de datos conectada
+        </p>
       </section>
 
       <section class="planner" aria-labelledby="planner-title">
@@ -140,6 +143,14 @@ interface DiaSemana {
                 <span>Duración: {{ rutina.duracion }}</span>
                 <span *ngIf="rutina.completada" class="status-badge">Completada</span>
               </div>
+              <button
+                type="button"
+                class="fav-btn"
+                (click)="marcarComoFavorita(rutina.id)"
+                title="Añadir a favoritas"
+                aria-label="Añadir a favoritas">
+                ★
+              </button>
               <button type="button" class="edit-btn" (click)="editarRutinaById(rutina.id)" title="Editar">Editar</button>
               <button type="button" class="delete-btn" (click)="eliminarRutinaV3(rutina.id)" title="Eliminar">×</button>
             </li>
@@ -163,6 +174,14 @@ interface DiaSemana {
                   <span>Agregado: {{ item.fecha | date:'shortDate' }}</span>
                   <span *ngIf="item.completada" class="status-badge">Completado</span>
                 </div>
+                <button
+                  type="button"
+                  class="fav-btn fav-btn-on"
+                  (click)="quitarDeFavoritas(item.id)"
+                  title="Quitar de favoritas"
+                  aria-label="Quitar de favoritas">
+                  ★
+                </button>
                 <button type="button" class="edit-btn" (click)="editarRutinaById(item.id)" title="Editar">Editar</button>
                 <button type="button" class="delete-btn" (click)="eliminarRutinaFavoritaItem(item.id)" title="Eliminar">×</button>
               </li>
@@ -317,6 +336,43 @@ interface DiaSemana {
         color: rgba(244, 250, 245, 0.8);
         font-size: 1rem;
         line-height: 1.55;
+      }
+
+      .demo-banner {
+        margin: 0.9rem 0 0;
+        display: inline-block;
+        padding: 0.45rem 0.7rem;
+        border-radius: 8px;
+        border: 1px solid rgba(200, 240, 66, 0.4);
+        background: rgba(200, 240, 66, 0.14);
+        color: var(--accent);
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .fav-btn {
+        border: 1px solid var(--line);
+        background: #fff;
+        color: #94a3b8;
+        border-radius: 0.65rem;
+        width: 2.4rem;
+        height: 2.4rem;
+        font-size: 1.1rem;
+        cursor: pointer;
+        line-height: 1;
+        transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+      }
+
+      .fav-btn:hover {
+        color: #ca8a04;
+        border-color: #eab308;
+        background: #fffbeb;
+      }
+
+      .fav-btn-on {
+        color: #ca8a04;
+        border-color: #eab308;
+        background: #fffbeb;
       }
 
       .planner {
@@ -633,8 +689,8 @@ interface DiaSemana {
       .playlist-item,
       .rutinas-list li {
         display: grid;
-        grid-template-columns: auto 1fr auto;
-        gap: 1rem;
+        grid-template-columns: auto 1fr auto auto auto;
+        gap: 0.65rem;
         align-items: center;
         padding: 1rem;
         border-radius: 1rem;
@@ -773,6 +829,7 @@ interface DiaSemana {
 })
 export class AppV9 implements OnInit {
   private datosFitnessService = inject(DatosFitnessService);
+  protected readonly usandoDatosLocales = this.datosFitnessService.usandoDatosLocales;
 
   protected readonly title = signal('Fitness Manager');
   protected readonly rutinaEditando = signal<Rutina | null>(null);
@@ -1011,6 +1068,28 @@ export class AppV9 implements OnInit {
   protected cancelarEdicion(): void {
     this.rutinaEditando.set(null);
     this.rutinasForm.reset({ duracion: '30 min', tipoRutina: 'normal', idCategoria: this.categorias()[0]?.id ?? null, idEjercicio: this.ejercicios()[0]?.id ?? null });
+  }
+
+  protected async marcarComoFavorita(id: number): Promise<void> {
+    try {
+      await this.datosFitnessService.actualizarRutina(id, { favorita: true, diaria: false });
+      await this.cargarDatos({ resetForm: false });
+      this.tabActual.set('favoritas');
+    } catch (err) {
+      console.error('Error al marcar favorita:', err);
+      this.error.set('No se pudo añadir a favoritas.');
+    }
+  }
+
+  protected async quitarDeFavoritas(id: number): Promise<void> {
+    try {
+      await this.datosFitnessService.actualizarRutina(id, { favorita: false });
+      await this.cargarDatos({ resetForm: false });
+      this.tabActual.set('misrutinas');
+    } catch (err) {
+      console.error('Error al quitar favorita:', err);
+      this.error.set('No se pudo quitar de favoritas.');
+    }
   }
 
   protected obtenerNombreCategoriaV3(idCategoria: number): string {
