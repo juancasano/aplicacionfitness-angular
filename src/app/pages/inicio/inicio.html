@@ -1,5 +1,29 @@
 <section class="pagina-inicio">
-  <h1>Fitness Manager</h1>
-  <p>Proyecto final del bloque Angular: componentes, servicios, formularios reactivos, Supabase y routing básico.</p>
-  <p>Usa el menú superior para acceder a la gestión de rutinas.</p>
+  <header class="hero">
+    <p class="eyebrow">Proyecto Angular · progresión didáctica</p>
+    <h1>Fitness Manager</h1>
+    <p class="lead">
+      Cada versión añade una pieza de Angular (estado, modelos, UI, HTTP, formularios…).
+      La app final es la <strong>v9</strong>.
+    </p>
+    <div class="cta-row">
+      <a routerLink="/rutinas" class="btn btn-primary">Abrir app final (v9)</a>
+      <a href="#versiones" class="btn btn-secondary">Ver mapa de versiones</a>
+    </div>
+  </header>
+
+  <section id="versiones" class="versiones" aria-labelledby="versiones-title">
+    <h2 id="versiones-title">Mapa v1 → v9</h2>
+    <p class="hint">No son 9 productos distintos: es la misma idea de fitness evolucionando ejercicio a ejercicio.</p>
+
+    <div class="grid">
+      @for (v of versions; track v.label) {
+        <a class="card" [class.card-final]="v.final" [routerLink]="v.path">
+          <span class="badge">{{ v.label }}</span>
+          <h3>{{ v.title }}</h3>
+          <p>{{ v.summary }}</p>
+        </a>
+      }
+    </div>
+  </section>
 </section>

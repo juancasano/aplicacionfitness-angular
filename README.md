@@ -1,62 +1,52 @@
 # AplicacionFitness Angular
 
-Proyecto Angular de Fitness Manager. Esta app gestiona rutinas, categorías y ejercicios, y ahora incluye la versión final `v1.0` junto con los tags históricos.
+App de gestión de rutinas, categorías y ejercicios en **Angular + TypeScript**.
 
-## Versiones
+Es un proyecto **didáctico**: las rutas `v1`…`v9` muestran la evolución del curso. La **app final** (portfolio) es la **v9**, también en `/rutinas`.
 
-- **v1**: versión inicial histórica de la aplicación de rutinas.
-- **v1.0**: release final de la aplicación de fitness.
-- **v2**: iteración del ejercicio 2.
-- **v3**: versión del ejercicio 3 con rutinas, categorías y ejercicios relacionales.
-- **v4**: versión multimedia con ejercicios y componentes visuales.
-- **v5a**: versión de rutinas favoritas.
-- **v5b**: versión de desafío diario.
-- **v6**: versión de control semanal y seguimiento de días.
-- **v7**: versión con HttpClient y Supabase usando tablas de `categorias`, `ejercicios` y `rutinas`.
-- **v8**: Fitness Manager con formulario reactivo y gestión completa de rutinas en Supabase.
-- **v9**: versión con filtrado por categoría, edición y borrado de rutinas.
+## Arranque
 
-## Enlaces locales
+```bash
+npm install
+npm start
+```
 
-- Versión 1.0 (release actual): [http://localhost:4200/](http://localhost:4200/)
-- Ruta de routing de v1.0: [http://localhost:4200/rutinas](http://localhost:4200/rutinas) (App V9 con mejoras de routing)
-- Versión 1: [http://localhost:4200/v1](http://localhost:4200/v1)
-- Versión 2: [http://localhost:4200/v2](http://localhost:4200/v2)
-- Versión 3: [http://localhost:4200/v3](http://localhost:4200/v3)
-- Versión 4: [http://localhost:4200/v4](http://localhost:4200/v4)
-- Versión 5A: [http://localhost:4200/v5a](http://localhost:4200/v5a)
-- Versión 5B: [http://localhost:4200/v5b](http://localhost:4200/v5b)
-- Versión 6: [http://localhost:4200/v6](http://localhost:4200/v6)
-- Versión 7: [http://localhost:4200/v7](http://localhost:4200/v7)
-- Versión 8: [http://localhost:4200/v8](http://localhost:4200/v8)
-- Versión 9: [http://localhost:4200/v9](http://localhost:4200/v9)
+Abre [http://localhost:4200/](http://localhost:4200/).
 
-## Release v1.0
+## Rutas importantes
 
-Esta versión final se publica como `v1.0`.
-Asegúrate de configurar tus credenciales de Supabase en `src/app/config/supabase.config.ts` antes de ejecutar la aplicación.
+| Ruta | Qué es |
+|------|--------|
+| `/` | Home con mapa de versiones y CTA a la app final |
+| `/rutinas` | **App final (v9)** — filtro, edición y borrado |
+| `/v1` … `/v9` | Versiones históricas del aprendizaje |
 
-## Uso
+## Progresión v1 → v9
 
-1. Abre la carpeta del proyecto en tu editor.
-2. Instala dependencias con:
+| Versión | Qué aporta |
+|---------|------------|
+| **v1** | Lista de rutinas + marcar completadas |
+| **v2** | Planificador con UI más clara |
+| **v3** | Modelo relacional: categorías / ejercicios / rutinas |
+| **v4** | UI multimedia / galería visual |
+| **v5a** | Rutinas favoritas |
+| **v5b** | Desafío diario |
+| **v6** | Plan semanal y días completados |
+| **v7** | Datos remotos (HttpClient + Supabase REST) |
+| **v8** | Formularios reactivos + CRUD en Supabase |
+| **v9** | Filtro por categoría, edición y borrado (**app final**) |
 
-   ```bash
-   npm install
-   ```
-3. Ejecuta el servidor local con:
+## Supabase (opcional)
 
-   ```bash
-   npm start
-   ```
-4. Abre el navegador en `http://localhost:4200/`.
+Las versiones v7–v9 usan la API REST de Supabase vía `HttpClient`.
 
-## Notas importantes
+1. Copia tus credenciales en [`src/app/config/supabase.config.ts`](src/app/config/supabase.config.ts).
+2. Si dejas los placeholders (`tu-proyecto.supabase.co`), la app usa **datos mock locales** para que la UI no falle.
 
-- Esta aplicación es un proyecto de fitness, no un proyecto de gestión de coches.
-- Mantén los tags `v1` y `v1.0` para distinguir la versión histórica de la versión final.
-- Si el puerto `4200` está ocupado, usa:
+Tablas esperadas: `categorias`, `ejercicios`, `rutinas`.
 
-  ```bash
-  npm start -- --port 4201
-  ```
+## Stack
+
+- Angular 22, TypeScript, RxJS
+- Reactive Forms, Router, HttpClient
+- Supabase REST (opcional) o mock local
