@@ -34,7 +34,7 @@ Abre [http://localhost:4200/](http://localhost:4200/).
 | **v6** | Plan semanal y días completados |
 | **v7** | Datos remotos (HttpClient + Supabase REST) |
 | **v8** | Formularios reactivos + CRUD en Supabase |
-| **v9** | Filtro por categoría, edición y borrado (**app final**) |
+| **v9** | **App final**: pestañas Mis rutinas · Favoritas · Diarias · Semana (+ CRUD/filtro) |
 
 ## Supabase (opcional)
 

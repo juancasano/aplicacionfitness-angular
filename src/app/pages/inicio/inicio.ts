@@ -77,7 +77,7 @@ export class InicioComponent {
       path: '/rutinas',
       label: 'v9',
       title: 'App final',
-      summary: 'Filtro por categoría, edición y borrado. Versión de portfolio.',
+      summary: 'Rutinas, favoritas, diarias y plan semanal — filtro, edición y borrado.',
       final: true
     }
   ];

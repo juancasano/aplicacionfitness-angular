@@ -6,7 +6,15 @@ import { Categoria } from './models/categoria';
 import { Ejercicio } from './models/ejercicio';
 import { Rutina } from './models/rutina';
 
-type TabType = 'misrutinas' | 'favoritas' | 'diarias';
+type TabType = 'misrutinas' | 'favoritas' | 'diarias' | 'semana';
+
+interface DiaSemana {
+  id: number;
+  nombre: string;
+  ejercicio: string;
+  duracion: string;
+  completado: boolean;
+}
 
 @Component({
   standalone: true,
@@ -16,14 +24,14 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
     <main class="page">
       <section class="hero">
         <h1>{{ title() }}</h1>
-        <p class="intro">Fitness Manager con formulario reactivo para crear nuevas rutinas en Supabase.</p>
+        <p class="intro">App final: rutinas, favoritas, diarias y plan semanal en un solo sitio.</p>
       </section>
 
       <section class="planner" aria-labelledby="planner-title">
         <header class="planner-header">
           <div>
             <h2 id="planner-title">Fitness Manager</h2>
-            <p class="subtext">Añade rutinas desde un formulario reactivo y gestiona tus entrenamientos en la nube.</p>
+            <p class="subtext">Crea y edita rutinas; usa las pestañas para favoritas, reto diario y semana.</p>
           </div>
           <div class="summary">
             <span>{{ rutinas().length }}</span> rutinas •
@@ -82,7 +90,7 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
         </section>
 
         <div class="status-messages" *ngIf="cargando() || error()">
-          <div class="loading-message" *ngIf="cargando()">Cargando datos desde Supabase...</div>
+          <div class="loading-message" *ngIf="cargando()">Cargando datos...</div>
           <div class="error-message" *ngIf="error()">{{ error() }}</div>
         </div>
 
@@ -91,19 +99,25 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
             class="tab-button"
             [class.active]="tabActual() === 'misrutinas'"
             (click)="tabActual.set('misrutinas')">
-            Mis Rutinas
+            Mis rutinas
           </button>
           <button 
             class="tab-button"
             [class.active]="tabActual() === 'favoritas'"
             (click)="tabActual.set('favoritas')">
-            Rutinas Favoritas
+            Favoritas
           </button>
           <button 
             class="tab-button"
             [class.active]="tabActual() === 'diarias'"
             (click)="tabActual.set('diarias')">
-            Rutinas Diarias
+            Diarias
+          </button>
+          <button
+            class="tab-button"
+            [class.active]="tabActual() === 'semana'"
+            (click)="tabActual.set('semana')">
+            Semana
           </button>
         </div>
 
@@ -158,7 +172,7 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
 
         <div class="tab-content" *ngIf="tabActual() === 'diarias'">
           <div class="tab-header">
-            <h3>Rutinas Diarias</h3>
+            <h3>Reto diario</h3>
             <div style="display:flex;gap:0.5rem;align-items:center">
               <div class="tab-stats">{{ rutinasV5b().length }} programadas • {{ completedCountV5b() }} completadas</div>
               <button type="button" class="quick-create" (click)="crearAqui('diaria')" aria-label="Crear rutina diaria">＋ Crear aquí</button>
@@ -190,6 +204,67 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
                 <button type="button" class="delete-btn" (click)="eliminarRutinaV5b(rutina.id)" title="Eliminar">×</button>
               </li>
             </ul>
+          </div>
+        </div>
+
+        <div class="tab-content" *ngIf="tabActual() === 'semana'">
+          <div class="tab-header">
+            <h3>Plan semanal</h3>
+            <div class="tab-stats">
+              {{ weekPlan().length }} días • {{ completedDaysCount() }} completados • {{ completionPercentSemana() }}%
+            </div>
+          </div>
+          <p class="semana-hint">Organiza el entreno de cada día (fuerza, cardio, recuperación…) y marca lo completado.</p>
+
+          <div class="week-grid">
+            <button
+              *ngFor="let dia of weekPlan()"
+              type="button"
+              class="day-card"
+              [class.active]="selectedDay() === dia.id"
+              [class.completed]="dia.completado"
+              (click)="selectedDay.set(dia.id)">
+              <strong>{{ dia.nombre }}</strong>
+              <span>{{ dia.ejercicio }}</span>
+              <span>{{ dia.duracion }}</span>
+            </button>
+          </div>
+
+          <div class="day-details" *ngIf="selectedDayPlan() as dia">
+            <h3>Detalle — {{ dia.nombre }}</h3>
+            <p class="detail-text">Hoy toca <strong>{{ dia.ejercicio }}</strong> · {{ dia.duracion }}.</p>
+
+            <label class="field">
+              <span class="label-text">Modificar entrenamiento</span>
+              <input
+                type="text"
+                [value]="dia.ejercicio"
+                (input)="updateDayExercise($any($event.target).value)"
+                aria-label="Ejercicio del día"
+              />
+            </label>
+
+            <label class="field">
+              <span class="label-text">Duración</span>
+              <input
+                type="text"
+                [value]="dia.duracion"
+                (input)="updateDayDuration($any($event.target).value)"
+                aria-label="Duración del día"
+              />
+            </label>
+
+            <button type="button" class="mark-button" (click)="toggleDayCompleted(dia.id)">
+              {{ dia.completado ? 'Marcar como no completado' : 'Marcar como completado' }}
+            </button>
+
+            <div class="progress-card">
+              <p>Progreso de la semana</p>
+              <div class="progress-bar">
+                <div class="progress-fill" [style.width]="completionPercentSemana() + '%'"></div>
+              </div>
+              <span>{{ completionPercentSemana() }}%</span>
+            </div>
           </div>
         </div>
       </section>
@@ -311,23 +386,101 @@ type TabType = 'misrutinas' | 'favoritas' | 'diarias';
 
       .tabs-nav {
         display: flex;
-        gap: 0.5rem;
+        flex-wrap: wrap;
+        gap: 0.35rem;
         margin-bottom: 1.5rem;
         border-bottom: 2px solid #e5e7eb;
       }
 
       .tab-button {
-        flex: 1;
-        padding: 1rem 1.25rem;
+        flex: 1 1 6.5rem;
+        padding: 0.85rem 0.75rem;
         border: none;
         background: transparent;
         color: #6b7280;
         font-weight: 600;
-        font-size: 1rem;
+        font-size: 0.95rem;
         cursor: pointer;
         border-bottom: 3px solid transparent;
         transition: all 0.3s ease;
         margin-bottom: -2px;
+      }
+
+      .semana-hint {
+        margin: -0.5rem 0 1.25rem;
+        color: #64748b;
+        font-size: 0.95rem;
+      }
+
+      .week-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .day-card {
+        display: grid;
+        gap: 0.35rem;
+        text-align: left;
+        padding: 0.9rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 1rem;
+        background: #fff;
+        color: #0f172a;
+        cursor: pointer;
+        font: inherit;
+      }
+
+      .day-card span {
+        font-size: 0.85rem;
+        color: #64748b;
+      }
+
+      .day-card.active {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      }
+
+      .day-card.completed {
+        background: #ecfdf5;
+        border-color: #6ee7b7;
+      }
+
+      .day-details {
+        display: grid;
+        gap: 1rem;
+        padding: 1.25rem;
+        border-radius: 1rem;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+      }
+
+      .day-details h3 {
+        margin: 0;
+      }
+
+      .detail-text {
+        margin: 0;
+        color: #334155;
+      }
+
+      .mark-button {
+        border: 0;
+        border-radius: 0.95rem;
+        padding: 0.9rem 1.25rem;
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        color: white;
+        font-weight: 700;
+        cursor: pointer;
+        width: fit-content;
+      }
+
+      .progress-card {
+        background: #eff6ff;
+        padding: 1rem;
+        border-radius: 1rem;
+        border: 1px solid #dbeafe;
       }
 
       .tab-button:hover {
@@ -616,6 +769,23 @@ export class AppV9 implements OnInit {
   protected readonly rutinasV3 = signal<Rutina[]>([]);
   protected readonly rutinasFavoritas = signal<RutinaFavoritaItem[]>([]);
   protected readonly rutinasV5b = signal<Array<{ id: number; idEjercicio: number; duracion: string; completada: boolean; fecha: string }>>([]);
+
+  protected readonly weekPlan = signal<DiaSemana[]>([
+    { id: 1, nombre: 'Lunes', ejercicio: 'Pierna y fuerza', duracion: '40 min', completado: false },
+    { id: 2, nombre: 'Martes', ejercicio: 'Cardio intenso', duracion: '30 min', completado: false },
+    { id: 3, nombre: 'Miércoles', ejercicio: 'Yoga y recuperación', duracion: '35 min', completado: false },
+    { id: 4, nombre: 'Jueves', ejercicio: 'Core y estabilidad', duracion: '30 min', completado: false },
+    { id: 5, nombre: 'Viernes', ejercicio: 'Circuito completo', duracion: '45 min', completado: false },
+    { id: 6, nombre: 'Sábado', ejercicio: 'Caminata activa', duracion: '25 min', completado: false },
+    { id: 7, nombre: 'Domingo', ejercicio: 'Descanso activo', duracion: '20 min', completado: false }
+  ]);
+  protected readonly selectedDay = signal(1);
+  protected readonly selectedDayPlan = computed(() =>
+    this.weekPlan().find((dia) => dia.id === this.selectedDay())
+  );
+  protected readonly completedDaysCount = computed(
+    () => this.weekPlan().filter((dia) => dia.completado).length
+  );
 
   protected readonly rutinasForm = new FormGroup({
     idCategoria: new FormControl<number | null>(null, Validators.required),
@@ -926,6 +1096,30 @@ export class AppV9 implements OnInit {
 
   protected obtenerNombreEjercicioV5b(idEjercicio: number): string {
     return this.ejercicios().find((ej) => ej.id === idEjercicio)?.nombre ?? 'Desconocido';
+  }
+
+  protected completionPercentSemana(): number {
+    const total = this.weekPlan().length;
+    if (total === 0) return 0;
+    return Math.round((this.completedDaysCount() / total) * 100);
+  }
+
+  protected toggleDayCompleted(id: number): void {
+    this.weekPlan.update((items) =>
+      items.map((dia) => (dia.id === id ? { ...dia, completado: !dia.completado } : dia))
+    );
+  }
+
+  protected updateDayExercise(value: string): void {
+    this.weekPlan.update((items) =>
+      items.map((dia) => (dia.id === this.selectedDay() ? { ...dia, ejercicio: value } : dia))
+    );
+  }
+
+  protected updateDayDuration(value: string): void {
+    this.weekPlan.update((items) =>
+      items.map((dia) => (dia.id === this.selectedDay() ? { ...dia, duracion: value } : dia))
+    );
   }
 }
 
