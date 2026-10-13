@@ -274,54 +274,60 @@ interface DiaSemana {
     `
       :host {
         display: block;
-        min-height: 100dvh;
-        background: radial-gradient(circle at top, #f8fbff 0%, #eff6ff 35%, #f8fafc 100%);
-        color: #1f2937;
-        font-family: Inter, system-ui, sans-serif;
-        padding: 1.5rem;
+        color: var(--ink);
+        font-family: var(--font-body);
+        padding: 0;
       }
 
       .page {
-        max-width: 60rem;
-        margin: 0 auto;
+        max-width: none;
+        margin: 0;
         display: grid;
-        gap: 2rem;
+        gap: 1.25rem;
+        animation: rise-in 0.5s ease both;
       }
 
       .hero {
-        padding: 2rem;
-        border-radius: 1.5rem;
-        background: white;
-        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+        padding: 1.5rem 1.6rem;
+        border-radius: var(--radius);
+        background:
+          linear-gradient(120deg, rgba(200, 240, 66, 0.2), transparent 40%),
+          linear-gradient(160deg, #163226, #10241c);
+        color: #f4faf5;
+        border: 1px solid rgba(200, 240, 66, 0.22);
       }
 
       .eyebrow {
         margin: 0 0 0.75rem;
         text-transform: uppercase;
-        letter-spacing: 0.2em;
-        font-size: 0.75rem;
-        color: #2563eb;
+        letter-spacing: 0.12em;
+        font-size: 0.72rem;
+        color: var(--accent);
+        font-weight: 700;
       }
 
       h1 {
         margin: 0;
-        font-size: clamp(2.25rem, 4vw, 3.5rem);
-        line-height: 1;
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
       }
 
       .intro {
-        margin: 1rem 0 0;
+        margin: 0.75rem 0 0;
         max-width: 40rem;
-        color: #4b5563;
+        color: rgba(244, 250, 245, 0.8);
         font-size: 1rem;
-        line-height: 1.75;
+        line-height: 1.55;
       }
 
       .planner {
-        background: white;
-        border-radius: 1.5rem;
-        padding: 1.75rem;
-        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+        background: rgba(251, 253, 251, 0.92);
+        border-radius: var(--radius);
+        padding: 1.35rem 1.35rem 1.5rem;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
       }
 
       .planner-header {
@@ -330,36 +336,41 @@ interface DiaSemana {
         justify-content: space-between;
         gap: 1rem;
         align-items: center;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.25rem;
       }
 
       .planner-header h2 {
         margin: 0;
-        font-size: 1.35rem;
+        font-family: var(--font-display);
+        font-size: 1.25rem;
       }
 
       .subtext {
-        margin: 0.5rem 0 0;
-        color: #6b7280;
+        margin: 0.4rem 0 0;
+        color: var(--muted);
       }
 
       .summary {
         font-weight: 700;
-        color: #111827;
+        color: var(--ink);
+        background: var(--surface-2);
+        padding: 0.55rem 0.8rem;
+        border-radius: var(--radius-sm);
       }
 
       .new-routine-section {
-        margin-bottom: 1.75rem;
-        padding: 1.5rem;
-        border-radius: 1rem;
-        background: #f8fafc;
-        border: 1px solid #e5e7eb;
+        margin-bottom: 1.5rem;
+        padding: 1.25rem;
+        border-radius: var(--radius-sm);
+        background: var(--surface);
+        border: 1px solid var(--line);
       }
 
       .new-routine-section h3 {
         margin-top: 0;
         margin-bottom: 1rem;
-        color: #111827;
+        font-family: var(--font-display);
+        color: var(--ink);
       }
 
       .status-messages {
@@ -388,22 +399,22 @@ interface DiaSemana {
         display: flex;
         flex-wrap: wrap;
         gap: 0.35rem;
-        margin-bottom: 1.5rem;
-        border-bottom: 2px solid #e5e7eb;
+        margin-bottom: 1.35rem;
+        border-bottom: 1px solid var(--line);
       }
 
       .tab-button {
         flex: 1 1 6.5rem;
-        padding: 0.85rem 0.75rem;
+        padding: 0.8rem 0.7rem;
         border: none;
         background: transparent;
-        color: #6b7280;
-        font-weight: 600;
-        font-size: 0.95rem;
+        color: var(--muted);
+        font-weight: 700;
+        font-size: 0.92rem;
         cursor: pointer;
         border-bottom: 3px solid transparent;
-        transition: all 0.3s ease;
-        margin-bottom: -2px;
+        transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        margin-bottom: -1px;
       }
 
       .semana-hint {
@@ -438,7 +449,7 @@ interface DiaSemana {
       }
 
       .day-card.active {
-        border-color: #2563eb;
+        border-color: var(--accent-deep);
         box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
       }
 
@@ -469,8 +480,8 @@ interface DiaSemana {
         border: 0;
         border-radius: 0.95rem;
         padding: 0.9rem 1.25rem;
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-        color: white;
+        background: linear-gradient(135deg, #163226 0%, #10241c 100%);
+        color: var(--accent);
         font-weight: 700;
         cursor: pointer;
         width: fit-content;
@@ -484,13 +495,14 @@ interface DiaSemana {
       }
 
       .tab-button:hover {
-        color: #374151;
-        background: #f9fafb;
+        color: var(--ink);
+        background: var(--surface-2);
       }
 
       .tab-button.active {
-        color: #2563eb;
-        border-bottom-color: #2563eb;
+        color: var(--ink);
+        border-bottom-color: var(--accent-deep);
+        background: linear-gradient(180deg, transparent, rgba(200, 240, 66, 0.18));
       }
 
       .tab-content {
@@ -516,8 +528,8 @@ interface DiaSemana {
       }
 
       .tab-stats {
-        font-weight: 600;
-        color: #2563eb;
+        font-weight: 700;
+        color: var(--accent-deep);
         font-size: 0.9rem;
       }
 
@@ -555,7 +567,7 @@ interface DiaSemana {
       select:focus,
       input:focus {
         outline: none;
-        border-color: #2563eb;
+        border-color: var(--accent-deep);
         box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
       }
 
@@ -565,7 +577,8 @@ interface DiaSemana {
         padding: 0.65rem 1.75rem;
         font-weight: 600;
         color: white;
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        background: linear-gradient(135deg, #163226 0%, #10241c 100%);
+        color: var(--accent);
         cursor: pointer;
         transition: all 0.3s ease;
       }
@@ -651,9 +664,9 @@ interface DiaSemana {
       }
 
       .check[aria-pressed="true"] {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-        color: white;
-        border-color: #1d4ed8;
+        background: linear-gradient(135deg, #163226 0%, #10241c 100%);
+        color: var(--accent);
+        border-color: var(--ink);
       }
 
       .info,
@@ -721,7 +734,7 @@ interface DiaSemana {
 
       .progress-fill {
         height: 100%;
-        background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
+        background: linear-gradient(90deg, var(--accent-deep) 0%, #163226 100%);
         border-radius: 999px;
         transition: width 0.3s ease;
       }
