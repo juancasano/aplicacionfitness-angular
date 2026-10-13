@@ -2,7 +2,7 @@
 
 App de gestión de rutinas, categorías y ejercicios en **Angular + TypeScript**.
 
-Es un proyecto **didáctico**: las rutas `v1`…`v9` muestran la evolución del curso. La **app final** (portfolio) es la **v9**, también en `/rutinas`.
+Es un proyecto **didáctico**: las rutas `v1`…`v9` muestran la evolución del curso. La **app final** (portafolio) es la **v9**, también en `/rutinas`.
 
 ## Arranque
 
