@@ -149,10 +149,7 @@ interface DiaSemana {
         <div class="tab-content" *ngIf="tabActual() === 'favoritas'">
           <div class="tab-header">
             <h3>Rutinas Favoritas</h3>
-            <div style="display:flex;gap:0.5rem;align-items:center">
-              <div class="tab-stats">{{ rutinasFavoritas().length }} favoritas • {{ completedCountV5a() }} completadas</div>
-              <button type="button" class="quick-create" (click)="crearAqui('favorita')" aria-label="Crear rutina favorita">＋ Crear aquí</button>
-            </div>
+            <div class="tab-stats">{{ rutinasFavoritas().length }} favoritas • {{ completedCountV5a() }} completadas</div>
           </div>
 
           <div class="playlist-section">
@@ -176,10 +173,7 @@ interface DiaSemana {
         <div class="tab-content" *ngIf="tabActual() === 'diarias'">
           <div class="tab-header">
             <h3>Reto diario</h3>
-            <div style="display:flex;gap:0.5rem;align-items:center">
-              <div class="tab-stats">{{ rutinasV5b().length }} programadas • {{ completedCountV5b() }} completadas</div>
-              <button type="button" class="quick-create" (click)="crearAqui('diaria')" aria-label="Crear rutina diaria">＋ Crear aquí</button>
-            </div>
+            <div class="tab-stats">{{ rutinasV5b().length }} programadas • {{ completedCountV5b() }} completadas</div>
           </div>
 
           <div class="goals-card">
@@ -1017,16 +1011,6 @@ export class AppV9 implements OnInit {
   protected cancelarEdicion(): void {
     this.rutinaEditando.set(null);
     this.rutinasForm.reset({ duracion: '30 min', tipoRutina: 'normal', idCategoria: this.categorias()[0]?.id ?? null, idEjercicio: this.ejercicios()[0]?.id ?? null });
-  }
-
-  protected crearAqui(tipo: 'normal' | 'favorita' | 'diaria'): void {
-    this.rutinasForm.controls.tipoRutina.setValue(tipo as any);
-    setTimeout(() => {
-      const el = document.querySelector('.new-routine-section');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      const input = document.querySelector('input[formcontrolname="duracion"]') as HTMLElement | null;
-      input?.focus();
-    }, 100);
   }
 
   protected obtenerNombreCategoriaV3(idCategoria: number): string {
